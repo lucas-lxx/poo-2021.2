@@ -35,6 +35,16 @@ int procurar(const std::vector<int>& fila, int x){
     return -1;
 }
 
+// procurar_apartir: Dada a posição para iniciar a busca, qual a próxima posição em que aparece X?
+// retorna -1 se não encontrar
+int procurar_apartir(const std::vector<int> fila, int x, int inicio){
+    for (int i = inicio; i < (int) fila.size(); i++) {
+        if(fila[i] == x) 
+            return i;
+    }
+    return -1;
+}   
+
 int main()
 {
     std::cout << "existe: " << to_alpha(existe({-1, -50, -99}, -1)) << '\n'; // 1/true
@@ -45,4 +55,8 @@ int main()
 
     std::cout << "procurar: " << procurar({-1, -50, -1 -99}, -50) << '\n'; // 1
     std::cout << "procurar: " << procurar({-1, -50, -1, -99}, 10) << '\n' << '\n'; // -1
+
+    std::cout << "procurar a partir: " << procurar_apartir({5, 3, -1, -50, -1, -99}, -1, 0) << '\n'; // 2
+    std::cout << "procurar a partir: " << procurar_apartir({5, 3, -1, -50, -1, -99}, -1, 3) << '\n'; // 4
+    std::cout << "procurar a partir: " << procurar_apartir({5, 3, -1, -50, -1, -99}, -1, 4) << '\n' << '\n'; // 4
 }

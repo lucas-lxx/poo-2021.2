@@ -216,3 +216,13 @@ std::string vet_print(const std::vector<int>& vect) {
     }
     return ss.str();
 }
+
+// pegar_homens: retorne uma lista com os homens (valores positivos)
+std::vector<int> pegar_homens(const std::vector<int>& v) {
+    std::vector<int> vect { };
+    for (int i : v) {
+        if (i > 0) 
+            vect.push_back(i);
+    }
+    return vect;
+}

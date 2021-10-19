@@ -72,10 +72,25 @@ int procurar_pos_menor(const std::vector<int>& fila) {
 
 // procurar_pos_menor_apartir: Dada a posição para iniciar a busca, qual a posição do menor valor da lista?
 int procurar_pos_menor_apartir(const std::vector<int>& fila, int inicio) {
-    int menor;
+    int menor { fila[0] };
+    int pos_menor { 0 };
     for (int i = inicio; i < (int) fila.size(); i++) {
-        if(fila[i] < menor) 
+        if(fila[i] < menor) {
             menor = fila[i];
+            pos_menor = i;
+        }
     }
-    return menor;
+    return pos_menor;
+}
+
+// procurar_pos_melhor_se: qual a posição do HOMEM mais calmo? (menor valor maior que 0)
+int procurar_pos_melhor_se(const std::vector<int>& fila) {
+    int mais_calmo { fila[0] };
+    for (int i : fila) {
+        if (i > 0 && i < mais_calmo)
+            mais_calmo = i;
+    }
+    if (mais_calmo <= 0)
+        return -1;
+    return mais_calmo;
 }

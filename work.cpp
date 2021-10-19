@@ -22,5 +22,8 @@ int main()
 
     std::cout << "procurar a posição do menor no vetor: " << procurar_pos_menor({5, 3, -1, -50, -1, -99}) << '\n' << '\n'; // 5
 
-    std::cout << "procurar menor posição a partir de um ponto: " << procurar_pos_menor_apartir({5, 3, -1, -50, -1, 10}, 3) << '\n' << '\n'; // -50
+    std::cout << "procurar menor posição a partir de um ponto: " << procurar_pos_menor_apartir({5, 3, -1, -50, -1, 10}, 3) << '\n' << '\n'; // 3
+
+    std::cout << "Qual a posição do homem mais calmo: " << procurar_pos_melhor_se({5, 3, -1, -50, -1, -99}) << '\n'; //1
+    std::cout << "Qual a posição do homem mais calmo: " << procurar_pos_melhor_se({-1, -50, -1, -99}) << '\n' << '\n'; // -1
 }

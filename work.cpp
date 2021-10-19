@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "work-lib.hpp"
-
+#include <string>
 
 int main()
 {
@@ -41,4 +41,11 @@ int main()
     // calcular_stress_medio: qual a média de stress da fila? (abs)
     std::cout << "Stress medio de uma fila: " << calcular_stress_medio({-51, 99, 1, -50, -1, -99}) << '\n';
     std::cout << "Stress medio de uma fila: " << calcular_stress_medio({5, 3, -1, -50, -1, -99}) << '\n' << '\n'; 
+
+    // mais_homens_ou_mulheres: Na fila existem mais homens ou mulheres?
+    std::cout << "Mais homens ou mulheres: " << mais_homens_ou_mulheres({5, 3, -1, -50, -1, -99}) << '\n'; // "mulheres"
+    std::cout << "Mais homens ou mulheres: " << mais_homens_ou_mulheres({5, 3, 1, -50, -1, -99}) << '\n'; // "empate"
+    std::cout << "Mais homens ou mulheres: " << mais_homens_ou_mulheres({5, 3, 1, -50, -1, 99}) << '\n' << '\n'; // "homens"
+
+    // qual_metade_eh_mais_estressada: O nível de stress somado de todas as pessoas da primeira metade é maior que o nível de stress somado das pessoas da segunda metade da fila? (abs)
 }

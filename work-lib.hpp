@@ -1,6 +1,7 @@
-
+#pragma once
 #include <iostream>
 #include <vector>
+#include <string>
 
 // transforma funções booleanas de 0 e 1 para true ou false
 std::string to_alpha(bool x) {
@@ -97,6 +98,7 @@ int procurar_pos_melhor_se(const std::vector<int>& fila) {
 
 // Contagem: 4 funções
 // calcular_stress_medio: qual a média de stress da fila? (abs)
+//retorna -1 se não encontrar
 float calcular_stress_medio(const std::vector<int>& fila) {
     int soma { 0 };
     int tamanho_vetor { (int) fila.size() };
@@ -104,4 +106,29 @@ float calcular_stress_medio(const std::vector<int>& fila) {
         i > 0 ? soma += i : soma += (i * -1);
     }
     return (float) soma / tamanho_vetor;
+}
+
+// mais_homens_ou_mulheres: Na fila existem mais homens ou mulheres?
+//retorna "homens", "mulheres" ou "empate"
+std::string mais_homens_ou_mulheres(const std::vector<int>& fila) {
+    int homens { 0 };
+    int mulheres { 0 };
+    for (int i : fila) {
+        if (i == 0) 
+            continue;
+        i > 0 ? homens++ : mulheres++;
+    }
+    if (mulheres == homens) {
+        return "empate";
+    } else if (mulheres > homens) {
+        return "mulheres";
+    } else {
+        return "homens";
+    }  
+}
+
+// qual_metade_eh_mais_estressada: O nível de stress somado de todas as pessoas da primeira metade é maior que o nível de stress somado das pessoas da segunda metade da fila? (abs)
+//retorna "primeira", "segunda" ou "empate"
+std::string mais_homens_ou_mulheres(const vector<int>& fila) {
+
 }

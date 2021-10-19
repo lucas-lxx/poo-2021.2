@@ -48,4 +48,7 @@ int main()
     std::cout << "Mais homens ou mulheres: " << mais_homens_ou_mulheres({5, 3, 1, -50, -1, 99}) << '\n' << '\n'; // "homens"
 
     // qual_metade_eh_mais_estressada: O nível de stress somado de todas as pessoas da primeira metade é maior que o nível de stress somado das pessoas da segunda metade da fila? (abs)
+    std::cout << "Qual é a metade mais estressada? " << qual_metade_eh_mais_estressada({5, 3, -1, -50, -1, -99}) << '\n'; // "segunda"
+    std::cout << "Qual é a metade mais estressada? " << qual_metade_eh_mais_estressada({50, 98, 2, -50, -1, -99}) << '\n'; // "empate"
+    std::cout << "Qual é a metade mais estressada? " << qual_metade_eh_mais_estressada({-51, 99, 1, -50, -1, -99}) << '\n' << '\n'; // "primeira"
 }

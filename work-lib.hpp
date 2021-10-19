@@ -127,8 +127,28 @@ std::string mais_homens_ou_mulheres(const std::vector<int>& fila) {
     }  
 }
 
+// Modulo conversor de estresse homens e mulheres
+int modulo_estresse (int pessoa) {
+    return pessoa > 0 ? pessoa : (pessoa * -1);
+}
+
 // qual_metade_eh_mais_estressada: O nível de stress somado de todas as pessoas da primeira metade é maior que o nível de stress somado das pessoas da segunda metade da fila? (abs)
 //retorna "primeira", "segunda" ou "empate"
-std::string mais_homens_ou_mulheres(const vector<int>& fila) {
-
+std::string qual_metade_eh_mais_estressada(const std::vector<int>& fila) {
+    int soma_primeira_parte { 0 };
+    int soma_segunda_parte { 0 };
+    for (int i = 0; i < (int) fila.size(); i++) {
+        if (i < (int) (fila.size() / 2)) {
+            soma_primeira_parte += modulo_estresse(fila[i]);
+        } else {
+            soma_segunda_parte += modulo_estresse(fila[i]);
+        }
+    }
+    if (soma_primeira_parte == soma_segunda_parte) {
+        return "empate";
+    } else if (soma_primeira_parte > soma_segunda_parte) {
+        return "primeira";
+    } else {
+        return "segunda";
+    }
 }

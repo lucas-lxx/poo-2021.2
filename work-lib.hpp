@@ -94,3 +94,14 @@ int procurar_pos_melhor_se(const std::vector<int>& fila) {
         return -1;
     return mais_calmo;
 }
+
+// Contagem: 4 funções
+// calcular_stress_medio: qual a média de stress da fila? (abs)
+float calcular_stress_medio(const std::vector<int>& fila) {
+    int soma { 0 };
+    int tamanho_vetor { (int) fila.size() };
+    for (int i : fila) {
+        i > 0 ? soma += i : soma += (i * -1);
+    }
+    return (float) soma / tamanho_vetor;
+}

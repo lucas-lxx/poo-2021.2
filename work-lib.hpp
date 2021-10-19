@@ -1,4 +1,4 @@
-#pragma once
+
 #include <iostream>
 #include <vector>
 
@@ -55,4 +55,17 @@ int procurar_menor(const std::vector<int>& fila){
             menor = i;
     }
     return menor;
+}
+
+// procurar_pos_menor: qual a posição do menor valor da lista?
+int procurar_pos_menor(const std::vector<int>& fila) {
+    int menor { fila[0] };
+    int pos_menor { 0 };
+    for (int i = 0; i < (int) fila.size(); i++) {
+        if (fila[i] < menor){ 
+            menor = fila[i];
+            pos_menor = i;
+        }
+    }
+    return pos_menor;
 }

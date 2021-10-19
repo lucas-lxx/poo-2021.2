@@ -2,6 +2,7 @@
 #include <vector>
 #include "work-lib.hpp"
 
+
 int main()
 {
     std::cout << "existe: " << to_alpha(existe({-1, -50, -99}, -1)) << '\n'; // 1/true
@@ -18,4 +19,6 @@ int main()
     std::cout << "procurar a partir: " << procurar_apartir({5, 3, -1, -50, -1, -99}, -1, 4) << '\n' << '\n'; // 4
 
     std::cout << "procurar menor: " << procurar_menor({5, 3, -1, -50, -1, -99}) << '\n' << '\n';
+
+    std::cout << "procurar a posição do menor no vetor: " << procurar_pos_menor({5, 3, -1, -50, -1, -99}) << '\n' << '\n'; // 5
 }

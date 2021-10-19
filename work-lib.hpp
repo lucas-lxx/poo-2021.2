@@ -45,3 +45,14 @@ int procurar_apartir(const std::vector<int> fila, int x, int inicio){
     }
     return -1;
 }
+
+// Melhor caso: 4 funções
+// procurar_menor: qual o menor valor da lista?
+int procurar_menor(const std::vector<int>& fila){
+    int menor { fila[0] };
+    for (int i : fila) {
+        if (i < menor) 
+            menor = i;
+    }
+    return menor;
+}

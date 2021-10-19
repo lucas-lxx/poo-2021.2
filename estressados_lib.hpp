@@ -211,9 +211,15 @@ std::vector<int> clonar(const std::vector<int>& v) {
 // printar vetor na tela
 std::string vet_print(const std::vector<int>& vect) {
     std::stringstream ss;
+    ss << "[ ";
     for (int i : vect) {
-        ss << i << " ";
+        if (i == vect.back()) {
+            ss << i << " ";
+            break;
+        }
+        ss << i << ", ";
     }
+    ss << "]";
     return ss.str();
 }
 
@@ -225,4 +231,14 @@ std::vector<int> pegar_homens(const std::vector<int>& v) {
             vect.push_back(i);
     }
     return vect;
+}
+
+// pegar_calmos: retorne uma lista com as pessoas com stress menor que 10 (abs)
+std::vector<int> pegar_calmos(const std::vector<int>& v) {
+    std::vector<int> vect_calmos { };
+    for (int i : v) {
+        if ((i > 0 && i < 10) || (i < 0 && i > -10))
+            vect_calmos.push_back(i);
+    }
+    return vect_calmos;
 }

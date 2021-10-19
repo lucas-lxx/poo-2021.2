@@ -18,7 +18,9 @@ int main()
     std::cout << "procurar a partir: " << procurar_apartir({5, 3, -1, -50, -1, -99}, -1, 3) << '\n'; // 4
     std::cout << "procurar a partir: " << procurar_apartir({5, 3, -1, -50, -1, -99}, -1, 4) << '\n' << '\n'; // 4
 
-    std::cout << "procurar menor: " << procurar_menor({5, 3, -1, -50, -1, -99}) << '\n' << '\n';
+    std::cout << "procurar menor: " << procurar_menor({5, 3, -1, -50, -1, -99}) << '\n' << '\n'; // -99
 
     std::cout << "procurar a posição do menor no vetor: " << procurar_pos_menor({5, 3, -1, -50, -1, -99}) << '\n' << '\n'; // 5
+
+    std::cout << "procurar menor posição a partir de um ponto: " << procurar_pos_menor_apartir({5, 3, -1, -50, -1, 10}, 3) << '\n' << '\n'; // -50
 }

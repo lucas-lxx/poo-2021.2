@@ -69,3 +69,13 @@ int procurar_pos_menor(const std::vector<int>& fila) {
     }
     return pos_menor;
 }
+
+// procurar_pos_menor_apartir: Dada a posição para iniciar a busca, qual a posição do menor valor da lista?
+int procurar_pos_menor_apartir(const std::vector<int>& fila, int inicio) {
+    int menor;
+    for (int i = inicio; i < (int) fila.size(); i++) {
+        if(fila[i] < menor) 
+            menor = fila[i];
+    }
+    return menor;
+}

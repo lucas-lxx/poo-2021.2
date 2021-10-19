@@ -51,4 +51,9 @@ int main()
     std::cout << "Qual é a metade mais estressada? " << qual_metade_eh_mais_estressada({5, 3, -1, -50, -1, -99}) << '\n'; // "segunda"
     std::cout << "Qual é a metade mais estressada? " << qual_metade_eh_mais_estressada({50, 98, 2, -50, -1, -99}) << '\n'; // "empate"
     std::cout << "Qual é a metade mais estressada? " << qual_metade_eh_mais_estressada({-51, 99, 1, -50, -1, -99}) << '\n' << '\n'; // "primeira"
+
+    // homens_sao_mais_estressados_que_mulheres: a média do stress dos homens é maior que a das mulheres?
+    std::cout << "Os homens estão mais estressados que as mulheres? " << homens_sao_mais_estressados_que_mulheres({5, 3, -1, -50, -1, -99}) << '\n';
+    std::cout << "Os homens estão mais estressados que as mulheres? " << homens_sao_mais_estressados_que_mulheres({50, 98, 2, -50, -1, -99}) << '\n';
+    std::cout << "Os homens estão mais estressados que as mulheres? " << homens_sao_mais_estressados_que_mulheres({-51, 99, 1, -50, -1, 99}) << '\n';
 }

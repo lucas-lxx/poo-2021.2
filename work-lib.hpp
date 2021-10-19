@@ -152,3 +152,28 @@ std::string qual_metade_eh_mais_estressada(const std::vector<int>& fila) {
         return "segunda";
     }
 }
+
+// homens_sao_mais_estressados_que_mulheres: a média do stress dos homens é maior que a das mulheres?
+std::string homens_sao_mais_estressados_que_mulheres(const std::vector<int>& fila){
+    int estresse_homens { 0 };
+    int estresse_mulheres { 0 };
+    for (int i : fila) {
+        if (i == 0)
+            continue;
+        if (i > 0){
+            estresse_homens += i;
+        } else {
+            estresse_mulheres += i;
+        }
+    }
+    estresse_mulheres = (estresse_mulheres * -1);
+    std::cout << "Estresse mulheres: " << estresse_mulheres << " " << "Estresse homens: " << estresse_homens << '\n';
+    
+    if (estresse_mulheres == estresse_homens) {
+        return "empate";
+    } else if (estresse_mulheres > estresse_homens) {
+        return "não";
+    } else {
+        return "sim";
+    }
+}

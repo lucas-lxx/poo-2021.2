@@ -16,4 +16,7 @@ int main()
 
     // pegar_calmos: retorne uma lista com as pessoas com stress menor que 10 (abs)
     std::cout << "Retorna uma lista só com as pessoas que tem o estresse menor que 10: " << vet_print(pegar_calmos({1, 10, -1, -10, 2, -2, 9, -9})) << '\n' << '\n';
+
+    // pegar_mulheres_calmas: retorne uma lista com as mulheres com nível de stress menor que 10.(negativos menor que 10)
+    std::cout << "Retorna uma lista com as mulheres calmas: " << vet_print(pegar_mulheres_calmas({-23, -52, 34, 84, -29, 91, -1, 1, 43, 234, -1, -3, 2, -4, 4, -8, 1, -3, 1, -5})) << '\n' << '\n';
 }

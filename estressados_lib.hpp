@@ -242,3 +242,20 @@ std::vector<int> pegar_calmos(const std::vector<int>& v) {
     }
     return vect_calmos;
 }
+
+// retorna verdadeiro se for mulheres
+bool eh_mulher(int pessoa) {
+    return pessoa < 0 ? true : false;
+}
+
+// pegar_mulheres_calmas: retorne uma lista com as mulheres com nível de stress menor que 10.(negativos menor que 10)
+
+std::vector<int> pegar_mulheres_calmas(std::vector<int> v) {
+    std::vector<int> vect_calmas = pegar_calmos(v);
+    for (int i = 0; i < (int) vect_calmas.size(); i++) {
+        if (!eh_mulher(vect_calmas[i]))
+            vect_calmas.erase(vect_calmas.begin() + i);
+    }
+    return vect_calmas;
+}
+

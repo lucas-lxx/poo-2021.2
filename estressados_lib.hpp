@@ -281,3 +281,8 @@ void inverter_inplace(std::vector<int>& v) {
         v[j] = place_holder;
     }
 }
+
+//retorna aleatoriamente um elemento do vetor
+int sortear(const std::vector<int>& v) {
+    return v[rand() % v.size()];
+}

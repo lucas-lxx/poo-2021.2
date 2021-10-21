@@ -29,4 +29,7 @@ int main()
     std::cout<< "Retorna o vetor, " << vet_print(inplace_asdf); 
     inverter_inplace(inplace_asdf);
     std::cout << " ao inverso, sem auxílio de vetor de cópia, " << vet_print(inplace_asdf) << '\n' << '\n';
+
+    // sortear
+    std::cout << "Retorna um número aleatório do vetor, " << vet_print(inplace_asdf) << " [ " << sortear(inplace_asdf) << " ]" << '\n';
 }

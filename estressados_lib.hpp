@@ -259,7 +259,8 @@ std::vector<int> pegar_mulheres_calmas(std::vector<int> v) {
     return vect_calmas;
 }
 
-//retorna um novo vetor com os dados invertidos
+
+// Retorna um novo vetor com os dados invertidos
 std::vector<int> inverter_com_copia(const std::vector<int>& vet) {
     std::vector<int> v { vet };
     int place_holder;
@@ -269,4 +270,14 @@ std::vector<int> inverter_com_copia(const std::vector<int>& vet) {
         v[j] = place_holder;
     }
     return v;
+}
+
+// inverte os valores do vetor de entrada sem uso de vetor auxiliar
+void inverter_inplace(std::vector<int>& v) {
+    int place_holder;
+    for(int i = 0, j = (v.size() -1); i < (int) (v.size() / 2); i++, j--) {
+        place_holder = v[i];
+        v[i] = v[j];
+        v[j] = place_holder;
+    }
 }

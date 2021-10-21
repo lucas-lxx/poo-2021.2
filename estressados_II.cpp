@@ -20,6 +20,13 @@ int main()
     // pegar_mulheres_calmas: retorne uma lista com as mulheres com nível de stress menor que 10.(negativos menor que 10)
     std::cout << "Retorna uma lista com as mulheres calmas: " << vet_print(pegar_mulheres_calmas({-23, -52, 34, 84, -29, 91, -1, 1, 43, 234, -1, -3, 2, -4, 4, -8, 1, -3, 1, -5})) << '\n' << '\n';
 
+    // Acesso: 5 funções
     // inverter com copia
     std::cout<< "Retorna o vetor, " << vet_print({1, 2, 3, 4}) << " ao inverso, " << vet_print(inverter_com_copia({1, 2, 3, 4})) << '\n' << '\n';
+
+    // inverter inplace
+    std::vector<int> inplace_asdf {1, 2, 3, 4};
+    std::cout<< "Retorna o vetor, " << vet_print(inplace_asdf); 
+    inverter_inplace(inplace_asdf);
+    std::cout << " ao inverso, sem auxílio de vetor de cópia, " << vet_print(inplace_asdf) << '\n' << '\n';
 }

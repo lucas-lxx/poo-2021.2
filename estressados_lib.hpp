@@ -284,5 +284,12 @@ void inverter_inplace(std::vector<int>& v) {
 
 //retorna aleatoriamente um elemento do vetor
 int sortear(const std::vector<int>& v) {
+    unsigned seed = time(0);
+    srand(seed);
     return v[rand() % v.size()];
 }
+
+//embaralha o vetor original
+// void embaralhar(std::vector<int>& v) {
+
+// }

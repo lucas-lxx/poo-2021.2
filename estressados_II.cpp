@@ -32,4 +32,7 @@ int main()
 
     // sortear
     std::cout << "Retorna um número aleatório do vetor, " << vet_print(inplace_asdf) << " [ " << sortear(inplace_asdf) << " ]" << '\n';
+
+    //embaralhar
+    
 }

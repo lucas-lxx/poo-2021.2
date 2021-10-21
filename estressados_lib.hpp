@@ -272,13 +272,18 @@ std::vector<int> inverter_com_copia(const std::vector<int>& vet) {
     return v;
 }
 
+// inverte os números
+void swap (int& a, int& b) {
+    int place_holder;
+    place_holder = a;
+    a = b;
+    b = place_holder;
+}
+
 // inverte os valores do vetor de entrada sem uso de vetor auxiliar
 void inverter_inplace(std::vector<int>& v) {
-    int place_holder;
     for(int i = 0, j = (v.size() -1); i < (int) (v.size() / 2); i++, j--) {
-        place_holder = v[i];
-        v[i] = v[j];
-        v[j] = place_holder;
+        swap(v[i], v[j]);
     }
 }
 
@@ -289,7 +294,18 @@ int sortear(const std::vector<int>& v) {
     return v[rand() % v.size()];
 }
 
-//embaralha o vetor original
-// void embaralhar(std::vector<int>& v) {
+// sorteia um lugar do vetor
+int sortear_indice (std::vector<int> v) {
+    unsigned seed = time(0);
+    srand(seed);
+    return rand() % v.size();
+}
 
-// }
+
+
+//embaralha o vetor original
+void embaralhar(std::vector<int>& v) {
+    for (int i; i < (int) v.size(); i++){
+        
+    }
+}

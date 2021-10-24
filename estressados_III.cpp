@@ -21,4 +21,8 @@ int main()
     // mais_recorrentes: Quais os níveis de stress mais recorrentes. (abs)
     // {1, 3, 4, 5, -1, -5, -5, 3, -3} -> {3, 5}
     std::cout << "Retorna os niveis de estresse mais recorrentes, " << vet_print(mais_recorrentes({1, 3, 4, 5, -1, -5, -5, 3, -3})) << '\n' << '\n';
+
+    // Proximidade: 2 funções
+    // briga Quando alguém super estressado(>50) está ao lado de duas pessoas muito estressadas(>30) pode dar briga. Quantas vezes essa situação acontece?
+    std::cout << "Quantas brigas ocorreram na fila, " << briga({50, 98, 31, -51, 31, -99}) << '\n' << '\n';
 }

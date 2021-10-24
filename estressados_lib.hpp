@@ -418,3 +418,29 @@ std::vector<int> mais_recorrentes(const std::vector<int>& v) {
     }
     return maiores;
 }
+
+// retorna verdadeiro se a pessoa estiver super estressada >50
+bool super_estressado(const int& pessoa) {
+    if (modulo_estresse(pessoa) > 100)
+        return false;
+    return modulo_estresse(pessoa) > 50 ? true : false;
+}
+
+// retorna verdadeiro se a pessoa estiver estressada >30
+bool estressado(const int& pessoa) {
+    if (modulo_estresse(pessoa) > 100)
+        return false;
+    return modulo_estresse(pessoa) > 30 ? true : false;
+}
+
+// Proximidade: 2 funções
+// briga Quando alguém super estressado(>50) está ao lado de duas pessoas muito estressadas(>30) pode dar briga. Quantas vezes essa situação acontece?
+int briga(const std::vector<int>& v) {
+    int briga { 0 };
+    for (int i = 1; i < (int) (v.size() - 1); i++) {
+        if (super_estressado(v[i]))
+            if(estressado(v[i - 1]) && estressado(v[i + 1]))
+                briga++;
+    }
+    return briga;
+}

@@ -390,7 +390,6 @@ bool unico(const std::vector<int>& v, int x) {
 // Map - Manipulação: 3 funções
 // sozinhos: Quais PESSOAS eram as únicas representantes do seu nível de stress na fila? (abs)
 std::vector<int> sozinhos(const std::vector<int>& v) {
-    
     std::vector<int> v_unic {};
     for (int i = 0; i < (int) v.size(); i++) {
         if (unico(vetor_modular(v), modulo_estresse(v[i])))
@@ -399,3 +398,12 @@ std::vector<int> sozinhos(const std::vector<int>& v) {
     return v_unic;
 }
 
+// mais_ocorrencias: Qual a maior quantidade de ocorrências do mesmo nível de stress. (abs)
+int mais_ocorrencias(const std::vector<int>& v) {
+    int maior { 0 };
+    for (int i = 0; i < (int) v.size(); i++) {
+        if (maior < contar(vetor_modular(v), modulo_estresse(v[i])))
+            maior = contar(vetor_modular(v), modulo_estresse(v[i]));
+    }
+    return maior;
+}

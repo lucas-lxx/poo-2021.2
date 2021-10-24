@@ -444,3 +444,28 @@ int briga(const std::vector<int>& v) {
     }
     return briga;
 }
+
+// retorna verdadeiro se for uma pessoa hiper estressada >80
+bool hiper_estressado(const int& pessoa) {
+    if (modulo_estresse(pessoa) > 100)
+        return false;
+    return modulo_estresse(pessoa) > 80 ? true : false;
+}
+
+// retorna verdadeiro se for uma pessoa bem tranquila <10
+bool bem_tranquilo(const int& pessoa) {
+    if (modulo_estresse(pessoa) > 100)
+        return false;
+    return modulo_estresse(pessoa) < 10 ? true : false;
+}
+
+// apaziguado Se alguém hiper estressado(>80) estiver ao lado de pelo menos uma pessoa bem tranquila (<10) ela vai ser apaziguada. Em que posições estão esses que serão apaziguados?
+std::vector<int> apaziguados(const std::vector<int>& v) {
+    std::vector<int> apzg {};
+    for (int i = 0; i < (int) v.size(); i++) {
+        if (hiper_estressado(v[i]))
+            if (bem_tranquilo(v[i - 1]) || bem_tranquilo(v[i + 1]))
+                apzg.push_back(i);
+    }
+    return apzg;
+}

@@ -24,5 +24,10 @@ int main()
 
     // Proximidade: 2 funções
     // briga Quando alguém super estressado(>50) está ao lado de duas pessoas muito estressadas(>30) pode dar briga. Quantas vezes essa situação acontece?
+    // {50, 98, 31, -51, 31, -99} -> {2}
     std::cout << "Quantas brigas ocorreram na fila, " << briga({50, 98, 31, -51, 31, -99}) << '\n' << '\n';
+
+    // apaziguado Se alguém hiper estressado(>80) estiver ao lado de pelo menos uma pessoa bem tranquila (<10) ela vai ser apaziguada. Em que posições estão esses que serão apaziguados?
+    // {83, -4, 65, 8, -99, 12 } -> {0, 4}
+    std::cout << "Retorna a posição das pessoas apaziguadas, " << vet_print(apaziguados({83, -4, 65, 8, -99, 12 })) << '\n' << '\n';
 }

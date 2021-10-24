@@ -407,3 +407,14 @@ int mais_ocorrencias(const std::vector<int>& v) {
     }
     return maior;
 }
+
+// mais_recorrentes: Quais os níveis de stress mais recorrentes. (abs)
+std::vector<int> mais_recorrentes(const std::vector<int>& v) {
+    int mais_recorrente { mais_ocorrencias(v) };
+    std::vector<int> maiores { };
+    for (int i = 0; i < (int) v.size(); i++) {
+        if (contar(vetor_modular(v), modulo_estresse(v[i])) == mais_recorrente && !existe(maiores, modulo_estresse(v[i])))
+            maiores.push_back(modulo_estresse(v[i]));
+    }
+    return maiores;
+}

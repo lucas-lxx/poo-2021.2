@@ -17,5 +17,8 @@ int main()
     // saida da funcao mais_ocorrencias();
     // {1, 3, 4, 5, -1, -5, -5} -> 3
     std::cout << "Retorna a maior quantidade de ocorrencias do mesmo nivel de stress [ " << mais_ocorrencias({1, 3, 4, 5, -1, -5, -5}) << " ]\n" << '\n';
-}
 
+    // mais_recorrentes: Quais os níveis de stress mais recorrentes. (abs)
+    // {1, 3, 4, 5, -1, -5, -5, 3, -3} -> {3, 5}
+    std::cout << "Retorna os niveis de estresse mais recorrentes, " << vet_print(mais_recorrentes({1, 3, 4, 5, -1, -5, -5, 3, -3})) << '\n' << '\n';
+}

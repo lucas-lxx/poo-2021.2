@@ -44,5 +44,12 @@ int main()
     // saida da funcao ordenar()
     // retorna o vetor desembaralhado
     ordenar(embaralhar_vet);
-    std::cout << "Retorna um vetor ordenado, " << vet_print(embaralhar_vet) << '\n';
+    std::cout << "Retorna um vetor ordenado, " << vet_print(embaralhar_vet) << '\n' << '\n';
+
+    // Conjuntos: 3 funções
+    // exclusivos: O fiscal permitiu a entrada de um único representante de cada valor, ou seja, uma lista dos valores que aparecem na fila sem repetição. Que conjunto foi formado?
+    // saida //{1, 3, 4, 3, -1, -2, -2} -> {1, 3, 4, -1, -2}
+    
+    std::cout << "Retorna a fila, " << vet_print({1, 3, 4, 3, -1, -2, -2}) << " sem os elementos repetidos, ";
+    std::cout << vet_print(exclusivos({1, 3, 4, 3, -1, -2, -2})) << '\n' << '\n';
 }

@@ -139,7 +139,7 @@ std::string mais_homens_ou_mulheres(const std::vector<int>& fila) {
 }
 
 // Modulo conversor de estresse homens e mulheres
-int modulo_estresse (int pessoa) {
+int modulo_estresse(int pessoa) {
     return pessoa > 0 ? pessoa : (pessoa * -1);
 }
 
@@ -353,3 +353,49 @@ std::vector<int> abandonados(const std::vector<int>& v) {
     }
     return aban;
 }
+
+// ==================================================================================================================================
+// ==================================================================================================================================
+// ==================================================================================================================================
+// Functions for estressados III =====================================================================================================
+// ==================================================================================================================================
+// ==================================================================================================================================
+// ==================================================================================================================================
+
+
+
+// retorna o vetor modularizado
+std::vector<int> vetor_modular(const std::vector<int> v) {
+    std::vector<int> v_mod {};
+    for (int i = 0; i < (int) v.size(); i++){
+        v_mod.push_back(modulo_estresse(v[i]));
+    }
+    return v_mod;
+}
+
+// retorna verdadeiro se for o unico elemento presente no vetor
+bool unico(const std::vector<int>& v, int x) {
+    if (!existe(v, x))
+        return false;
+    int count { 0 };
+    for (int i = 0; i < (int) v.size(); i++) {
+        if (x == v[i])
+            ++count;
+    }
+    if (count > 1)
+        return false;
+    return true;
+}
+
+// Map - Manipulação: 3 funções
+// sozinhos: Quais PESSOAS eram as únicas representantes do seu nível de stress na fila? (abs)
+std::vector<int> sozinhos(const std::vector<int>& v) {
+    std::vector<int> v_mod { vetor_modular(v) };
+    std::vector<int> v_unic {};
+    for (int i = 0; i < (int) v_mod.size(); i++) {
+        if (unico(v_mod, v_mod[i]))
+            v_unic.push_back(v_mod[i]);
+    }
+    return v_unic;
+}
+

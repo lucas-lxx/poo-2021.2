@@ -212,12 +212,12 @@ std::vector<int> clonar(const std::vector<int>& v) {
 std::string vet_print(const std::vector<int>& vect) {
     std::stringstream ss;
     ss << "[ ";
-    for (int i : vect) {
-        if (i == vect.back()) {
-            ss << i << " ";
+    for (int i = 0; i < (int) vect.size(); i++) {
+        if (i == (int) (vect.size() - 1)) {
+            ss << vect[i] << " ";
             break;
         }
-        ss << i << ", ";
+        ss << vect[i] << ", ";
     }
     ss << "]";
     return ss.str();
@@ -338,4 +338,18 @@ std::vector<int> diferentes(const std::vector<int>& v) {
             dife.push_back(modulo_estresse(v[i]));
     }
     return dife;
+}
+
+// abandonados: quais pessoas ficaram na fila após remover um exemplar de cada valor?
+std::vector<int> abandonados(const std::vector<int>& v) {
+    std::vector<int> excl {};
+    std::vector<int> aban {};
+    for (int i = 0; i < (int) v.size(); i++){
+        if(!existe(excl, v[i])) {
+            excl.push_back(v[i]);
+        } else {
+            aban.push_back(v[i]);
+        }
+    }
+    return aban;
 }

@@ -390,11 +390,11 @@ bool unico(const std::vector<int>& v, int x) {
 // Map - Manipulação: 3 funções
 // sozinhos: Quais PESSOAS eram as únicas representantes do seu nível de stress na fila? (abs)
 std::vector<int> sozinhos(const std::vector<int>& v) {
-    std::vector<int> v_mod { vetor_modular(v) };
+    
     std::vector<int> v_unic {};
-    for (int i = 0; i < (int) v_mod.size(); i++) {
-        if (unico(v_mod, v_mod[i]))
-            v_unic.push_back(v_mod[i]);
+    for (int i = 0; i < (int) v.size(); i++) {
+        if (unico(vetor_modular(v), modulo_estresse(v[i])))
+            v_unic.push_back(v[i]);
     }
     return v_unic;
 }

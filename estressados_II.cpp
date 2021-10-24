@@ -39,5 +39,10 @@ int main()
     std::cout << "Retorna um vetor embaralhado, " << vet_print(embaralhar_vet);
     // retorna o vetor embaralhado
     embaralhar(embaralhar_vet);
-    std::cout << " " << vet_print(embaralhar_vet) << '\n';
+    std::cout << " " << vet_print(embaralhar_vet) << '\n' << '\n';
+
+    // saida da funcao ordenar()
+    // retorna o vetor desembaralhado
+    ordenar(embaralhar_vet);
+    std::cout << "Retorna um vetor ordenado, " << vet_print(embaralhar_vet) << '\n';
 }

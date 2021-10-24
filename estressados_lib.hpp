@@ -307,3 +307,15 @@ void embaralhar(std::vector<int>& v) {
         swap(v[i], v[sortear_indice(v)]);
     }
 }
+
+//ordena o vetor original
+void ordenar(std::vector<int>& v) {
+    for (int i = 0; i < (int) v.size(); i++) {
+        for (int j = 0; j < (int) v.size(); j++) {
+            if (v[i] < v[j]) {
+                swap(v[i], v[j]);
+            }
+        }
+    }
+}
+

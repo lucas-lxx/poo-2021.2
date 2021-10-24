@@ -321,7 +321,6 @@ void ordenar(std::vector<int>& v) {
 
 // Conjuntos: 3 funções
 // exclusivos: O fiscal permitiu a entrada de um único representante de cada valor, ou seja, uma lista dos valores que aparecem na fila sem repetição. Que conjunto foi formado?
-
 std::vector<int> exclusivos(const std::vector<int>& v) {
     std::vector<int> excl {};
     for (int i = 0; i < (int) v.size(); i++) {

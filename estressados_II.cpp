@@ -31,8 +31,14 @@ int main()
     std::cout << " ao inverso, sem auxílio de vetor de cópia, " << vet_print(inplace_asdf) << '\n' << '\n';
 
     // sortear
-    std::cout << "Retorna um número aleatório do vetor, " << vet_print(inplace_asdf) << " [ " << sortear(inplace_asdf) << " ]" << '\n';
+    std::cout << "Retorna um número aleatório do vetor, " << vet_print(inplace_asdf) << " [ " << sortear(inplace_asdf) << " ]" << '\n' << '\n';
 
-    //embaralhar
+    // saida da função embaralhar
+    std::vector<int> embaralhar_vet = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     
+    std::cout << "Retorna um vetor embaralhado, " << vet_print(embaralhar_vet);
+    // retorna o vetor embaralhado
+    embaralhar(embaralhar_vet);
+    
+    std::cout << " " << vet_print(embaralhar_vet) << '\n';
 }

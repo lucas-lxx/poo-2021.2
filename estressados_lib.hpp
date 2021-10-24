@@ -287,25 +287,23 @@ void inverter_inplace(std::vector<int>& v) {
     }
 }
 
-//retorna aleatoriamente um elemento do vetor
-int sortear(const std::vector<int>& v) {
-    unsigned seed = time(0);
-    srand(seed);
-    return v[rand() % v.size()];
-}
-
 // sorteia um lugar do vetor
-int sortear_indice (std::vector<int> v) {
+int sortear_indice (std::vector<int>& v) {
     unsigned seed = time(0);
     srand(seed);
     return rand() % v.size();
 }
 
 
+//retorna aleatoriamente um elemento do vetor
+int sortear(std::vector<int>& v) {
+    return v[sortear_indice(v)];
+}
+
 
 //embaralha o vetor original
 void embaralhar(std::vector<int>& v) {
-    for (int i; i < (int) v.size(); i++){
-        
+    for (int i = 0; i < (int) v.size(); i++){
+        swap(v[i], v[sortear_indice(v)]);
     }
 }

@@ -329,3 +329,13 @@ std::vector<int> exclusivos(const std::vector<int>& v) {
     }
     return excl;
 }
+
+// diferentes: Qual a lista dos diferentes níveis de stress que aparecem?
+std::vector<int> diferentes(const std::vector<int>& v) {
+    std::vector<int> dife {};
+    for (int i = 0; i < (int) v.size(); i++) {
+        if (!existe(dife, modulo_estresse(v[i])))
+            dife.push_back(modulo_estresse(v[i]));
+    }
+    return dife;
+}

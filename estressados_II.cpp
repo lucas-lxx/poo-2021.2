@@ -51,5 +51,8 @@ int main()
     // saida //{1, 3, 4, 3, -1, -2, -2} -> {1, 3, 4, -1, -2}
     std::cout << "Retorna a fila, " << vet_print({1, 3, 4, 3, -1, -2, -2}) << " sem os elementos repetidos, ";
     std::cout << vet_print(exclusivos({1, 3, 4, 3, -1, -2, -2})) << '\n' << '\n';
-}
 
+    // diferentes: Qual a lista dos diferentes níveis de stress que aparecem?
+    //{1, 3, 4, 3, -1, -2, -2} -> {1, 3, 4, 2}
+    std::cout << "Retorna a lista dos diferentes niveis de stress " << vet_print(diferentes({1, 3, 4, 3, -1, -2, -2})) << '\n' << '\n';
+}

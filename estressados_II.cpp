@@ -55,4 +55,9 @@ int main()
     // diferentes: Qual a lista dos diferentes níveis de stress que aparecem?
     //{1, 3, 4, 3, -1, -2, -2} -> {1, 3, 4, 2}
     std::cout << "Retorna a lista dos diferentes niveis de stress " << vet_print(diferentes({1, 3, 4, 3, -1, -2, -2})) << '\n' << '\n';
+
+    // abandonados: quais pessoas ficaram na fila após remover um exemplar de cada valor?
+    //{1, 3, 4, 3, -1, -2, -2} -> {3, -2}
+    std::vector<int> aban { abandonados({1, 3, 4, 3, -1, -2, -2}) };
+    std::cout << "Retorna os elementos que aparecem mais de uma vez " << vet_print(aban) << '\n';
 }

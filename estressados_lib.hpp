@@ -50,7 +50,7 @@ int procurar(const std::vector<int>& fila, int x){
 
 // procurar_apartir: Dada a posição para iniciar a busca, qual a próxima posição em que aparece X?
 // retorna -1 se não encontrar
-int procurar_apartir(const std::vector<int> fila, int x, int inicio){
+int procurar_apartir(const std::vector<int>& fila, int x, int inicio){
     for (int i = inicio; i < (int) fila.size(); i++) {
         if(fila[i] == x) 
             return i;
@@ -243,7 +243,7 @@ std::vector<int> pegar_calmos(const std::vector<int>& v) {
     return vect_calmos;
 }
 
-// retorna verdadeiro se for mulheres
+// retorna verdadeiro se for mulhere
 bool eh_mulher(int pessoa) {
     return pessoa < 0 ? true : false;
 }
@@ -365,7 +365,7 @@ std::vector<int> abandonados(const std::vector<int>& v) {
 
 
 // retorna o vetor modularizado
-std::vector<int> vetor_modular(const std::vector<int> v) {
+std::vector<int> vetor_modular(const std::vector<int>& v) {
     std::vector<int> v_mod {};
     for (int i = 0; i < (int) v.size(); i++){
         v_mod.push_back(modulo_estresse(v[i]));
@@ -469,3 +469,53 @@ std::vector<int> apaziguados(const std::vector<int>& v) {
     }
     return apzg;
 }
+
+// retorna a quantidade de mulheres enfileirados sem interrupcao
+int range_mulheres(const std::vector<int>& v, const int& pos) {
+    int range { 0 };
+    for (int i = pos; i < (int) v.size(); i++) {
+        if (eh_mulher(v[i])) {
+            range++;
+        } else {
+            break;
+        }
+    }
+    return range;
+}
+
+// retorna a quantidade de homens enfileirados sem interrupcao
+int range_homens(const std::vector<int>& v, const int& pos) {
+    int range { 0 };
+    for (int i = pos; i < (int) v.size(); i++) {
+        if (!eh_mulher(v[i])) {
+            range++;
+        } else {
+            break;
+        }
+    }
+    return range;
+}
+
+int range_pessoas(const std::vector<int>& v, const int& pos) {
+    int range { 0 };
+    if (eh_mulher(v[pos])) {
+        range = range_mulheres(v, pos);
+    } else {
+        range = range_homens(v, pos);
+    }
+    return range;
+}
+
+// Sequências: 3 funções
+// quantos_times Duas ou mais pessoas do mesmo sexo seguidas podem formar um time. Quantos times existem na fila?
+int quantos_times(const std::vector<int>& v) {
+    int times { 0 };
+    for (int i = 0; i < (int) v.size(); i++) {
+        if (range_pessoas(v, i) > 1){
+            times++;
+            i += range_pessoas(v, i);
+        }
+    }
+    return times;
+}
+

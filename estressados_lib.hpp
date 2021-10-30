@@ -513,9 +513,13 @@ int quantos_times(const std::vector<int>& v) {
     for (int i = 0; i < (int) v.size(); i++) {
         if (range_pessoas(v, i) > 1){
             times++;
-            i += range_pessoas(v, i);
+            i += (range_pessoas(v, i) - 1);
         }
     }
     return times;
 }
 
+// maior_time Qual o maior time que apareceu na fila?
+// std::vector<int> maior_time(const std::vector<int>& v) {
+
+// }

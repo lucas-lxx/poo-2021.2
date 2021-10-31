@@ -596,11 +596,6 @@ int sem_time(const std::vector<int>& v) {
     comparar pelo menor lado
 */
 
-//retorna verdadeiro se existem homens
-bool checar_homens_no_vetor(std::vector<int> v) {
-    return soma_homens_no_vetor(v) <=0 ? false : true;
-}
-
 // retorna a quantidade de mulheres no vetor v
 int soma_mulheres_no_vetor(const std::vector<int>& v) {
     int soma { 0 };
@@ -617,10 +612,40 @@ int soma_homens_no_vetor(const std::vector<int>& v) {
     return v.size() - soma_mulheres_no_vetor(v);
 }
 
+//retorna verdadeiro se existem homens
+bool checar_homens_no_vetor(std::vector<int> v) {
+    return soma_homens_no_vetor(v) <= 0 ? false : true;
+}
+
+// retorna verdadeiro ou falso,
+// se h e m forem opostos, mas de mesmo valor
+bool tem_match(int& h, int& m) {
+    return h == (m * -1) ? true : false;
+}
+
+// exclui o casal do vetor v
+// nas posicoes de indice pos_1 e pos_2
+// atencao pois os indices devem estar na ordem pos_1 < pos_2
+void exclui_casal(std::vector<int>& v, int& pos_1, int pos_2) {
+    v.erase(v.begin() + pos_1);
+    v.erase(v.begin() + (pos_2-1));
+}
+
+// retorna os casais que podem ser criados dentro do vetor v
 int casais_no_vetor(std::vector<int> v) {
+    int soma_casais { 0 };
     ordenar(v);
     if(!checar_homens_no_vetor(v))
-        return 0;
-    
-    
+        return soma_casais;
+    for(int i = 0; v[i] < 0; i++) {
+        for(int j = ((int) v.size() - 1); v[j] > 0; j--) {
+            if (tem_match(v[i], v[j])) {
+                exclui_casal(v, i, j);
+                i -= 1;
+                soma_casais++;
+                break;
+            }
+        }
+   }
+    return soma_casais;
 }

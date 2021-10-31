@@ -42,7 +42,7 @@ int main()
 
     // maior_time Qual o maior time que apareceu na fila?
     std::cout << "Retorna qual eh o maior time que apareceu na fila: " << vet_print(maior_time({-5, 3, -1, 15, 1, -99, 11, 1 })) << '\n'; // {15, 1}
-    std::cout << "retorna qual eh o maior time que apareceu na fila: " << vet_print(maior_time({-5, 3, -1, 15, -1, 99, -11, 1 })) << '\n'; // {}
+    std::cout << "Retorna qual eh o maior time que apareceu na fila: " << vet_print(maior_time({-5, 3, -1, 15, -1, 99, -11, 1 })) << '\n'; // {}
     std::cout << "Retorna qual eh o maior time que apareceu na fila: " << vet_print(maior_time({-5, 3, 1, -15, -1, 99, -11, -1, -7 })) << '\n'; // {-11, -1, -7}
 
 

@@ -589,13 +589,6 @@ int sem_time(const std::vector<int>& v) {
 //Grupos: 2 funcoes
 //casais: Casais são formados quando quando um homem e uma mulher com o mesmo nível de stress são formados. O 3 e o -3 formam um casal. Os participantes fossem orientados a sair da fila e procurar seu par. Quantos casais poderiam ser formados?
 
-/*
-    ordenar
-    checar se tem homens
-    mais homens ou mulheres
-    comparar pelo menor lado
-*/
-
 // retorna a quantidade de mulheres no vetor v
 int soma_mulheres_no_vetor(const std::vector<int>& v) {
     int soma { 0 };

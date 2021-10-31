@@ -58,4 +58,10 @@ int main()
     // trios: Pedimos pros participantes se organizassem em trios. Todos os 3 deveriam estar com o mesmo nível de stress.Quantos trios podem ser formados?
     std::cout << "Retorna quantos trios existem no vetor: " << trios_no_vetor({1, 3, 19, 4, -4, 5, -19, -19, -43, -1, 4, -3}) << '\n'; // 2
     std::cout << "Retorna quantos trios existem no vetor: " << trios_no_vetor({1, 3, -4, 5, -19, -19, -43, -1, 4, -3}) << '\n' << '\n'; // 0
+
+    // remove: Dado a pessoa X, como fica a fila após remover X?
+    std::vector<int> fila_remocao {1, 2, 3, 4, 5, 6};
+    std::cout << "Remove da fila " << vet_print(fila_remocao) << " o segundo elemento da fila usado a funcao remove_do_vetor(), ";
+    remove_do_vetor(fila_remocao, 1);
+    std::cout << vet_print(fila_remocao) << '\n' << '\n';
 }

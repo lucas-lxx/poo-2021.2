@@ -673,3 +673,11 @@ int trios_no_vetor(std::vector<int> v) {
     }
     return soma_trios;
 }
+
+// remove: Dado a pessoa X, como fica a fila após remover X?
+
+// remove um elemento do vetor v
+// na posicao de indice pos
+void remove_do_vetor(std::vector<int>& v, int pos) {
+    v.erase(v.begin() + pos);
+}

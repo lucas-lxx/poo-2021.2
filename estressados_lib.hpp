@@ -540,16 +540,29 @@ int indice_maior_time(const std::vector<int>& v) {
     return maior;
 }
 
+// retorna se ambos os elementos sao do mesmo time
+// no vetor v, comparando os indices pos_1 com pos_2
+bool mesmo_time(const std::vector<int>& v, int pos_1, int pos_2) {
+    if ((eh_mulher(v[pos_1]) && eh_mulher(v[pos_2])) || (!eh_mulher(v[pos_1]) && !eh_mulher(v[pos_2])))
+        return true;
+    return false;
+}
+
 // maior_time Qual o maior time que apareceu na fila?
 // retorna o primeiro maior time presente no vetor v
 std::vector<int> maior_time(const std::vector<int>& v) {
     std::vector<int> maior { };
-    int j { 0 };
     for(int i = indice_maior_time(v); i < (int) v.size(); i++) {
-        if (j >= range_pessoas(v, indice_maior_time(v)) || range_pessoas(v, indice_maior_time(v)) < 2)
+        if (!mesmo_time(v, indice_maior_time(v), i) || range_pessoas(v, indice_maior_time(v)) < 2)
             break;
-        j++;
         maior.push_back(v[i]);
     }
     return maior;
 }
+
+
+
+// sem_time Quantas pessoas não estavam em um time?
+// int sem_time(const std::vector<int>& v) {
+
+// }

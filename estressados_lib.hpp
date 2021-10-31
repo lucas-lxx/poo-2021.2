@@ -515,12 +515,18 @@ int range_pessoas(const std::vector<int>& v, const int& pos) {
     return range;
 }
 
+// retorna se eh um time a partir
+// do vetor v e o indice do elemento pos
+bool eh_time(const std::vector<int>& v, int pos) {
+    return range_pessoas(v, pos) > 1 ? true : false;
+}
+
 // Sequências: 3 funções
 // quantos_times Duas ou mais pessoas do mesmo sexo seguidas podem formar um time. Quantos times existem na fila?
 int quantos_times(const std::vector<int>& v) {
     int times { 0 };
     for (int i = 0; i < (int) v.size(); i++) {
-        if (range_pessoas(v, i) > 1){
+        if (eh_time(v, i)){
             times++;
             i += (range_pessoas(v, i) - 1);
         }
@@ -560,9 +566,17 @@ std::vector<int> maior_time(const std::vector<int>& v) {
     return maior;
 }
 
+/*  
+    identificar os time 
+    pegar as posições dos times
+    excluir os times
+    contar o restante
 
+    identificar o somatorio de pessoas nos times
+    subtrair o somatorio do total
+*/
 
 // sem_time Quantas pessoas não estavam em um time?
 // int sem_time(const std::vector<int>& v) {
-
+    
 // }

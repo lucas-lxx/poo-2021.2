@@ -36,13 +36,17 @@ int main()
     // quantos_times({5, 3, 1, -11, 1, 99, -11, -1, -2, 44});  // 3
     // quantos_times({1, 1, 1, -1, 1, -1, -1});  // 2
     // quantos_times({ 28,  26,  1,  6,  39});  // 1
-    std::cout << "Retorna times possiveis, " << quantos_times({5, 3, 1, -11, 1, 99, -11, -1, -2, 44, 23}) << '\n';  // 3
+    std::cout << "Retorna times possiveis, " << quantos_times({5, 3, 1, -11, 1, 99, -11, -1, -2, 44}) << '\n';  // 3
     std::cout << "Retorna times possiveis, " << quantos_times({1, 1, 1, -1, 1, -1, -1}) << '\n';  // 2
     std::cout << "Retorna times possiveis, " << quantos_times({ 28,  26,  1,  6,  39}) << '\n';  // 1
 
     // maior_time Qual o maior time que apareceu na fila?
-    // maior_time({-5, 3, -1, 15, 1, -99, 11, 1 }); // {15, 1}
-    // maior_time({-5, 3, -1, 15, -1, 99, -11, 1 }); // {}
-    // maior_time({-5, 3, 1, -15, -1, 99, -11, -1, -7 }); // {-11, -1, -7}
-    
+    std::cout << "Retorna qual eh o maior time que apareceu na fila: " << vet_print(maior_time({-5, 3, -1, 15, 1, -99, 11, 1 })) << '\n'; // {15, 1}
+
+    std::cout << "Retorna qual eh o maior time que apareceu na fila: " << vet_print(maior_time({-5, 3, -1, 15, -1, 99, -11, 1 })) << '\n'; // {}
+
+    std::cout << "Retorna qual eh o maior time que apareceu na fila: " << vet_print(maior_time({-5, 3, 1, -15, -1, 99, -11, -1, -7 })) << '\n'; // {-11, -1, -7}
+
+    std::cout << "retorna o indice do maior time " << indice_maior_time({-5, 3, 1, -15, -1, 99, -11, -1, -7 }) << '\n';
+    std::cout << "retorna o indice do maior time " << indice_maior_time({-5, 3, 1, 1, -1, -1, 15, -1, 99, -11, 1 }) << '\n';
 }

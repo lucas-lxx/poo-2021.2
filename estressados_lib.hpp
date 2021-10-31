@@ -3,7 +3,12 @@
 #include <vector>
 #include <string>
 #include <sstream>
-
+//
+//
+// library for the estressados programming exercises
+// https://github.com/senapk/estressados
+//
+//
 // ==================================================================================================================================
 // ==================================================================================================================================
 // ==================================================================================================================================
@@ -471,6 +476,7 @@ std::vector<int> apaziguados(const std::vector<int>& v) {
 }
 
 // retorna a quantidade de mulheres enfileirados sem interrupcao
+// no vetor v, a partir da posicao pos
 int range_mulheres(const std::vector<int>& v, const int& pos) {
     int range { 0 };
     for (int i = pos; i < (int) v.size(); i++) {
@@ -484,6 +490,7 @@ int range_mulheres(const std::vector<int>& v, const int& pos) {
 }
 
 // retorna a quantidade de homens enfileirados sem interrupcao
+// no vetor v, a partir da posicao pos
 int range_homens(const std::vector<int>& v, const int& pos) {
     int range { 0 };
     for (int i = pos; i < (int) v.size(); i++) {
@@ -496,6 +503,8 @@ int range_homens(const std::vector<int>& v, const int& pos) {
     return range;
 }
 
+// retorna o tamanho o tamanho de um time sem indicar se sao homens ou mulheres (eh considerado um time quando tem mais de uma pessoa)
+// no vetor v, a partir da posicao pos
 int range_pessoas(const std::vector<int>& v, const int& pos) {
     int range { 0 };
     if (eh_mulher(v[pos])) {
@@ -519,7 +528,28 @@ int quantos_times(const std::vector<int>& v) {
     return times;
 }
 
-// maior_time Qual o maior time que apareceu na fila?
-// std::vector<int> maior_time(const std::vector<int>& v) {
+// retorna a primeira posicao do maior time no vetor v
+int indice_maior_time(const std::vector<int>& v) {
+    int maior { 0 };
+    for(int i = 0; i < (int) v.size(); i++) {
+        if (range_pessoas(v, maior) < range_pessoas(v, i)){
+            maior = i;
+            i += (range_pessoas(v, i) - 1);
+        }
+    }
+    return maior;
+}
 
-// }
+// maior_time Qual o maior time que apareceu na fila?
+// retorna o primeiro maior time presente no vetor v
+std::vector<int> maior_time(const std::vector<int>& v) {
+    std::vector<int> maior { };
+    int j { 0 };
+    for(int i = indice_maior_time(v); i < (int) v.size(); i++) {
+        if (j >= range_pessoas(v, indice_maior_time(v)) || range_pessoas(v, indice_maior_time(v)) < 2)
+            break;
+        j++;
+        maior.push_back(v[i]);
+    }
+    return maior;
+}

@@ -616,6 +616,8 @@ bool tem_match(int& h, int& m) {
     return h == (m * -1) ? true : false;
 }
 
+// trios: Pedimos pros participantes se organizassem em trios. Todos os 3 deveriam estar com o mesmo nível de stress.Quantos trios podem ser formados?
+
 // exclui o casal do vetor v
 // nas posicoes de indice pos_1 e pos_2
 // atencao pois os indices devem estar na ordem pos_1 < pos_2

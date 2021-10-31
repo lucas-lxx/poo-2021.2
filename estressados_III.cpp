@@ -52,5 +52,8 @@ int main()
     std::cout << "Retorna quantas pessoas estao sem time: " << sem_time({-5, -3, -1, -15, -1, -99, -11, -1, -7 }) << '\n'; // 0
     std::cout << "Retorna quantas pessoas estao sem time: " << sem_time({-5, 3, 1, 15, -1, -99, -11, -1, -7 }) << '\n' << '\n'; // 1
 
-    std::cout << "Retorna quantos casais existem no vetor " << casais_no_vetor({1, 3, 19, -4, 5, -19, -19, -43, -1, 4, -3}) << '\n' << '\n';
+    std::cout << "Retorna quantos casais existem no vetor: " << casais_no_vetor({1, 3, 19, -4, 5, -19, -19, -43, -1, 4, -3}) << '\n' << '\n'; // 4
+
+    std::cout << "Retorna quantos trios existem no vetor: " << trios_no_vetor({1, 3, 19, 4, -4, 5, -19, -19, -43, -1, 4, -3}) << '\n'; // 2
+    std::cout << "Retorna quantos trios existem no vetor: " << trios_no_vetor({1, 3, -4, 5, -19, -19, -43, -1, 4, -3}) << '\n' << '\n'; // 0
 }

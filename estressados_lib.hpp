@@ -626,7 +626,7 @@ bool tem_match(int& h, int& m) {
 // exclui o casal do vetor v
 // nas posicoes de indice pos_1 e pos_2
 // atencao pois os indices devem estar na ordem pos_1 < pos_2
-void exclui_casal(std::vector<int>& v, int& pos_1, int pos_2) {
+void exclui_casal(std::vector<int>& v, int& pos_1, int& pos_2) {
     v.erase(v.begin() + pos_1);
     v.erase(v.begin() + (pos_2 - 1));
 }
@@ -654,8 +654,27 @@ int casais_no_vetor(std::vector<int> v) {
 // exclui o trio do vetor v
 // nas posicoes de indice pos_1, pos_2 e pos_3
 // atencao pois os indices devem estar na ordem pos_1 < pos_2 < pos_3
-void exclui_trio(std::vector<int>& v, int& pos_1, int pos_2, int& pos_3) {
+void exclui_trio(std::vector<int>& v, int& pos_1, int& pos_2, int& pos_3) {
     v.erase(v.begin() + pos_1);
     v.erase(v.begin() + (pos_2 - 1));
     v.erase(v.begin() + (pos_3 - 2));
+}
+
+int trios_no_vetor(std::vector<int> v) {
+    int soma_trios { 0 };
+    for(int i = 0; i < (int) v.size(); i++) {
+        for(int j = (i + 1); j < (int) v.size(); j++) {
+            if (modulo_estresse(v[i]) == modulo_estresse(v[j])) {
+                for(int k = (j + 1); k < (int) v.size(); k++) {
+                    if (modulo_estresse(v[j]) == modulo_estresse(v[k])) {
+                        exclui_trio(v, i, j, k);
+                        i -= 1;
+                        soma_trios++;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    return soma_trios;
 }

@@ -576,7 +576,21 @@ std::vector<int> maior_time(const std::vector<int>& v) {
     subtrair o somatorio do total
 */
 
+// retorna a quantidade de pessoas em times
+// do vetor v
+int soma_pessoas_em_times(const std::vector<int>& v) {
+    int soma { 0 };
+    for(int i = 0; i < (int) v.size(); i++) {
+        if (eh_time(v, i)){
+            soma += range_pessoas(v, i);
+            i += (range_pessoas(v, i) - 1);
+        }
+    }
+    return soma;
+} 
+
+
 // sem_time Quantas pessoas não estavam em um time?
-// int sem_time(const std::vector<int>& v) {
-    
-// }
+int sem_time(const std::vector<int>& v) {
+    return v.size() - soma_pessoas_em_times(v);
+}

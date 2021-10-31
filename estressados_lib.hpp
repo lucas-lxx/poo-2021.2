@@ -628,7 +628,7 @@ bool tem_match(int& h, int& m) {
 // atencao pois os indices devem estar na ordem pos_1 < pos_2
 void exclui_casal(std::vector<int>& v, int& pos_1, int pos_2) {
     v.erase(v.begin() + pos_1);
-    v.erase(v.begin() + (pos_2-1));
+    v.erase(v.begin() + (pos_2 - 1));
 }
 
 // retorna os casais que podem ser criados dentro do vetor v
@@ -648,4 +648,14 @@ int casais_no_vetor(std::vector<int> v) {
         }
    }
     return soma_casais;
+}
+
+
+// exclui o trio do vetor v
+// nas posicoes de indice pos_1, pos_2 e pos_3
+// atencao pois os indices devem estar na ordem pos_1 < pos_2 < pos_3
+void exclui_trio(std::vector<int>& v, int& pos_1, int pos_2, int& pos_3) {
+    v.erase(v.begin() + pos_1);
+    v.erase(v.begin() + (pos_2 - 1));
+    v.erase(v.begin() + (pos_3 - 2));
 }

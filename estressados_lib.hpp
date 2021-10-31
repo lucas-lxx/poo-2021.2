@@ -598,21 +598,23 @@ int sem_time(const std::vector<int>& v) {
 
 //retorna verdadeiro se existem homens
 bool checar_homens_no_vetor(std::vector<int> v) {
-    for(int i : v) {
-        if (!eh_mulher(i))
-            return true;
-    }
-    return false;
+    return soma_homens_no_vetor(v) <=0 ? false : true;
 }
 
+// retorna a quantidade de mulheres no vetor v
 int soma_mulheres_no_vetor(const std::vector<int>& v) {
     int soma { 0 };
     for(int i = 0; i < (int) v.size(); i++) {
         if (!eh_mulher(v[i]))
-            return soma;
+            continue;
         soma++;
     }
     return soma;
+}
+
+// retorna a quantidade de homens no vetor v
+int soma_homens_no_vetor(const std::vector<int>& v) {
+    return v.size() - soma_mulheres_no_vetor(v);
 }
 
 int casais_no_vetor(std::vector<int> v) {

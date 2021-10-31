@@ -55,7 +55,7 @@ int procurar(const std::vector<int>& fila, int x){
 
 // procurar_apartir: Dada a posição para iniciar a busca, qual a próxima posição em que aparece X?
 // retorna -1 se não encontrar
-int procurar_apartir(const std::vector<int>& fila, int x, int inicio){
+int procurar_a_partir(const std::vector<int>& fila, int x, int inicio){
     for (int i = inicio; i < (int) fila.size(); i++) {
         if(fila[i] == x) 
             return i;
@@ -324,8 +324,7 @@ void ordenar(std::vector<int>& v) {
     }
 }
 
-// Conjuntos: 3 funções
-// exclusivos: O fiscal permitiu a entrada de um único representante de cada valor, ou seja, uma lista dos valores que aparecem na fila sem repetição. Que conjunto foi formado?
+// Conjuntos: 3 funçõesda de um único representante de cada valor, ou seja, uma lista dos valores que aparecem na fila sem repetição. Que conjunto foi formado?
 std::vector<int> exclusivos(const std::vector<int>& v) {
     std::vector<int> excl {};
     for (int i = 0; i < (int) v.size(); i++) {
@@ -584,4 +583,42 @@ int soma_pessoas_em_times(const std::vector<int>& v) {
 // sem_time Quantas pessoas não estavam em um time?
 int sem_time(const std::vector<int>& v) {
     return v.size() - soma_pessoas_em_times(v);
+}
+
+
+//Grupos: 2 funcoes
+//casais: Casais são formados quando quando um homem e uma mulher com o mesmo nível de stress são formados. O 3 e o -3 formam um casal. Os participantes fossem orientados a sair da fila e procurar seu par. Quantos casais poderiam ser formados?
+
+/*
+    ordenar
+    checar se tem homens
+    mais homens ou mulheres
+    comparar pelo menor lado
+*/
+
+//retorna verdadeiro se existem homens
+bool checar_homens_no_vetor(std::vector<int> v) {
+    for(int i : v) {
+        if (!eh_mulher(i))
+            return true;
+    }
+    return false;
+}
+
+int soma_mulheres_no_vetor(const std::vector<int>& v) {
+    int soma { 0 };
+    for(int i = 0; i < (int) v.size(); i++) {
+        if (!eh_mulher(v[i]))
+            return soma;
+        soma++;
+    }
+    return soma;
+}
+
+int casais_no_vetor(std::vector<int> v) {
+    ordenar(v);
+    if(!checar_homens_no_vetor(v))
+        return 0;
+    
+    
 }

@@ -566,15 +566,6 @@ std::vector<int> maior_time(const std::vector<int>& v) {
     return maior;
 }
 
-/*  
-    identificar os time 
-    pegar as posições dos times
-    excluir os times
-    contar o restante
-
-    identificar o somatorio de pessoas nos times
-    subtrair o somatorio do total
-*/
 
 // retorna a quantidade de pessoas em times
 // do vetor v

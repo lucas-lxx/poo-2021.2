@@ -681,3 +681,11 @@ int trios_no_vetor(std::vector<int> v) {
 void remove_do_vetor(std::vector<int>& v, int pos) {
     v.erase(v.begin() + pos);
 }
+
+// insert: Como fica a fila se eu inserir a pessoa X na posição Y.
+
+// insere um elemento no vetor v
+// na posicao de indice pos e valor add
+void adiciona_ao_vetor(std::vector<int>& v, int pos, int add) {
+    v.insert(v.begin() + pos, add);
+}

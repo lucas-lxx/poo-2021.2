@@ -69,4 +69,8 @@ int main()
     std::cout << "Adiciona na fila " << vet_print(fila_alteracao) << " um novo segundo elemento usando a funcao adiciona_ao_vetor(), ";
     adiciona_ao_vetor(fila_alteracao, 1, 2);
     std::cout << vet_print(fila_alteracao) << '\n' << '\n';
+
+
+    // dance: O coordenador disse: se você está do lado de alguém com o mesmo nível de stress que você, saia da fila com ele. Quando os pares saiam, as vezes se formavam novos pares que também saíam. Quem ficou na fila?
+    std::cout << "Retorna a quantidade de pessoas que nao encontraram par " << dance({44, 1, 1, -44, 2, 3, 50, 4, -4, 50, -3, -2, -44}) << '\n'; // 2
 }

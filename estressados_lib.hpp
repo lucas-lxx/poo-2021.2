@@ -621,7 +621,7 @@ bool tem_match(int& h, int& m) {
 // exclui o casal do vetor v
 // nas posicoes de indice pos_1 e pos_2
 // atencao pois os indices devem estar na ordem pos_1 < pos_2
-void exclui_casal(std::vector<int>& v, int& pos_1, int& pos_2) {
+void exclui_casal(std::vector<int>& v, int pos_1, int pos_2) {
     v.erase(v.begin() + pos_1);
     v.erase(v.begin() + (pos_2 - 1));
 }
@@ -688,4 +688,26 @@ void remove_do_vetor(std::vector<int>& v, int pos) {
 // na posicao de indice pos e valor add
 void adiciona_ao_vetor(std::vector<int>& v, int pos, int add) {
     v.insert(v.begin() + pos, add);
+}
+
+// dance: O coordenador disse: se você está do lado de alguém com o mesmo nível de stress que você, saia da fila com ele. Quando os pares saiam, as vezes se formavam novos pares que também saíam. Quem ficou na fila?
+
+// retorna verdadeiro se os numeros sao iguais
+// int a == int b
+bool mesmo_estresse(int a, int b) {
+    return modulo_estresse(a) == modulo_estresse(b) ? true : false;
+}
+
+int dance(std::vector<int> v) {
+    for(int i = 0; i < (int) v.size(); i++) {
+        if (mesmo_estresse(v[i], v[i + 1]) && i < ((int) v.size() - 1)) {
+            exclui_casal(v, i, i + 1);
+            i -= 1;
+        }
+        if ((mesmo_estresse(v[i], v[i - 1]) && i > 0)) {
+            exclui_casal(v, i - 1, i);
+            i -= 2;
+        }
+    }
+    return v.size();
 }

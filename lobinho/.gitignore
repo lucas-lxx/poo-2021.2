@@ -1,2 +1,5 @@
-#compiled programs
+# compiled programs
 *.o
+
+# copied code
+lobinho.cpp

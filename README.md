@@ -1,3 +1,3 @@
-This is the repository used for my object oriented programming school course.
+##This is the repository used for my object oriented programming school course.##
 
-Estressados pack: https://github.com/senapk/estressados#readme
+Estressados: https://github.com/senapk/estressados#readme

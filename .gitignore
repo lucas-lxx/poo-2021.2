@@ -1,8 +1,4 @@
-hello-world
 .vscode/
-asdf.hpp
-testador.hpp
-work
-solver.cpp
-estressados_II
-estressados_III
+
+# compiled code
+*.out

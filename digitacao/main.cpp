@@ -1,6 +1,27 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
+struct Pincel {
+    sf::Font font;
+    sf::Text text;
+    sf::RenderWindow& window;
+
+    Pincel(sf::RenderWindow& window) : window(window) {
+        if (!font.loadFromFile("Ubuntu/Ubuntu-Regular.ttf")) {
+            std::cout << "Font didn't load sucessfully\n";
+        }
+        text.setFont(font);
+    }
+
+    void write(std::string string, int x, int y, int size, sf::Color color) {
+        text.setString(string);
+        text.setCharacterSize(size);
+        text.setPosition(x, y);
+        text.setFillColor(color);
+        window.draw(text);
+    }
+};
+
 struct Game {
     sf::RenderWindow window;
 

@@ -9,6 +9,8 @@ struct Pincel {
     Pincel(sf::RenderWindow& window) : window(window) {
         if (!font.loadFromFile("Ubuntu/Ubuntu-Regular.ttf")) {
             std::cout << "Font didn't load sucessfully\n";
+        } else {
+            std::cout << "Font sucessfully loaded\n";
         }
         text.setFont(font);
     }
@@ -44,7 +46,9 @@ struct Game {
     }
 
     void draw() {
-        window.clear();
+        window.clear(sf::Color::Black);
+        static Pincel pincel(window);
+        pincel.write("Hello World", 100, 100, 24, sf::Color::White);
         window.display();
     }
 

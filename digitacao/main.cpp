@@ -24,6 +24,34 @@ struct Pincel {
     }
 };
 
+struct Bubble {
+    int x;
+    int y;
+    char letter;
+    int speed;
+
+    static const int radius { 10 };
+    bool alive { true };
+
+    Bubble(int x, int y, char letter, int speed) : 
+        x(x), y(y), letter(letter), speed(speed) {
+    }
+
+    void update() {
+        this->y += this->speed;
+    }
+
+    void draw(sf::RenderWindow& window) {
+        sf::CircleShape bubble(Bubble::radius, 500);
+        bubble.setPosition(x, y);
+        bubble.setFillColor(sf::Color::White);
+        window.draw(bubble);
+
+        static Pincel pincel(window);
+        pincel.write(std::string(1, letter), x + 0.4 * Bubble::radius, y, Bubble::radius * 1.5, sf::Color::Black);
+    }
+};
+
 struct Game {
     sf::RenderWindow window;
 
@@ -47,8 +75,9 @@ struct Game {
 
     void draw() {
         window.clear(sf::Color::Black);
-        static Pincel pincel(window);
-        pincel.write("Hello World", 100, 100, 24, sf::Color::White);
+        static Bubble bubble(100, 100, 'L', 2);
+        bubble.update();
+        bubble.draw(window);
         window.display();
     }
 

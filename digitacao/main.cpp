@@ -1,5 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <vector>
+#include <random>
 
 struct Pincel {
     sf::Font font;
@@ -52,11 +54,39 @@ struct Bubble {
     }
 };
 
+struct Board {
+    sf::RenderWindow& window;
+    std::vector<Bubble> bubbles;
+    const int new_bubble_timeout { 30 };
+    int new_bubble_timer { 0 };
+    int hits { 0 };
+    int misses { 0 };
+
+    Board(sf::RenderWindow& window): window(window) {
+        bubbles.push_back(Bubble(100, 100, 'L', 2));
+        bubbles.push_back(Bubble(200, 100, 'A', 2));
+        bubbles.push_back(Bubble(400, 100, 'Z', 3));
+        bubbles.push_back(Bubble(700, 100, 'S', 1));
+    }
+
+    void update() {
+        for (Bubble& bubble : bubbles) {
+            bubble.update();
+        }
+    }
+
+    void draw() {
+        for (Bubble& bubble : bubbles) {
+            bubble.draw(window);
+        }
+    }
+};
+
 struct Game {
     sf::RenderWindow window;
 
     Game() : window(sf::VideoMode(800, 600), "Bubble Type") {
-        window.setFramerateLimit(60);
+        window.setFramerateLimit(30);
     };
 
     void process_events() {
@@ -75,9 +105,9 @@ struct Game {
 
     void draw() {
         window.clear(sf::Color::Black);
-        static Bubble bubble(100, 100, 'L', 2);
+        static Board bubble(window);
         bubble.update();
-        bubble.draw(window);
+        bubble.draw();
         window.display();
     }
 

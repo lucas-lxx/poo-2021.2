@@ -173,9 +173,20 @@ struct Game {
     sf::RenderWindow window;
     Board board;
     std::function<void()> on_update;
+    int videoWidth { 800 };
+    int videoHeight { 600 };
 
-    // Sets the window and the board to handdle the bubbles
+    // Sets the window and the board to handdle the bubbles as the default constructor
     Game() : window(sf::VideoMode(800, 600), "Bubble Type"), board(window) {
+        this->on_update = [&]() {
+            this->gameplay();
+        };
+        window.setFramerateLimit(60);
+    };
+
+    // Sets the window, width and height, and the board to handdle the bubbles
+    Game(int width, int height) : 
+        window(sf::VideoMode(width, height), "Bubble Type"), board(window), videoWidth(width), videoHeight(height) {
         this->on_update = [&]() {
             this->gameplay();
         };
@@ -191,7 +202,7 @@ struct Game {
             } else if (event.type == sf::Event::KeyPressed) {
                 if (event.key.code == sf::Keyboard::Escape) {
                     window.close();
-                } else if (event.key.code == sf::Keyboard::R) {
+                } else if (event.key.code == sf::Keyboard::Space) {
                     this->on_update = [&]() {
                         this->gameplay();
                     };
@@ -219,11 +230,18 @@ struct Game {
 
     // Draws Game Over on the screen
     void game_over() {
-        static Pincel pincel(window);
+        static sf::Texture gameover_tex;
+        if (!gameover_tex.loadFromFile("images/game-over.png")) {
+            std::cout << "Error loading texture!\n";
+            exit(1);
+        }
+        static sf::Sprite gameover(gameover_tex);
+        gameover.setPosition(0, 0);
+        gameover.setScale(this->videoWidth / gameover.getLocalBounds().width, this->videoHeight / gameover.getLocalBounds().height);
         board.misses = 0;
         board.bubbles.clear();
-        window.clear(sf::Color::Red);
-        pincel.write("GAME OVER", 250, 200, 50, sf::Color::White);
+        window.clear();
+        window.draw(gameover);
         window.display();
     }
 

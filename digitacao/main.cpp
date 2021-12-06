@@ -116,6 +116,17 @@ struct Board {
             bubble.update();
         }
         mark_outside_bubble();
+        remove_dead_bubbles();
+    }
+
+    void remove_dead_bubbles() {
+        std::vector<Bubble> vivas;
+        for (Bubble& bubble : bubbles) {
+            if (bubble.alive) {
+                vivas.push_back(bubble);
+            }
+        }
+        this->bubbles = vivas;
     }
 
     void mark_outside_bubble() {
@@ -132,6 +143,7 @@ struct Board {
     // Draws on the referenced window
     void draw() {
         pincel.write("Hits: " + std::to_string(this->hits) + " Misses: " + std::to_string(this->misses), 10, 10, 20, sf::Color::Yellow);
+        pincel.write("Size: " + std::to_string(this->bubbles.size()),10, 30, 20, sf::Color::White);
         for (Bubble& bubble : bubbles) {
             bubble.draw(window);
         }

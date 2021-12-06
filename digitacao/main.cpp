@@ -80,7 +80,7 @@ struct Board {
         bubbles.push_back(Bubble(700, 100, 'S', 1));
     }
 
-    // Updates all the bubbles of the vector
+    // Updates all the bubbles of the vector by reference
     void update() {
         for (Bubble& bubble : bubbles) {
             bubble.update();
@@ -98,9 +98,10 @@ struct Board {
 // Set up the window to run the game and handdles it's events
 struct Game {
     sf::RenderWindow window;
+    Board board;
 
-    // Sets the window mode and it's tittle
-    Game() : window(sf::VideoMode(800, 600), "Bubble Type") {
+    // Sets the window and the board to handdle the bubbles
+    Game() : window(sf::VideoMode(800, 600), "Bubble Type"), board(window) {
         window.setFramerateLimit(30);
     };
 
@@ -121,10 +122,9 @@ struct Game {
 
     // Draws the elements on window
     void draw() {
+        board.update();
         window.clear(sf::Color::Black);
-        static Board bubble(window);
-        bubble.update();
-        bubble.draw();
+        board.draw();
         window.display();
     }
 

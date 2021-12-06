@@ -168,6 +168,19 @@ struct Board {
 
 
 
+// Returns a texture
+sf::Texture loadTexture(std::string path) {
+    sf::Texture texture;
+    if (!texture.loadFromFile(path)) {
+        std::cout << "Error loading texture!\n";
+        exit(1);
+    }
+    return texture;
+}
+
+
+
+
 // Set up the window to run the game and handdles it's events
 struct Game {
     sf::RenderWindow window;
@@ -230,11 +243,7 @@ struct Game {
 
     // Draws Game Over on the screen
     void game_over() {
-        static sf::Texture gameover_tex;
-        if (!gameover_tex.loadFromFile("images/game-over.png")) {
-            std::cout << "Error loading texture!\n";
-            exit(1);
-        }
+        static sf::Texture gameover_tex { loadTexture("images/game-over.png")}; 
         static sf::Sprite gameover(gameover_tex);
         gameover.setPosition(0, 0);
         gameover.setScale(this->videoWidth / gameover.getLocalBounds().width, this->videoHeight / gameover.getLocalBounds().height);

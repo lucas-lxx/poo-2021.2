@@ -191,6 +191,10 @@ struct Game {
             } else if (event.type == sf::Event::KeyPressed) {
                 if (event.key.code == sf::Keyboard::Escape) {
                     window.close();
+                } else if (event.key.code == sf::Keyboard::R) {
+                    this->on_update = [&]() {
+                        this->gameplay();
+                    };
                 }
             } else if (event.type == sf::Event::TextEntered) {
                 char code = static_cast<char>(event.text.unicode);
@@ -216,6 +220,8 @@ struct Game {
     // Draws Game Over on the screen
     void game_over() {
         static Pincel pincel(window);
+        board.misses = 0;
+        board.bubbles.clear();
         window.clear(sf::Color::Red);
         pincel.write("GAME OVER", 250, 200, 50, sf::Color::White);
         window.display();

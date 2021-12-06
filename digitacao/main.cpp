@@ -30,6 +30,9 @@ struct Pincel {
     }
 };
 
+
+
+
 // Handles how bubbles works on a window 
 struct Bubble {
     int x;
@@ -62,6 +65,9 @@ struct Bubble {
         pincel.write(std::string(1, letter), x + 0.4 * Bubble::radius, y, Bubble::radius * 1.5, sf::Color::Black);
     }
 };
+
+
+
 
 // Handles multiple bubbles in a window
 struct Board {
@@ -109,9 +115,21 @@ struct Board {
         for (Bubble& bubble : bubbles) {
             bubble.update();
         }
+        mark_outside_bubble();
     }
 
-    // Draws on referenced the window all the bubbles of the vector
+    void mark_outside_bubble() {
+        for (Bubble& bubble : bubbles) {
+            if (bubble.y + 2 * Bubble::radius > (int) this->window.getSize().y) {
+                if (bubble.alive == true) {
+                    bubble.alive = false;
+                    this->misses++;
+                }
+            }
+        }
+    }
+
+    // Draws on the referenced window
     void draw() {
         pincel.write("Hits: " + std::to_string(this->hits) + " Misses: " + std::to_string(this->misses), 10, 10, 20, sf::Color::Yellow);
         for (Bubble& bubble : bubbles) {
@@ -121,6 +139,9 @@ struct Board {
 
     
 };
+
+
+
 
 // Set up the window to run the game and handdles it's events
 struct Game {
@@ -165,6 +186,9 @@ struct Game {
 
 
 };
+
+
+
 
 int main() {
     Game game;

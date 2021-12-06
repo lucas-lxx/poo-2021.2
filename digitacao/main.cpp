@@ -88,7 +88,7 @@ struct Board {
 
     // Checks if there is the need of a new bubble and updates the timer
     bool check_new_bubble() {
-        static const int new_bubble_timeout { 30 };
+        static const int new_bubble_timeout { 60 };
         static int new_bubble_timer { 0 };
 
         new_bubble_timer--;
@@ -179,7 +179,7 @@ struct Game {
         this->on_update = [&]() {
             this->gameplay();
         };
-        window.setFramerateLimit(30);
+        window.setFramerateLimit(60);
     };
 
     // Process the events

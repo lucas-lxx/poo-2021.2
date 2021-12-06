@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include <random>
+#include <functional>
 
 // Handles how the text works on a window
 struct Pincel {
@@ -170,9 +170,13 @@ struct Board {
 struct Game {
     sf::RenderWindow window;
     Board board;
+    std::function<void()> on_update;
 
     // Sets the window and the board to handdle the bubbles
     Game() : window(sf::VideoMode(800, 600), "Bubble Type"), board(window) {
+        this->on_update = [&]() {
+            this->draw();
+        };
         window.setFramerateLimit(30);
     };
 

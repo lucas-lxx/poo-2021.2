@@ -67,21 +67,45 @@ struct Bubble {
 struct Board {
     sf::RenderWindow& window;
     std::vector<Bubble> bubbles;
-    const int new_bubble_timeout { 30 };
-    int new_bubble_timer { 0 };
+    Pincel pincel;
     int hits { 0 };
     int misses { 0 };
 
     // Add bubbles to a vector and set the referenced window that'll be used
-    Board(sf::RenderWindow& window): window(window) {
+    Board(sf::RenderWindow& window): window(window), pincel(window) {
         bubbles.push_back(Bubble(100, 100, 'L', 2));
         bubbles.push_back(Bubble(200, 100, 'A', 2));
         bubbles.push_back(Bubble(400, 100, 'Z', 3));
         bubbles.push_back(Bubble(700, 100, 'S', 1));
     }
 
+    // Checks if there is the need of a new bubble and updates the timer
+    bool check_new_bubble() {
+        static const int new_bubble_timeout { 30 };
+        static int new_bubble_timer { 0 };
+
+        new_bubble_timer--;
+        if(new_bubble_timer <= 0) {
+            new_bubble_timer = new_bubble_timeout;
+            return true;
+        }
+        return false;
+    }
+
+    // Adds a new random bubble
+    void add_new_bubble() {
+        int x = rand() % ((int) this->window.getSize().x - 2 * Bubble::radius);
+        int y = - 2 * Bubble::radius;
+        int speed = rand() % 5 + 1;
+        char letter = rand() % 26 + 'A';
+        bubbles.push_back(Bubble(x, y, letter, speed));
+    }
+     
     // Updates all the bubbles of the vector by reference
     void update() {
+        if (this->check_new_bubble()) {
+            this->add_new_bubble();
+        }
         for (Bubble& bubble : bubbles) {
             bubble.update();
         }
@@ -89,10 +113,13 @@ struct Board {
 
     // Draws on referenced the window all the bubbles of the vector
     void draw() {
+        pincel.write("Hits: " + std::to_string(this->hits) + " Misses: " + std::to_string(this->misses), 10, 10, 20, sf::Color::Yellow);
         for (Bubble& bubble : bubbles) {
             bubble.draw(window);
         }
     }
+
+    
 };
 
 // Set up the window to run the game and handdles it's events

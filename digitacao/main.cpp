@@ -132,10 +132,8 @@ struct Board {
     void mark_outside_bubble() {
         for (Bubble& bubble : bubbles) {
             if (bubble.y + 2 * Bubble::radius > (int) this->window.getSize().y) {
-                if (bubble.alive == true) {
-                    bubble.alive = false;
-                    this->misses++;
-                }
+                bubble.alive = false;
+                this->misses++;
             }
         }
     }

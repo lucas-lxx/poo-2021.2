@@ -119,6 +119,7 @@ struct Board {
         remove_dead_bubbles();
     }
 
+    // Remove bubbles marked as dead 
     void remove_dead_bubbles() {
         std::vector<Bubble> vivas;
         for (Bubble& bubble : bubbles) {
@@ -129,11 +130,23 @@ struct Board {
         this->bubbles = vivas;
     }
 
+    // Mark bubbles outside of the board as dead
     void mark_outside_bubble() {
         for (Bubble& bubble : bubbles) {
             if (bubble.y + 2 * Bubble::radius > (int) this->window.getSize().y) {
                 bubble.alive = false;
                 this->misses++;
+            }
+        }
+    }
+
+    // Mark bubble by char input, if they are equal values
+    void mark_by_hit(char letter) {
+        for (Bubble& bubble : bubbles) {
+            if (bubble.letter == letter) {
+                bubble.alive = false;
+                this->hits++;
+                break;
             }
         }
     }
@@ -169,11 +182,14 @@ struct Game {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window.close();
-            }
-            if (event.type == sf::Event::KeyPressed) {
+            } else if (event.type == sf::Event::KeyPressed) {
                 if (event.key.code == sf::Keyboard::Escape) {
                     window.close();
                 }
+            } else if (event.type == sf::Event::TextEntered) {
+                char code = static_cast<char>(event.text.unicode);
+                code = toupper(code);
+                board.mark_by_hit(code);
             }
         }
     }

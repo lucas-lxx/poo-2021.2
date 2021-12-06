@@ -4,6 +4,9 @@
 #include <functional>
 #include <ctime>
 
+const auto yellow = sf::Color(232, 235, 56);
+const auto light_gray = sf::Color(83, 83, 83);
+
 // Handles how the text works on a window
 struct Pincel {
     sf::Font font;
@@ -155,8 +158,8 @@ struct Board {
 
     // Draws on the referenced window
     void draw() {
-        pincel.write("Hits: " + std::to_string(this->hits) + " Misses: " + std::to_string(this->misses), 10, 10, 20, sf::Color::Yellow);
-        pincel.write("Size: " + std::to_string(this->bubbles.size()),10, 30, 20, sf::Color::White);
+        pincel.write("Hits: " + std::to_string(this->hits) + " Misses: " + std::to_string(this->misses), 10, 10, 20, yellow);
+        pincel.write("Size: " + std::to_string(this->bubbles.size()),10, 30, 20, yellow);
         for (Bubble& bubble : bubbles) {
             bubble.draw(window);
         }
@@ -164,7 +167,6 @@ struct Board {
 
     
 };
-
 
 
 
@@ -216,6 +218,8 @@ struct Game {
                 if (event.key.code == sf::Keyboard::Escape) {
                     window.close();
                 } else if (event.key.code == sf::Keyboard::Space) {
+                    board.misses = 0;
+                    board.bubbles.clear();
                     this->on_update = [&]() {
                         this->gameplay();
                     };
@@ -231,7 +235,7 @@ struct Game {
     // Draws the gameplay board
     void gameplay() {
         board.update();
-        window.clear(sf::Color::Black);
+        window.clear(light_gray);
         board.draw();
         window.display();
         if (board.misses > 2) {
@@ -247,8 +251,7 @@ struct Game {
         static sf::Sprite gameover(gameover_tex);
         gameover.setPosition(0, 0);
         gameover.setScale(this->videoWidth / gameover.getLocalBounds().width, this->videoHeight / gameover.getLocalBounds().height);
-        board.misses = 0;
-        board.bubbles.clear();
+        
         window.clear();
         window.draw(gameover);
         window.display();

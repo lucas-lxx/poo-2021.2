@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <functional>
+#include <ctime>
 
 // Handles how the text works on a window
 struct Pincel {
@@ -100,9 +101,10 @@ struct Board {
 
     // Adds a new random bubble
     void add_new_bubble() {
+        srand(time(0));
         int x = rand() % ((int) this->window.getSize().x - 2 * Bubble::radius);
         int y = - 2 * Bubble::radius;
-        int speed = rand() % 5 + 1;
+        int speed = rand() % 20 + 1;
         char letter = rand() % 26 + 'A';
         bubbles.push_back(Bubble(x, y, letter, speed));
     }
@@ -198,11 +200,24 @@ struct Game {
         }
     }
 
-    // Draws the elements on window
+    // Draws the gameplay board
     void gameplay() {
         board.update();
         window.clear(sf::Color::Black);
         board.draw();
+        window.display();
+        if (board.misses > 2) {
+            this->on_update = [&]() {
+                this->game_over();
+            };
+        }
+    }
+
+    // Draws Game Over on the screen
+    void game_over() {
+        static Pincel pincel(window);
+        window.clear(sf::Color::Red);
+        pincel.write("GAME OVER", 250, 200, 50, sf::Color::White);
         window.display();
     }
 

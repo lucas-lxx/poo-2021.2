@@ -175,7 +175,7 @@ struct Game {
     // Sets the window and the board to handdle the bubbles
     Game() : window(sf::VideoMode(800, 600), "Bubble Type"), board(window) {
         this->on_update = [&]() {
-            this->draw();
+            this->gameplay();
         };
         window.setFramerateLimit(30);
     };
@@ -199,7 +199,7 @@ struct Game {
     }
 
     // Draws the elements on window
-    void draw() {
+    void gameplay() {
         board.update();
         window.clear(sf::Color::Black);
         board.draw();
@@ -210,11 +210,9 @@ struct Game {
     void main_loop() {
         while (window.isOpen()) {
             process_events();
-            draw();
+            on_update();
         }
     }
-
-
 };
 
 

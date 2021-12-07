@@ -188,6 +188,7 @@ struct Game {
     sf::RenderWindow window;
     Board board;
     std::function<void()> on_update;
+    std::function<void()> event_process;
     int videoWidth { 800 };
     int videoHeight { 600 };
 
@@ -195,6 +196,9 @@ struct Game {
     Game() : window(sf::VideoMode(800, 600), "Bubble Type"), board(window) {
         this->on_update = [&]() {
             this->gameplay();
+        };
+        this->event_process = [&]() {
+            this->gameplay_event_process();
         };
         window.setFramerateLimit(60);
     };
@@ -209,7 +213,7 @@ struct Game {
     };
 
     // Process the events
-    void process_events() {
+    void gameplay_event_process() {
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
@@ -217,13 +221,7 @@ struct Game {
             } else if (event.type == sf::Event::KeyPressed) {
                 if (event.key.code == sf::Keyboard::Escape) {
                     window.close();
-                } else if (event.key.code == sf::Keyboard::Space) {
-                    board.misses = 0;
-                    board.bubbles.clear();
-                    this->on_update = [&]() {
-                        this->gameplay();
-                    };
-                }
+                } 
             } else if (event.type == sf::Event::TextEntered) {
                 char code = static_cast<char>(event.text.unicode);
                 code = toupper(code);
@@ -242,6 +240,31 @@ struct Game {
             this->on_update = [&]() {
                 this->game_over();
             };
+            this->event_process = [&]() {
+                this->game_over_event_process();
+            };
+        }
+    }
+
+    void game_over_event_process() {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            } else if (event.type == sf::Event::KeyPressed) {
+                if (event.key.code == sf::Keyboard::Escape) {
+                    window.close();
+                } else if (event.key.code == sf::Keyboard::Space) {
+                    board.misses = 0;
+                    board.bubbles.clear();
+                    this->on_update = [&]() {
+                        this->gameplay();
+                    };
+                    this->event_process = [&]() {
+                        this->gameplay_event_process();
+                    };
+                }
+            }
         }
     }
 
@@ -252,7 +275,7 @@ struct Game {
         gameover.setPosition(0, 0);
         gameover.setScale(this->videoWidth / gameover.getLocalBounds().width, this->videoHeight / gameover.getLocalBounds().height);
         
-        window.clear();
+        window.clear(light_gray);
         window.draw(gameover);
         window.display();
     }
@@ -260,7 +283,7 @@ struct Game {
     // Encapsulates the event processing and the drawing process
     void main_loop() {
         while (window.isOpen()) {
-            process_events();
+            event_process();
             on_update();
         }
     }

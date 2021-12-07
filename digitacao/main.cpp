@@ -7,6 +7,9 @@
 const auto yellow = sf::Color(232, 235, 56);
 const auto light_gray = sf::Color(83, 83, 83);
 
+/////////////////////////////////////////
+/////////////////////////////////////////
+/////////////////////////////////////////
 // Handles how the text works on a window
 struct Pincel {
     sf::Font font;
@@ -33,10 +36,10 @@ struct Pincel {
         window.draw(text);
     }
 };
-
-
-
-
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
 // Handles how bubbles works on a window 
 struct Bubble {
     int x;
@@ -69,10 +72,10 @@ struct Bubble {
         pincel.write(std::string(1, letter), x + 0.4 * Bubble::radius, y, Bubble::radius * 1.5, sf::Color::Black);
     }
 };
-
-
-
-
+///////////////////////////////////////
+///////////////////////////////////////
+///////////////////////////////////////
+///////////////////////////////////////
 // Handles multiple bubbles in a window
 struct Board {
     sf::RenderWindow& window;
@@ -107,7 +110,7 @@ struct Board {
         srand(time(0));
         int x = rand() % ((int) this->window.getSize().x - 2 * Bubble::radius);
         int y = - 2 * Bubble::radius;
-        int speed = rand() % 20 + 1;
+        int speed = rand() % 10 + 1;
         char letter = rand() % 26 + 'A';
         bubbles.push_back(Bubble(x, y, letter, speed));
     }
@@ -156,8 +159,8 @@ struct Board {
         }
     }
 
-    // Draws on the referenced window
-    void draw() {
+    // Draws the gameplay() screen itens
+    void gameplay_draw() {
         pincel.write("Hits: " + std::to_string(this->hits) + " Misses: " + std::to_string(this->misses), 10, 10, 20, yellow);
         pincel.write("Size: " + std::to_string(this->bubbles.size()),10, 30, 20, yellow);
         for (Bubble& bubble : bubbles) {
@@ -165,12 +168,19 @@ struct Board {
         }
     }
 
+    // Draws the game_over() screen itens
+    void game_over_draw() {
+        pincel.write("GAME OVER!", 190, 200, 70, yellow);
+        pincel.write("Press 'Space' to restart the game", 215, 550, 23, yellow);
+        pincel.write("Press 'Esc'", 10, 10, 16, yellow);
+        pincel.write("to exit", 20, 26, 16, yellow);
+    }
     
 };
-
-
-
-
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
 // Set up the window to run the game and handdles it's events
 struct Game {
     sf::RenderWindow window;
@@ -222,9 +232,9 @@ struct Game {
     void gameplay() {
         board.update();
         window.clear(light_gray);
-        board.draw();
+        board.gameplay_draw();
         window.display();
-        if (board.misses > 2) {
+        if (board.misses > 3) {
             this->on_update = [&]() {
                 this->game_over();
             };
@@ -265,6 +275,7 @@ struct Game {
     // Draws Game Over on the screen
     void game_over() {
         window.clear(light_gray);
+        board.game_over_draw();
         window.display();
     }
 

@@ -170,18 +170,6 @@ struct Board {
 
 
 
-// Returns a texture
-sf::Texture loadTexture(std::string path) {
-    sf::Texture texture;
-    if (!texture.loadFromFile(path)) {
-        std::cout << "Error loading texture!\n";
-        exit(1);
-    }
-    return texture;
-}
-
-
-
 
 // Set up the window to run the game and handdles it's events
 struct Game {
@@ -212,7 +200,7 @@ struct Game {
         window.setFramerateLimit(60);
     };
 
-    // Process the events
+    // Process the available events to the gameplay() screen
     void gameplay_event_process() {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -246,6 +234,19 @@ struct Game {
         }
     }
 
+    // Clears the previous game stats and changes to gameplay() screen
+    void restart_gameplay() {
+        board.misses = 0;
+        board.bubbles.clear();
+        this->on_update = [&]() {
+            this->gameplay();
+        };
+        this->event_process = [&]() {
+            this->gameplay_event_process();
+        };
+    }
+
+    // Process the available events of the game_over() screen
     void game_over_event_process() {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -255,14 +256,7 @@ struct Game {
                 if (event.key.code == sf::Keyboard::Escape) {
                     window.close();
                 } else if (event.key.code == sf::Keyboard::Space) {
-                    board.misses = 0;
-                    board.bubbles.clear();
-                    this->on_update = [&]() {
-                        this->gameplay();
-                    };
-                    this->event_process = [&]() {
-                        this->gameplay_event_process();
-                    };
+                    restart_gameplay();
                 }
             }
         }
@@ -270,13 +264,7 @@ struct Game {
 
     // Draws Game Over on the screen
     void game_over() {
-        static sf::Texture gameover_tex { loadTexture("images/game-over.png")}; 
-        static sf::Sprite gameover(gameover_tex);
-        gameover.setPosition(0, 0);
-        gameover.setScale(this->videoWidth / gameover.getLocalBounds().width, this->videoHeight / gameover.getLocalBounds().height);
-        
         window.clear(light_gray);
-        window.draw(gameover);
         window.display();
     }
 

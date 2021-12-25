@@ -8,9 +8,21 @@ struct Person {
         name { name }, age { age } {
     }
 
-    friend std::ostream& operator<<(std::ostream& os, Person& person) {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////IgotYouBaby///////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    int getAge() {
+        return this->age;
+    }
+
+    std::string& getName() {
+        return this->name;
+    }
+
+    // Teach the operator<< how to turn the object Person into a output stream
+    friend std::ostream& operator<<(std::ostream& os, const Person& person) {
         os << person.name << " ";
-        os << person. age;
+        os << person.age;
         return os;
     }
 };
@@ -35,7 +47,22 @@ struct Motorcycle {
         }
         return true;
     }   
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////IgotYouBaby///////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    Person getPerson() {
+        return *this->person;
+    }
 
+    int getPower() {
+        return this->power;
+    }
+
+    int getTime() {
+        return this->time;
+    }
+
+    // teach the operator<< how to turn a Motorcycle object into a output stream
     friend std::ostream& operator<<(std::ostream& os, Motorcycle& motorcycle) {
         os << "power: " << motorcycle.power << ", ";
         os << "minutes: " << motorcycle.time << ", ";
@@ -52,7 +79,9 @@ struct Motorcycle {
 
 int main() {
     Person person { "Bryan", 23 };
-    Motorcycle kx;
+    Person person2 { "Toretto", 27 };
+    Motorcycle kx { &person2, 3, 33 };
     std::cout << kx << '\n';
     std::cout << person << '\n';
+
 }

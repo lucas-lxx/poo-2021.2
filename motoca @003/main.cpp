@@ -44,9 +44,11 @@ struct Motorcycle {
         power { power } {
     }
 
+    // Adds time to the current amount of a Motorcycle
     void buy(int time) {
         this->time += time;
     }
+
 
     // Returns true if there is someone on the motorcycle
     // Else returns false and atributes someone to the motorcycle
@@ -74,6 +76,15 @@ struct Motorcycle {
         return this->time;
     }
 
+    void show() {
+        std::cout << "power: " << this->power << ", " << "minutes: " << this->time << ", ";
+        if (this->enter(person)) {
+            std::cout << "person: " << person->name << '\n'; 
+        } else {
+            std::cout << "person: null\n";
+        }
+    }
+
     // teach the operator<< how to turn a Motorcycle object into a output stream
     friend std::ostream& operator<<(std::ostream& os, Motorcycle& motorcycle) {
         os << "power: " << motorcycle.power << ", ";
@@ -95,8 +106,8 @@ int main() {
     Motorcycle kx;
     Motorcycle yz{ 74 };
     std::cout << person << '\n';
-    std::cout << kx << '\n';
-    std::cout << yz << '\n';
+    kx.show();
+    yz.show();
     yz.buy(40);
     std::cout << yz << '\n';
 }

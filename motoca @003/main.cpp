@@ -30,12 +30,18 @@ struct Person {
 
 
 struct Motorcycle {
-    Person* person;
-    int power;
-    int time;
+    Person* person { nullptr };
+    int power { 1 };
+    int time { 0 };
 
+    // Default constructor
     Motorcycle(Person* person=nullptr, int power=1, int time=0):
         person { person }, power { power }, time { time } {
+    }
+
+    // Only power assignment constructor
+    Motorcycle(int power) : 
+        power { power } {
     }
 
     // Returns true if there is someone on the motorcycle
@@ -47,7 +53,6 @@ struct Motorcycle {
         }
         return true;
     }   
-
 
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -83,6 +88,9 @@ struct Motorcycle {
 int main() {
     Person person { "Bryan", 23 };
     Person person2 { "Toretto", 27 };
-    Motorcycle kx { &person2, 3, 33 };
+    Motorcycle kx;
+    Motorcycle yz{ 74 };
     std::cout << person << '\n';
+    std::cout << kx << '\n';
+    std::cout << yz << '\n';
 }

@@ -44,6 +44,10 @@ struct Motorcycle {
         power { power } {
     }
 
+    void buy(int time) {
+        this->time += time;
+    }
+
     // Returns true if there is someone on the motorcycle
     // Else returns false and atributes someone to the motorcycle
     bool enter(Person* person) {
@@ -92,5 +96,7 @@ int main() {
     Motorcycle yz{ 74 };
     std::cout << person << '\n';
     std::cout << kx << '\n';
+    std::cout << yz << '\n';
+    yz.buy(40);
     std::cout << yz << '\n';
 }

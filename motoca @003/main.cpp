@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 
 struct Person {
     std::string name;
@@ -88,6 +89,13 @@ struct Motorcycle {
         }
     }
 
+    Person* leave() {
+        if (this->person == nullptr) {
+            std::cout << "fail: good try ghostbuster\n";
+            return nullptr;
+        }
+        return std::exchange(this->person, nullptr);
+    }
 
     ////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////IgotYouBaby/////////////////////////////////////
@@ -135,7 +143,8 @@ int main() {
     Motorcycle kx { 23 };
     Motorcycle yz{ 74 };
     std::cout << person << '\n';
-    kx.honk();
-    kx.enter(&person2);
-    kx.honk();
+    yz.leave();
+    yz.enter(&person);
+    yz.show();
+    std::cout << *yz.leave() << '\n';
 }

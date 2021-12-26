@@ -61,7 +61,7 @@ struct Motorcycle {
                 std::cout << "fail: drove " << this->time << " minutes and the time ended\n";
             }
         } else {
-            std::cout << "fail: age limit to drive is 10 years old\n";
+            std::cout << "fail: too old to drive\n";
         }
     }
 

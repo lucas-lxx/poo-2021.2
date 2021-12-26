@@ -81,10 +81,10 @@ struct Motorcycle {
 
     void honk() {
         if (this->person == nullptr) {
-            std::cout << "fail: no ghost can honk the motorcycle,\nthis is not an horror movie.\nIt's called a school assignment, we went schooling Toto\n";
+            std::cout << "fail: no ghost can honk the motorcycle\n";
         } else {
             std::cout << "P";
-            for (int i = 0; i <= this->power; i++) {
+            for (int i = 0; i < this->power; i++) {
                 std::cout << "e";
             }
             std::cout << "m\n";
@@ -117,7 +117,7 @@ struct Motorcycle {
     void show() {
         std::cout << "power: " << this->power << ", " << "minutes: " << this->time << ", ";
         if (this->enter(person)) {
-            std::cout << "person: " << person->name << '\n'; 
+            std::cout << "person: [" << *person << "]\n"; 
         } else {
             std::cout << "person: null\n";
         }

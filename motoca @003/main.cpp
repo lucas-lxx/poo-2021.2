@@ -4,5 +4,6 @@
 
 
 int main() {
-    enter_and_honk_case();
+    enter_and_honk_case_v1();
+    enter_and_honk_case_v2();
 }

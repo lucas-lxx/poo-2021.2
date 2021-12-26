@@ -49,6 +49,7 @@ struct Motorcycle {
         this->time += time;
     }
 
+    // Shows the drive log
     void drive(int time) {
         if (this->person == nullptr) {
             std::cout << "fail: ghosts don't drive motorcycles\n";
@@ -74,6 +75,18 @@ struct Motorcycle {
         }
         return true;
     }   
+
+    void honk() {
+        if (this->person == nullptr) {
+            std::cout << "fail: no ghost can honk the motorcycle,\nthis is not an horror movie.\nIt's called a school assignment, we went schooling Toto\n";
+        } else {
+            std::cout << "P";
+            for (int i = 0; i <= this->power; i++) {
+                std::cout << "e";
+            }
+            std::cout << "m\n";
+        }
+    }
 
 
     ////////////////////////////////////////////////////////////////////////////////
@@ -119,22 +132,10 @@ int main() {
     Person person { "Brian O'Conner", 27 };
     Person person2 { "Don Toretto", 30 };
     Person person3 { "Jack O'Conner"};
-    Motorcycle kx;
+    Motorcycle kx { 23 };
     Motorcycle yz{ 74 };
     std::cout << person << '\n';
-    kx.show();
-    yz.show();
-    yz.buy(40);
-    yz.show();
-    yz.enter(&person);
-    yz.drive(20);
-    yz.show();
-    kx.enter(&person3);
-    kx.drive(20);
-    kx.show();
-    kx.buy(20);
-    kx.drive(17);
-    kx.show();
-    kx.drive(20);
-    kx.show();
+    kx.honk();
+    kx.enter(&person2);
+    kx.honk();
 }

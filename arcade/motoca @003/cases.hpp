@@ -1,78 +1,58 @@
 #pragma once
 #include <iostream>
+#include <sstream>
 #include <algorithm>
 #include "motoca.hpp"
+enum Commands {
+    // init,
+    // buy,
+    // drive,
+    // enter,
+    // honk,
+    // leave
+};
 
-void show(Motorcycle bike) {
-    std::cout << "$show\n";
-    bike.show();
-}
+struct Cases {
+    Motorcycle* bike;
 
-void honk(Motorcycle bike) {
-    std::cout << "$honk\n";
-    bike.honk();
-}
-
-void enter(Motorcycle& bike, Person* person) {
-    std::cout << "$enter " << *person << "\n";
-    if (bike.enter(person)) {
-        std::cout << "fail: the motorcycle is already occupied\n";
+    // Receives the addres of a Motorcycle object
+    Cases(Motorcycle* bike = nullptr) : 
+        bike { bike } {
     }
-}
-
-void end() {
-    std::cout << "$end\n\n";
-    std::cout << "////////////////////\n";
-}
-
-void title(const std::string& str) {
-    std::cout << "Case: " << str << '\n';
-}
-
-////////////////////////////////////////////////////////////
-/////////////First Case/////////////////////////////////////
-////////////////////////////////////////////////////////////
-
-void enter_and_honk_case_v1() {
-    title("entering the motorcycle and honking v1");
-    Motorcycle kx;
-    show(kx);
-    honk(kx);
-    Person person { "Marcos", 4 };
-    enter(kx, &person);
-    show(kx);
-    honk(kx);
-    Person person2 { "Marisa", 2 };
-    enter(kx, &person2);
-    show(kx);
-    end();
-}
-
-Motorcycle init(int power) {
-    std::cout << "$init " << power << '\n';
-    Motorcycle yz { power };
-    return yz;
-}
-
-////////////////////////////////////////////////////////////
-/////////////Second Case////////////////////////////////////
-////////////////////////////////////////////////////////////
-
-void enter_and_honk_case_v2() {
-    Motorcycle yz = init(5);
-    show(yz);
-    Person person { "Marcos", 4 };
-    enter(yz, &person);
-    show(yz);
-    honk(yz);
-    end();
-}
-
-
-////////////////////////////////////////////////////////////
-/////////////Third Case/////////////////////////////////////
-////////////////////////////////////////////////////////////
-
-void enter_and_change() {
     
-}
+    void identifier() {
+        std::string line {""};
+        std::string command{""};
+        do {
+            line = "";
+            command = "";
+            std::cout << "$";
+            std::getline(std::cin >> std::ws, line);
+            std::stringstream ss { line };
+            if (!(ss >> command)) {
+                
+            }
+            if (command == "init") {
+                *bike = init();
+            } else if (command == "buy") {
+                
+            } else if (command == "drive") {
+
+            } else if (command == "enter") {
+
+            } else if (command == "honk") {
+                bike->honk();
+            } else if (command == "leave") {
+
+            } else if (command == "show") {
+                bike->show();
+            }
+        } while(command != "end");
+    }
+
+    Motorcycle init(int power = 1) {
+        Motorcycle bike { power };
+        return bike;
+    }
+
+};

@@ -49,6 +49,21 @@ struct Motorcycle {
         this->time += time;
     }
 
+    void drive(int time) {
+        if (this->person == nullptr) {
+            std::cout << "fail: ghosts don't drive motorcycles\n";
+        } else if (this->person->age < 11) {
+            if (this->time == 0) {
+                std::cout << "fail: time limit is 0\n";
+            } else if (this->time >= time) {
+                this->time -= time;
+            } else {
+                std::cout << "fail: drove " << this->time << " minutes and the time ended\n";
+            }
+        } else {
+            std::cout << "fail: age limit to drive is 10 years old\n";
+        }
+    }
 
     // Returns true if there is someone on the motorcycle
     // Else returns false and atributes someone to the motorcycle
@@ -101,13 +116,25 @@ struct Motorcycle {
 
 
 int main() {
-    Person person { "Bryan", 23 };
-    Person person2 { "Toretto", 27 };
+    Person person { "Brian O'Conner", 27 };
+    Person person2 { "Don Toretto", 30 };
+    Person person3 { "Jack O'Conner"};
     Motorcycle kx;
     Motorcycle yz{ 74 };
     std::cout << person << '\n';
     kx.show();
     yz.show();
     yz.buy(40);
-    std::cout << yz << '\n';
+    yz.show();
+    yz.enter(&person);
+    yz.drive(20);
+    yz.show();
+    kx.enter(&person3);
+    kx.drive(20);
+    kx.show();
+    kx.buy(20);
+    kx.drive(17);
+    kx.show();
+    kx.drive(20);
+    kx.show();
 }

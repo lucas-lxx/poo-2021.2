@@ -66,6 +66,7 @@ struct Motorcycle {
                 this->time -= time;
             } else {
                 std::cout << "fail: drove " << this->time << " minutes and the time ended\n";
+                this->time = 0;
             }
         } else {
             std::cout << "fail: too old to drive\n";

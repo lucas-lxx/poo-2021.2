@@ -29,21 +29,32 @@ struct Cases {
             std::cout << "$";
             std::getline(std::cin >> std::ws, line);
             std::stringstream ss { line };
-            if (!(ss >> command)) {
-                
-            }
+            ss >> command;
             if (command == "init") {
-                *bike = init();
+                int power;
+                ss >> power;
+                *bike = init(power);
             } else if (command == "buy") {
-                
+                int time;
+                ss >> time;
+                bike->buy(time);
             } else if (command == "drive") {
-
+                int time;
+                ss >> time;
+                bike->drive(time);
             } else if (command == "enter") {
-
+                std::string name;
+                int age;
+                ss >> name;
+                ss >> age;
+                Person* person = new Person { name, age };
+                if (bike->enter(person)) {
+                    std::cout << "fail: there is already someone on the bike\n";
+                }
             } else if (command == "honk") {
                 bike->honk();
             } else if (command == "leave") {
-
+                bike->leave();
             } else if (command == "show") {
                 bike->show();
             }

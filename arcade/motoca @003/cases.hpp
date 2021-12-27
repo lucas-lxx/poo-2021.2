@@ -56,6 +56,7 @@ struct Cases {
                 bike->honk();
             } else if (command == "leave") {
                 bike->leave();
+                delete person;
             } else if (command == "show") {
                 bike->show();
             }

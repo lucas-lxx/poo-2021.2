@@ -57,6 +57,7 @@ struct Cases {
             } else if (command == "leave") {
                 bike->leave();
                 delete person;
+                person = nullptr;
             } else if (command == "show") {
                 bike->show();
             }

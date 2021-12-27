@@ -21,6 +21,7 @@ struct Cases {
     }
     
     void identifier() {
+        Person* person;
         std::string line {""};
         std::string command{""};
         do {
@@ -47,7 +48,7 @@ struct Cases {
                 int age;
                 ss >> name;
                 ss >> age;
-                Person* person = new Person { name, age };
+                person = new Person { name, age };
                 if (bike->enter(person)) {
                     std::cout << "fail: there is already someone on the bike\n";
                 }
@@ -59,6 +60,7 @@ struct Cases {
                 bike->show();
             }
         } while(command != "end");
+        delete person;
     }
 
     Motorcycle init(int power = 1) {

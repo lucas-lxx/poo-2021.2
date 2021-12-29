@@ -48,6 +48,8 @@ public:
         return false;
     }
 
+    // Returns the addres of the lead that was on the tip and assigns nullptr to it
+    // If there was no lead returns nullptr and a fail warning on the terminal
     std::shared_ptr<Lead> remove() {
         if (this->tip == nullptr) {
             std::cout << "fail: there is no lead on the tip\n";
@@ -55,6 +57,8 @@ public:
         }
         return std::exchange(this->tip, nullptr);
     }
+
+
 
     //////////////////////////////////////////////////////////////////////
     ///////////////To String//////////////////////////////////////////////

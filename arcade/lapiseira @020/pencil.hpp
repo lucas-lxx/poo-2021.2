@@ -2,6 +2,7 @@
 #include <iostream>
 #include <memory>
 #include <list>
+#include <algorithm>
 #include "lead.hpp"
 
 class Pencil {
@@ -45,6 +46,14 @@ public:
             return true;
         }
         return false;
+    }
+
+    std::shared_ptr<Lead> remove() {
+        if (this->tip == nullptr) {
+            std::cout << "fail: there is no lead on the tip\n";
+            return nullptr;
+        }
+        return std::exchange(this->tip, nullptr);
     }
 
     //////////////////////////////////////////////////////////////////////

@@ -11,7 +11,7 @@ private:
     float thickness { 0 };
 
 public:
-    Lead(std::string hardness = "", int size = 0, float thickness = 0) :
+    Lead(float thickness = 0, std::string hardness = "", int size = 0) :
         hardness{hardness}, size{size}, thickness{thickness} {
     }
 
@@ -21,25 +21,16 @@ public:
 
     // Returns the usage per sheet
     int usagePerSheet() {
-        std::stringstream ss {this->hardness};
-        char c;
-        ss >> c;
-        if (ss.str() != "B") {
-            std::cout << "Hardness not defined!\n";
-            return 0;
-        }
-        switch (c)
-        {
-        case 'H':
+        if (this->hardness == "HB") {
             return 1;
-        case '2':
+        } else if (this->hardness == "2B") {
             return 2;
-        case '4':
+        } else if (this->hardness == "4B") {
             return 4;
-        case '6':
+        } else if (this->hardness == "6B") {
             return 6;
-        default:
-            std::cout << "Hardness not defined!\n";
+        } else {
+            std::cout << "Invalid hardness!\n";
             return 0;
         }
     }
@@ -74,7 +65,7 @@ public:
     }
 
     friend std::ostream& operator<< (std::ostream& os, Lead lead) {
-        os << "[" << lead.thickness << ":" << lead.hardness << ":" << lead.size << "]";
+        os << "[" << lead.size << ":" << lead.thickness << ":" << lead.hardness << "]";
         return os;
     }
 };

@@ -6,6 +6,6 @@
 
 int main() {
 
-    Lead lead{"3B", 30, 0.3};
+    Lead lead{0.3, "4B", 30};
     std::cout << lead.usagePerSheet() << '\n';
 }

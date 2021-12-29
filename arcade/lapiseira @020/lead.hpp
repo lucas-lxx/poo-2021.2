@@ -62,10 +62,11 @@ public:
     // Sets the size of a lead
     // Returns true if it was a valid size
     bool setSize(int size) {
-        if (size > 10) {
+        if (size >= 10) {
             this->size = size;
             return true;
         }
+        this->size = 10;
         return false;
     }
 

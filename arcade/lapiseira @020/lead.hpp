@@ -2,6 +2,7 @@
 #include <iostream>
 #include <memory>
 #include <list>
+#include <sstream>
 
 class Lead {
 private:
@@ -14,8 +15,37 @@ public:
         hardness{hardness}, size{size}, thickness{thickness} {
     }
 
+    //////////////////////////////////////////////////////////////////////
+    ///////////////Methods////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////
+
+    // Returns the usage per sheet
+    int usagePerSheet() {
+        std::stringstream ss {this->hardness};
+        char c;
+        ss >> c;
+        if (ss.str() != "B") {
+            std::cout << "Hardness not defined!\n";
+            return 0;
+        }
+        switch (c)
+        {
+        case 'H':
+            return 1;
+        case '2':
+            return 2;
+        case '4':
+            return 4;
+        case '6':
+            return 6;
+        default:
+            std::cout << "Hardness not defined!\n";
+            return 0;
+        }
+    }
+
     ///////////////////////////////////////////////////////////////////////////
-    ////////////////////Get and Set Methods////////////////////////////////////
+    ///////////////Get and Set Methods/////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
     // Returns the Hardness of the lead

@@ -6,6 +6,6 @@
 
 int main() {
 
-    Pencil pencil {0.3};
-    std::cout << pencil << '\n';
+    Lead lead{"3B", 30, 0.3};
+    std::cout << lead.usagePerSheet() << '\n';
 }

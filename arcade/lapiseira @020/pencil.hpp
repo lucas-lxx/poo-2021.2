@@ -33,6 +33,20 @@ public:
         return false;
     }
 
+    // Returns true if there is no Lead on the tip
+    // and the barrel is not empty
+    bool pull() {
+        if (this->barrel.front() == nullptr) {
+            return false;
+        }
+        if (this->tip == nullptr) {
+            this->tip = this->barrel.front();
+            this->barrel.pop_front();
+            return true;
+        }
+        return false;
+    }
+
     //////////////////////////////////////////////////////////////////////
     ///////////////To String//////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
@@ -41,7 +55,7 @@ public:
         if (pencil.tip == nullptr) {
             os << "tip: [], ";
         } else {
-            os << "tip: " << pencil.tip << ", ";
+            os << "tip: " << *pencil.tip << ", ";
         }
         os << "barrel: {"; 
         for (auto i : pencil.barrel) {

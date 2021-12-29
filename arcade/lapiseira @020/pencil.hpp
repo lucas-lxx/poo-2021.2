@@ -58,7 +58,18 @@ public:
         return std::exchange(this->tip, nullptr);
     }
 
-
+    // Writes and reassigns the lead size accordingly
+    void writePage() {
+        if (this->tip == nullptr) {
+            std::cout << "fail: there's no lead on the tip\n";
+        } else if (this->tip->getSize() <= 10) {
+            std::cout << "fail: lead is too short\n";
+        } else {
+            if (!this->tip->setSize(this->tip->getSize() - this->tip->usagePerSheet())) {
+                std::cout << "fail: incomplete page\n";
+            }
+        }
+    }
 
     //////////////////////////////////////////////////////////////////////
     ///////////////To String//////////////////////////////////////////////

@@ -25,7 +25,8 @@ public:
     ///////////////Methods////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////
 
-    // Returns true if the Lead has the same thickness as the Pencil
+    // Returns true if the Lead has the same thickness as the Pencil and assigns it to the barrel
+    // Else it will return false
     bool insert(std::shared_ptr<Lead> lead) {
         if (this->thickness == lead->getThickness()) {
             this->barrel.push_back(lead);
@@ -37,10 +38,7 @@ public:
     // Returns true if there is no Lead on the tip
     // and the barrel is not empty
     bool pull() {
-        if (this->barrel.front() == nullptr) {
-            return false;
-        }
-        if (this->tip == nullptr) {
+        if (this->tip == nullptr && this->barrel.front() != nullptr) {
             this->tip = this->barrel.front();
             this->barrel.pop_front();
             return true;
@@ -87,5 +85,61 @@ public:
         }
         os << "}";
         return os;
+    }
+
+    void show() {
+        std::cout << "thickness: " << this->thickness << ", ";
+        if (this->tip == nullptr) {
+            std::cout << "tip: [], ";
+        } else {
+            std::cout << "tip: " << *this->tip << ", ";
+        }
+        std::cout << "barrel: {"; 
+        for (auto i : this->barrel) {
+            std::cout << *i;
+        }
+        std::cout << "}\n";
+    }
+
+    //////////////////////////////////////////////////////////////////////
+    ///////////////Cases//////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////  
+
+    void case_identifier() {
+        std::string line{""};
+        std::string command{""};
+        do {
+            std::cout << "$ ";
+            getline(std::cin >> std::ws, line);
+            std::stringstream ss {line};
+            ss >> command;
+            if (command == "init") {
+                float thickness;
+                ss >> thickness;
+                this->thickness = thickness;
+            } else if (command == "show") {
+                show();
+            } else if (command == "insert") {
+                float thickness;
+                std::string hardness;
+                int size;
+                ss >> thickness >> hardness >> size;
+                if (!insert(std::make_shared<Lead>(thickness, hardness, size))) {
+                    std::cout << "fail: wrong lead thickness\n";
+                }
+            } else if (command == "pull") {
+                if (!pull()) {
+                    if (this->barrel.front() == nullptr) {
+                        std::cout << "fail: there's no lead on the barrel\n";
+                    } else {
+                        std::cout << "fail: the tip already have a lead\n";
+                    }
+                }
+            } else if (command == "remove") {
+                remove();
+            } else if (command == "write") {
+                writePage();
+            }
+        } while (line != "end");
     }
 };

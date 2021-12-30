@@ -75,7 +75,7 @@ public:
     ///////////////////////////////////////////////////////////////////////////
 
     friend std::ostream& operator<< (std::ostream& os, Lead lead) {
-        os << "[" << lead.size << ":" << lead.thickness << ":" << lead.hardness << "]";
+        os << "[" << lead.thickness << ":" << lead.hardness << ":" << lead.size << "]";
         return os;
     }
 };

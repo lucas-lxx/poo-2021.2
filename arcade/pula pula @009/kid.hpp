@@ -24,12 +24,12 @@ public:
     ///////////////////////////////////////////////////////////////////////////
 
     // Returns the age variable of the object
-    int getAge() {
+    int getAge() const {
         return this->age;
     }
 
     // Returns the name variable of the object
-    std::string getName() {
+    std::string getName() const {
         return this->name;
     }
 
@@ -52,7 +52,7 @@ public:
     ///////////////To String Methods///////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
-    friend std::ostream& operator<<(std::ostream& os, Kid& kid) {
+    friend std::ostream& operator<<(std::ostream& os, const Kid& kid) {
         os << kid.name << ":" << kid.age;
         return os;
     }

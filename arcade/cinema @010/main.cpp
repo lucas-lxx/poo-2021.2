@@ -5,9 +5,6 @@
 #include "client.hpp"
 
 int main() {
-    Sala sala{5};
-    sala.show();
-
-    std::cout << sala.reservation("Lucas", "2424", 3) << '\n';
-    sala.show();
+    Cases cases;
+    cases.case_identifier();
 }

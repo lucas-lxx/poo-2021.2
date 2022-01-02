@@ -5,11 +5,9 @@
 #include "client.hpp"
 
 int main() {
-    auto sclient = std::make_shared<Client>("Lucas", "3322");
-    Client client {"Lucas", "3324"};
+    Sala sala{5};
+    sala.show();
 
-    std::cout << *sclient << '\n';
-    std::cout << client << '\n';
-    sclient->show();
-    client.show();
+    std::cout << sala.reservation("Lucas", "2424", 3) << '\n';
+    sala.show();
 }

@@ -19,11 +19,11 @@ public:
     ///////////////Get and Set Methods/////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
-    std::string getId() {
+    std::string getId() const {
         return id;
     }
 
-    std::string getFone() {
+    std::string getFone() const {
         return fone;
     }
 
@@ -39,12 +39,12 @@ public:
     ///////////////Print Methods///////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
-    friend std::ostream& operator<<(std::ostream& os, Client client) {
+    friend std::ostream& operator<<(std::ostream& os, const Client& client) {
         os << client.id << ":" << client.fone;
         return os;
     }
 
-    void show() {
+    void show() const {
         std::cout << id << ":" << fone << '\n';
     }
 };

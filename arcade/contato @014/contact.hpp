@@ -55,6 +55,11 @@ public:
 
     // Returns true if the fone was removed successfully
     bool rmFone(int index) {
+        auto it = isPresent(index);
+        if (it != fones.end()) {
+            this->fones.erase(it);
+            return true;
+        }
         return false;
     }
 

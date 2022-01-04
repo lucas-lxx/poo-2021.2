@@ -54,6 +54,8 @@ public:
         return true;
     }
 
+    // Returns true if it's a valid vector of fone numbers and adds them
+    // to the end of the list
     bool addFone(std::vector<Fone> fones) {
         for (auto i : fones) {
             if (!addFone(i)) {

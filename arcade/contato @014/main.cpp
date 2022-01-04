@@ -12,6 +12,6 @@ int main() {
     std::cout << "fone2: " <<  c.addFone(fone2) << '\n';
     std::cout << "fone3: " <<  c.addFone(fone3) << '\n';
     std::cout << "show: " << c << '\n';
-    std::cout << "remove: " << c.rmFone(1) << '\n';
+    std::cout << "remove: " << c.rmFone(2) << '\n';
     std::cout << "show: " << c << '\n';
 }

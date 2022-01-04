@@ -7,6 +7,30 @@ class Contact {
 private:
     std::list<Fone> fones;
     std::string name{""};
+
+    // Returns true if the index is in the range of the fone list
+    bool inRange(int index) {
+        if (index > -1 && index < this->fones.size()) {
+            return true;
+        }
+        return false;
+    }
+
+    // If found returns the iterator of the fone searched 
+    // If not returns the fone.end()
+    std::list<Fone>::iterator isPresent(int index) {
+        if (!inRange(index)) {
+            return this->fones.end();
+        }
+        int count{0};
+        for (auto it = this->fones.begin(); it != this->fones.end(); it++) {
+            if (index == count) {
+                this->fones.erase(it);
+                return it;
+            }
+        }
+        return this->fones.end();
+    }
 public:
     ///////////////////////////////////////////////////////////////////////////
     ///////////////Constructor/////////////////////////////////////////////////
@@ -31,15 +55,6 @@ public:
 
     // Returns true if the fone was removed successfully
     bool rmFone(int index) {
-        if (index > -1 && index < this->fones.size()) {
-            int count {0};
-            for (auto it = this->fones.begin(); it != this->fones.end(); it++) {
-                if (index == count) {
-                    this->fones.erase(it);
-                    return true;
-                }
-            }
-        }
         return false;
     }
 

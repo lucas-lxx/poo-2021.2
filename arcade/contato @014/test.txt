@@ -1,0 +1,15 @@
+init Lucas
+show
+add oi 88
+add tim 99
+add tim 98
+add vivo 83
+show
+remove 2
+show
+remove 0
+show
+add time 9a9
+add tim (85)99.99
+show
+end

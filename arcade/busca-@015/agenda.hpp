@@ -1,11 +1,12 @@
 #pragma once
 #include <iostream>
+#include <list>
 #include <vector>
 #include "../contato-@014/contact.hpp"
 
 class Agenda {
 private:
-    std::vector<Contact> contacts{};
+    std::list<Contact> contacts{};
 
     // Returns the position of the contact, else returns -1
     int findPosByName(std::string name) {
@@ -31,19 +32,33 @@ public:
     ///////////////Methods/////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
-    // Returns true if it added all the number to the contact
+    // Returns true if it added all the numbers to the contact
     // Else it does not attributes any
     bool addContact(std::string name, std::vector<Fone> fones) {
-        Contact person{name};
-        if (!person.addFone(fones)) {
+        Contact* cont = findContact(name);
+        if (cont == nullptr) {
+            Contact person{name};
+            if (!person.addFone(fones)) 
+                return false;
+            this->contacts.push_back(person);
+            this->contacts.sort([](Contact a, Contact b) {return a.getName() > b.getName();});
+        } else {
+            cont->addFone(fones);
         }
-        this->contacts.push_back(person);
         return true;
     }
 
+    // Returns a pointer to the contact or else returns nullptr
+    Contact* findContact(std::string name) {
+        auto pos {findPosByName(name)};
+        if (pos == -1) {
+            return nullptr;
+        }
+        std::list<Contact>::iterator it{this->contacts.begin()};
+        return &(*std::next(it, pos));
+    }
 
-
-    std::vector<Contact> getContacts() {
+    std::list<Contact> getContacts() {
         return this->contacts;
     }
 

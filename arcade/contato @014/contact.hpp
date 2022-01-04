@@ -29,7 +29,19 @@ public:
         return true;
     }
 
-
+    // Returns true if the fone was removed successfully
+    bool rmFone(int index) {
+        if (index > -1 && index < this->fones.size()) {
+            int count {0};
+            for (auto it = this->fones.begin(); it != this->fones.end(); it++) {
+                if (index == count) {
+                    this->fones.erase(it);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////Get and Set Methods/////////////////////////////////////////

@@ -20,14 +20,15 @@ private:
     // If not returns the fone.end()
     std::list<Fone>::iterator isPresent(int index) {
         if (!inRange(index)) {
+            std::cout << "fail: not in range\n";
             return this->fones.end();
         }
         int count{0};
         for (auto it = this->fones.begin(); it != this->fones.end(); it++) {
             if (index == count) {
-                this->fones.erase(it);
                 return it;
             }
+            count++;
         }
         return this->fones.end();
     }

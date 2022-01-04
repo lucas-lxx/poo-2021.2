@@ -10,7 +10,7 @@ private:
 
     // Returns true if the index is in the range of the fone list
     bool inRange(int index) {
-        if (index > -1 && index < this->fones.size()) {
+        if (index > -1 && index < (int) this->fones.size()) {
             return true;
         }
         return false;
@@ -85,5 +85,19 @@ public:
 
     void setName(std::string name) {
         this->name = name;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////Print Method////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    friend std::ostream& operator<<(std::ostream& os, Contact contact) {
+        os << " - " << contact.name << " ";
+        int count {0};
+        for (auto i : contact.fones) {
+            os << "[" << count << ":" << i << "] ";
+            count++;
+        }
+        return os;
     }
 };

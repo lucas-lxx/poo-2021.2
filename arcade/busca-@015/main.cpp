@@ -10,7 +10,7 @@ int main() {
     std::vector<Fone> fones{fone, fone2};
     Fone fone12{"oi", "122"};
     Fone fone22{"tim", "4334"};
-    Fone fone32{"claro", "232a3"};
+    Fone fone32{"claro", "2a323"};
     std::vector<Fone> fones2{fone12, fone22, fone32};
     Agenda agenda;
     agenda.addContact("Lucas", fones);

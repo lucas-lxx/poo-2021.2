@@ -9,15 +9,13 @@ private:
     std::list<Contact> contacts{};
 
     // Returns the position of the contact, else returns -1
-    int findPosByName(std::string name) {
-        int count {0};
-        for (auto i : this->contacts) {
-            if (name == i.getName()) {
-                return count;
+    std::list<Contact>::iterator findPosByName(std::string name) {
+        for (auto it = this->contacts.begin(); it != this->contacts.end(); it++) {
+            if ((*it).getName() == name) {
+                return it;
             }
-            count++;
         }
-        return -1;
+        return this->contacts.end();
     }
 
 public:
@@ -50,12 +48,11 @@ public:
 
     // Returns a pointer to the contact or else returns nullptr
     Contact* findContact(std::string name) {
-        auto pos {findPosByName(name)};
-        if (pos == -1) {
+        auto it {findPosByName(name)};
+        if (it == this->contacts.end()) {
             return nullptr;
         }
-        std::list<Contact>::iterator it{this->contacts.begin()};
-        return &(*std::next(it, pos));
+        return &(*it);
     }
 
     std::list<Contact> getContacts() {

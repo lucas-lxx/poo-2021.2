@@ -1,17 +1,23 @@
 #pragma once
 #include <iostream>
-#include <list>
 #include <vector>
 #include "../contato-@014/contact.hpp"
 
 class Agenda {
 private:
-    std::list<Contact> contacts{};
+    std::vector<Contact> contacts{};
 
-    // std::list<Contact>::iterator findPosByName(std::string name) {
-    //     for (auto i : this->contacts) {
-    //     }
-    // }
+    // Returns the position of the contact, else returns -1
+    int findPosByName(std::string name) {
+        int count {0};
+        for (auto i : this->contacts) {
+            if (name == i.getName()) {
+                return count;
+            }
+            count++;
+        }
+        return -1;
+    }
 
 public:
     ///////////////////////////////////////////////////////////////////////////
@@ -30,7 +36,6 @@ public:
     bool addContact(std::string name, std::vector<Fone> fones) {
         Contact person{name};
         if (!person.addFone(fones)) {
-            std::cout << "failed to add " << name << "'s contact\n";
         }
         this->contacts.push_back(person);
         return true;
@@ -38,7 +43,7 @@ public:
 
 
 
-    std::list<Contact> getContacts() {
+    std::vector<Contact> getContacts() {
         return this->contacts;
     }
 

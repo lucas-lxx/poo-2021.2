@@ -30,8 +30,8 @@ public:
     ///////////////Methods/////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
-    // Returns true if it added all the numbers to the contact
-    // Else it does not attributes any
+    // Returns true if it added all the numbers to the contact,
+    // else it does not attributes any
     bool addContact(std::string name, std::vector<Fone> fones) {
         Contact* cont = findContact(name);
         if (cont == nullptr) {
@@ -49,10 +49,17 @@ public:
     // Returns a pointer to the contact or else returns nullptr
     Contact* findContact(std::string name) {
         auto it {findPosByName(name)};
-        if (it == this->contacts.end()) {
+        if (it == this->contacts.end())
             return nullptr;
-        }
         return &(*it);
+    }
+
+    bool rmContact(std::string name) {
+        auto it {findPosByName(name)};
+        if (it == this->contacts.end())
+            return false;
+        this->contacts.erase(it);
+        return true;
     }
 
     std::list<Contact> getContacts() {

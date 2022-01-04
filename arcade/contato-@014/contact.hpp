@@ -54,6 +54,15 @@ public:
         return true;
     }
 
+    bool addFone(std::vector<Fone> fones) {
+        for (auto i : fones) {
+            if (!addFone(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     // Returns true if the fone was removed successfully
     bool removeFone(int index) {
         auto it = isPresent(index);

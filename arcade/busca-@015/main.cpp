@@ -19,6 +19,9 @@ int main() {
     std::cout << "----\n";
     Fone fone0{"zero", "0000"};
     std::vector<Fone>asdf{fone0};
-    agenda.addContact("Lucas", asdf);
+    agenda.addContact("Leh", asdf);
+    std::cout << agenda;
+    std::cout << "----\n";
+    agenda.rmContact("Lucas");
     std::cout << agenda;
 }

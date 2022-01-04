@@ -55,7 +55,7 @@ public:
     }
 
     // Returns true if the fone was removed successfully
-    bool rmFone(int index) {
+    bool removeFone(int index) {
         auto it = isPresent(index);
         if (it != fones.end()) {
             this->fones.erase(it);
@@ -93,7 +93,7 @@ public:
     ///////////////////////////////////////////////////////////////////////////
 
     friend std::ostream& operator<<(std::ostream& os, Contact contact) {
-        os << " - " << contact.name << " ";
+        os << "- " << contact.name << " ";
         int count {0};
         for (auto i : contact.fones) {
             os << "[" << count << ":" << i << "] ";

@@ -7,6 +7,12 @@ private:
     std::string id{"-"};
     std::string number{"-"};
 
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////Private Methods/////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    // Returns true if the number is in between these characters,
+    // [0 1 2 3 4 5 6 7 8 9 ( ) .]
     static bool validate(std::string number) {
         for (auto& i : number) {
             if (!std::isdigit(i - 0)) {
@@ -23,6 +29,7 @@ public:
     ///////////////Constructor/////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
+    // Initializes a number with it's id and the number itself
     Fone(std::string id = "-", std::string number = "-") {
         if (validate(number)) {
             this->id = id;
@@ -37,6 +44,7 @@ public:
     ///////////////Methods/////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
+    // Returns true if it is a valid number
     bool isValid() {
         return validate(this->number);
     }

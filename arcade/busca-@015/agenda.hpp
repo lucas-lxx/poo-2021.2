@@ -9,7 +9,8 @@ private:
     std::list<Contact> contacts{};
 
     // std::list<Contact>::iterator findPosByName(std::string name) {
-
+    //     for (auto i : this->contacts) {
+    //     }
     // }
 
 public:
@@ -24,17 +25,18 @@ public:
     ///////////////Methods/////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
+    // Returns true if it added all the number to the contact
+    // Else it does not attributes any
     bool addContact(std::string name, std::vector<Fone> fones) {
         Contact person{name};
-        for (auto i : fones) {
-            if (!person.addFone(i)) {
-                std::cout << "fail: " << name << '\n';
-                return false;
-            }
+        if (!person.addFone(fones)) {
+            std::cout << "failed to add " << name << "'s contact\n";
         }
         this->contacts.push_back(person);
         return true;
     }
+
+
 
     std::list<Contact> getContacts() {
         return this->contacts;

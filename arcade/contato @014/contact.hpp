@@ -20,7 +20,13 @@ public:
     ///////////////Methods/////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
-
+    bool addFone(Fone fone) {
+        if (!fone.isValid()) {
+            return false;
+        }
+        this->fones.push_back(fone);
+        return true;
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     ///////////////Get and Set Methods/////////////////////////////////////////
@@ -34,11 +40,11 @@ public:
         return this->name;
     }
 
+    // Sets the number only if it's a valid number
     bool setFones(Fone fone) {
-        if (!fone.isValid()) {
+        if (!addFone(fone)) {
             return false;
         }
-        this->fones.push_back(fone);
         return true;
     }
 

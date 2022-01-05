@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <list>
+#include <sstream>
 #include <vector>
 #include "../contato-@014/contact.hpp"
 
@@ -23,8 +24,7 @@ public:
     ///////////////Contructor//////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
-    Agenda(std::list<Contact> contacts) :
-        contacts{contacts} {
+    Agenda() {
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -58,18 +58,20 @@ public:
     // Returns true if the contact was removed successfully
     bool rmContact(std::string name) {
         auto it {findPosByName(name)};
-        if (it == this->contacts.end())
-            return false;
-        this->contacts.erase(it);
-        return true;
+        if (it != this->contacts.end()) {
+            this->contacts.erase(it);
+            return true;
+        }
+        return false;
     }
 
     // Returns a list with the contacts that have the argument pattern present
     std::list<Contact> search(std::string pattern) {
         std::list<Contact> found;
+        std::stringstream ss;
         for (auto it = this->contacts.begin(); it != this->contacts.end(); it++) {
-            std::cout << it->getName().compare(pattern) << '\n';
-            if (it->getName().find(pattern) != std::string::npos) {
+            ss << (*it);
+            if (ss.str().find(pattern) != std::string::npos) {
                 found.push_back((*it));
             } 
         }
@@ -85,6 +87,7 @@ public:
     ///////////////////////////////////////////////////////////////////////////
 
     friend std::ostream& operator<<(std::ostream& os, Agenda agenda) {
+        os << "Agenda:\n ";
         for (auto i : agenda.contacts) {
             os << i << '\n';
         }

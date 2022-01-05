@@ -12,7 +12,7 @@ int main() {
     Fone fone22{"tim", "4334"};
     Fone fone32{"claro", "2323"};
     std::vector<Fone> fones2{fone12, fone22, fone32};
-    Agenda agenda;
+    Agenda agenda{{}};
     agenda.addContact("Lucas", fones);
     agenda.addContact("Norma", fones2);
     std::cout << agenda;
@@ -21,7 +21,10 @@ int main() {
     std::vector<Fone>asdf{fone0};
     agenda.addContact("Leh", asdf);
     std::cout << agenda;
-    std::cout << "----\n";
-    agenda.rmContact("Lucas");
-    std::cout << agenda;
+    // std::cout << "----\n";
+    // agenda.rmContact("Lucas");
+    // std::cout << agenda;
+    std::cout << "F----\n";
+    Agenda found {agenda.search("L")};
+    std::cout << found;
 }

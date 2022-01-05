@@ -46,6 +46,10 @@ public:
             } else if (command == "remove") {
                 auto [index] = parse<int>(ss);
                 contact->removeFone(index);
+            } else if (command == "help") {
+                help();
+            } else {
+                std::cout << "Invalid command\nuse help for commands\n";
             }
         }
     }

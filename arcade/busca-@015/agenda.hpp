@@ -48,18 +48,33 @@ public:
             if (!person.addFone(fones)) 
                 return false;
             this->contacts.push_back(person);
-            this->contacts.sort([](Contact a, Contact b) {return a.getName() > b.getName();});
-        } else {
-            cont->addFone(fones);
+            this->contacts.sort([](Contact a, Contact b) {return a.getName() < b.getName();});
+            return true;
         }
+        if (!cont->addFone(fones))
+            return false;
         return true;
+    }
+
+    void rmFone(const std::string& name, const int& index) {
+        findContact(name)->removeFone(index);
+    }
+
+    // Returns true if the contact was removed successfully
+    bool rmContact(std::string name) {
+        auto it {findPosByName(name)};
+        if (it != this->contacts.end()) {
+            this->contacts.erase(it);
+            return true;
+        }
+        return false;
     }
 
     // Returns a list with the contacts that have the argument pattern present
     std::list<Contact> search(std::string pattern) {
         std::list<Contact> found;
-        std::stringstream ss;
         for (auto it = this->contacts.begin(); it != this->contacts.end(); it++) {
+            std::stringstream ss;
             ss << (*it);
             if (ss.str().find(pattern) != std::string::npos) {
                 found.push_back((*it));
@@ -75,9 +90,16 @@ public:
     ///////////////////////////////////////////////////////////////////////////
     ///////////////Print Methods///////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
+    std::string to_string(std::list<Contact> contacts) {
+        std::stringstream ss;
+        for (auto& i : contacts) {
+            ss << i << '\n';
+        }
+        return ss.str();
+    }
 
     friend std::ostream& operator<<(std::ostream& os, Agenda agenda) {
-        os << "Agenda:\n ";
+        os << "Agenda:\n";
         for (auto i : agenda.contacts) {
             os << i << '\n';
         }

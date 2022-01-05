@@ -19,6 +19,14 @@ private:
         return this->contacts.end();
     }
 
+    // Returns a pointer to the contact or else returns nullptr
+    Contact* findContact(std::string name) {
+        auto it {findPosByName(name)};
+        if (it == this->contacts.end())
+            return nullptr;
+        return &(*it);
+    }
+
 public:
     ///////////////////////////////////////////////////////////////////////////
     ///////////////Contructor//////////////////////////////////////////////////
@@ -45,24 +53,6 @@ public:
             cont->addFone(fones);
         }
         return true;
-    }
-
-    // Returns a pointer to the contact or else returns nullptr
-    Contact* findContact(std::string name) {
-        auto it {findPosByName(name)};
-        if (it == this->contacts.end())
-            return nullptr;
-        return &(*it);
-    }
-
-    // Returns true if the contact was removed successfully
-    bool rmContact(std::string name) {
-        auto it {findPosByName(name)};
-        if (it != this->contacts.end()) {
-            this->contacts.erase(it);
-            return true;
-        }
-        return false;
     }
 
     // Returns a list with the contacts that have the argument pattern present

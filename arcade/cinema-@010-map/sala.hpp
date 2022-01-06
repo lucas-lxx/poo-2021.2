@@ -55,9 +55,9 @@ public:
 
     // Cancels the chair of the peron at the cinema and changes it to available
     void cancel(const std::string& id) {
-        int check = isPresent(id);
-        if (check != -1) {
-            getCadeiras()[check] = nullptr;
+        auto check = isPresent(id);
+        if (check != this->customers.end()) {
+            this->customers[id] = nullptr;
         } else {
             std::cout << "fail: this client is not at the cinema\n";
         }

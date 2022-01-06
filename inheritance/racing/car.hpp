@@ -34,6 +34,14 @@ public:
         }
     }
 
+    virtual int& getMyDucks() {
+        return myDuck;
+    }
+
+    virtual void setMyDuck(int ducks) {
+        this->myDuck = ducks;
+    }
+
     virtual void isItMax() {
         std::cout << "https://www.youtube.com/watch?v=43HCYSXZ9GI&t=104s <- click it!\n";
     }

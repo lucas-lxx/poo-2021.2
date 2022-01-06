@@ -1,0 +1,5 @@
+show
+init 5
+show
+init 4
+show

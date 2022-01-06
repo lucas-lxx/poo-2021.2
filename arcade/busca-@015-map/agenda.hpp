@@ -24,7 +24,7 @@ private:
         auto it {findPosByName(name)};
         if (it == this->contacts.end())
             return nullptr;
-        return &(*it);
+        return &it->second;
     }
 
 public:

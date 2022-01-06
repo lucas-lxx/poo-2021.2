@@ -99,7 +99,7 @@ public:
         return ss.str();
     }
 
-    friend std::ostream& operator<<(std::ostream& os, Agenda agenda) {
+    friend std::ostream& operator<<(std::ostream& os, Agenda& agenda) {
         os << "Agenda:\n";
         for (auto i : agenda.contacts) {
             os << i.second << '\n';

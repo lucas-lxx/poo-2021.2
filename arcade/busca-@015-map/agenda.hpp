@@ -100,12 +100,15 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, Agenda& agenda) {
         std::vector<Contact> contacts_ordered;
+        // Pushes back all the elements of the map to the vector
         for (auto i : agenda.contacts) {
             contacts_ordered.push_back(i.second);
         }
+        // Sort the vector alphabetically
         std::sort(contacts_ordered.begin(), contacts_ordered.end(), [](Contact a, Contact b) {
             return a.getName() < b.getName();
         });
+        // Pushes the contacs to the output stream
         os << "Agenda:\n";
         for (auto i : contacts_ordered) {
             os << i << '\n';

@@ -129,9 +129,10 @@ public:
         while(true) {
             line = "";
             command = "";
-            std::cout << "$ ";
+            // std::cout << "$ ";
             std::getline(std::cin >> std::ws, line);
             std::stringstream ss {line};
+            std::cout << "$ " << line << '\n';
             ss >> command;
             if (command == "end") {
                 break;

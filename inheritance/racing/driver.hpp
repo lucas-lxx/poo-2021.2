@@ -1,3 +1,4 @@
+#pragma once 
 #include <iostream>
 #include "person.hpp"
 
@@ -10,9 +11,13 @@ public:
         Person{age, name}, driverSkill(skill) {
     }
 
+    virtual int getSkill() {
+        return driverSkill;
+    }
+
     friend std::ostream& operator<<(std::ostream& os, const Driver& driver) {
         const Person& person = driver;
-        os << "Driver: " << person.getName() << "skill: " << driver.driverSkill;
+        os << "Driver: " << person.getName() << " skill: " << driver.driverSkill;
         return os;
     }
 };

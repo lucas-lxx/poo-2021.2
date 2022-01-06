@@ -11,11 +11,10 @@ private:
     std::unordered_map<std::string, Contact> contacts{};
 
     // Returns the position of the contact, else returns -1
-    std::list<Contact>::iterator findPosByName(std::string name) {
-        for (auto it = this->contacts.begin(); it != this->contacts.end(); it++) {
-            if ((*it).getName() == name) {
-                return it;
-            }
+    std::unordered_map<std::string, Contact>::iterator findPosByName(std::string name) {
+        auto it = this->contacts.find(name);
+        if (it != this->contacts.end()) {
+            return it;
         }
         return this->contacts.end();
     }

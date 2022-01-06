@@ -74,11 +74,11 @@ public:
     // Returns a list with the contacts that have the argument pattern present
     std::list<Contact> search(std::string pattern) {
         std::list<Contact> found;
-        for (auto it = this->contacts.begin(); it != this->contacts.end(); it++) {
+        for (auto& pair : this->contacts) {
             std::stringstream ss;
-            ss << (*it);
+            ss << pair.second;
             if (ss.str().find(pattern) != std::string::npos) {
-                found.push_back((*it));
+                found.push_back(pair.second);
             } 
         }
         return found;

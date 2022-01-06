@@ -3,3 +3,13 @@ init 5
 show
 init 4
 show
+reservation davi 3232 0
+reservation joao 3434 3
+show
+reservation rute 3030 0
+reservation davi 3234 2
+cancel davi
+show
+cancel rita
+show
+end

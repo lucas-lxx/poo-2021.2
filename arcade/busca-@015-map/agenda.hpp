@@ -3,11 +3,12 @@
 #include <list>
 #include <sstream>
 #include <vector>
+#include <unordered_map>
 #include "../contato-@014/contact.hpp"
 
 class Agenda {
 private:
-    std::list<Contact> contacts{};
+    std::unordered_map<std::string, Contact> contacts{};
 
     // Returns the position of the contact, else returns -1
     std::list<Contact>::iterator findPosByName(std::string name) {
@@ -83,7 +84,7 @@ public:
         return found;
     }
 
-    std::list<Contact> getContacts() {
+    std::unordered_map<std::string, Contact> getContacts() {
         return this->contacts;
     }
 

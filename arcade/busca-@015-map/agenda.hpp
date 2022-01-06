@@ -102,7 +102,7 @@ public:
     friend std::ostream& operator<<(std::ostream& os, Agenda agenda) {
         os << "Agenda:\n";
         for (auto i : agenda.contacts) {
-            os << i << '\n';
+            os << i.second << '\n';
         }
         return os;
     }

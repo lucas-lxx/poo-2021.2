@@ -47,8 +47,7 @@ public:
             Contact person{name};
             if (!person.addFone(fones)) 
                 return false;
-            this->contacts.push_back(person);
-            this->contacts.sort([](Contact a, Contact b) {return a.getName() < b.getName();});
+            this->contacts.insert({name, person});
             return true;
         }
         if (!cont->addFone(fones))

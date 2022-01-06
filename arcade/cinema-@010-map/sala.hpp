@@ -21,7 +21,7 @@ private:
                 }
             }
         }
-        return -1;
+        return std::string::npos;
     }
 
     // Returns true if the chair is available
@@ -54,7 +54,7 @@ public:
     // Cancels the chair of the peron at the cinema and changes it to available
     void cancel(const std::string& id) {
         int check = isPresent(id);
-        if (check != -1) {
+        if (check != std::string::npos) {
             getCadeiras()[check] = nullptr;
         } else {
             std::cout << "fail: this client is not at the cinema\n";
@@ -63,7 +63,7 @@ public:
 
     // Returns true if it was possible to make a reservation
     bool reservation(std::string id, std::string fone, int chair) {
-        if (isPresent(id) == -1) {
+        if (isPresent(id) == std::string::npos) {
             if (isChairAvailable(chair)) {
                 getCadeiras()[chair] = std::make_shared<Client>(id, fone);
                 return true;

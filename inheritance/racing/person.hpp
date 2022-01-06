@@ -11,6 +11,10 @@ public:
         age{age}, name{name} {
     }
 
+    std::string getName() const {
+        return name;
+    }
+
     friend std::ostream& operator<<(std::ostream& os, const Person& person) {
         os << person.name << ":" << person.age;
         return os;

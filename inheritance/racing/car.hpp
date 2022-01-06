@@ -1,29 +1,37 @@
 #pragma once
 #include <iostream>
 #include <memory>
-#include "person.hpp"
+#include "driver.hpp"
 
 class Car {
 private:
+    std::shared_ptr<Driver> driver{nullptr};
     int passengers{4};
     int power{100};
-    std::shared_ptr<Person> driver{nullptr};
+    int myDuck{0};
     
 public:
-    Car(int passengers = 4, int driver = 1, int power = 100) :
-        passengers(passengers), power(power) {
+    Car(std::shared_ptr<Driver> driver = nullptr, int passengers = 4, int power = 100) :
+        driver{driver}, passengers{passengers}, power{power} {
     }
 
     virtual ~Car() {
         std::cout << "The car got to the junkyard\n";
     }
 
-    virtual int speed() {
-        return power / passengers;
+    virtual int speed() const {
+        if (driver == nullptr)
+            return power / passengers;
+        return (power / passengers) * driver->getSkill();
     }
 
-    virtual void race(Car car) {
-        std::cout << "Oh snap I got smoked\n";
+    virtual void race(const Car& car) {
+        if (this->speed() > car.speed()) {
+            std::cout << "My duck! Quaqua\n";
+            myDuck++;
+        } else {
+            std::cout << "Oh snap I got smoked\n";
+        }
     }
 
     virtual void isItMax() {

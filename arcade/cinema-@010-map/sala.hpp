@@ -28,6 +28,14 @@ private:
     // Returns true if the chair is available
     bool isChairAvailable(int chair) {
         if (chair < cinema_size) {
+            if (this->chairs.find(chair) == this->chairs.end())
+                return true;
+        }
+        return false;
+    }
+
+    bool isChairAvailableWarning(int chair) {
+        if (chair < cinema_size) {
             if (this->chairs.find(chair) == this->chairs.end()) {
                 return true;
             } else {
@@ -39,6 +47,11 @@ private:
         return false;
     }
 
+    std::shared_ptr<Client> getClient(int chair) {
+        auto key = this->chairs.find(chair);
+        auto client = this->customers.find(key->second)->second;
+        return client;
+    }
 public:
     ///////////////////////////////////////////////////////////////////////////
     //////////////Constructor//////////////////////////////////////////////////
@@ -66,8 +79,9 @@ public:
     // Returns true if it was possible to make a reservation
     bool reservation(std::string id, std::string fone, int chair) {
         if (isPresent(id) == this->customers.end()) {
-            if (isChairAvailable(chair)) {
-                getCadeiras()[chair] = std::make_shared<Client>(id, fone);
+            if (isChairAvailableWarning(chair)) {
+                this->chairs.insert({chair, id});
+                this->customers.insert({id, std::make_shared<Client>(id, fone)});
                 return true;
             }
             return false;
@@ -87,15 +101,18 @@ public:
     ///////////////////////////////////////////////////////////////////////////
 
     void show() {
-        int count{0};
         std::cout << "[ ";
-        for (auto i : getCadeiras()) {
-            if (i == nullptr) {
-                std::cout << '(' << count << ")---- ";
+        for (int i = 0; i < cinema_size; i++) {
+            if (isChairAvailable(i)) {
+                std::cout << '(' << i << ")---- ";
             } else {
-                std::cout << '(' << count << ") " << *i << ' ';
+                auto client = getClient(i);
+                if (client != nullptr) {
+                    std::cout << '(' << i << ") " << (*client) << ' ';
+                } else {
+                    std::cout << '(' << i << ")---- ";
+                }
             }
-            count++;
         }
         std::cout << "]\n";
     }

@@ -4,24 +4,22 @@
 #include <vector>
 #include <sstream>
 #include <memory>
+#include <unordered_map>
 #include "client.hpp"
 
 
 class Sala {
 private:
-    std::vector<std::shared_ptr<Client>> sala{};
+    std::unordered_map<std::string, std::shared_ptr<Client>> sala;
     
-    // Returns the position on the vector if the person is present
-    // If there is no one present that matches, then returns -1
-    int isPresent(const std::string& name) {
-        for (auto i = 0; i < (int) getCadeiras().size(); i++) {
-            if (getCadeiras()[i] != nullptr) {
-                if (getCadeiras()[i]->getId() == name) {
-                    return i;
-                }
-            }
+    // Returns the iterator of the map if the person is present
+    // If there is no one present that matches, then returns this->sala.end()
+    auto isPresent(const std::string& name) {
+        auto it = this->sala.find(name);
+        if (it != this->sala.end()) {
+            return it;
         }
-        return std::string::npos;
+        return this->sala.end();
     }
 
     // Returns true if the chair is available
@@ -43,8 +41,8 @@ public:
     //////////////Constructor//////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
-    Sala(int capacity = 0) :
-        sala(capacity, nullptr) {
+    Sala(int capacity = 0) {
+        this->sala.reserve(capacity);
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -54,7 +52,7 @@ public:
     // Cancels the chair of the peron at the cinema and changes it to available
     void cancel(const std::string& id) {
         int check = isPresent(id);
-        if (check != std::string::npos) {
+        if (check != -1) {
             getCadeiras()[check] = nullptr;
         } else {
             std::cout << "fail: this client is not at the cinema\n";
@@ -63,7 +61,7 @@ public:
 
     // Returns true if it was possible to make a reservation
     bool reservation(std::string id, std::string fone, int chair) {
-        if (isPresent(id) == std::string::npos) {
+        if (isPresent(id) == -1) {
             if (isChairAvailable(chair)) {
                 getCadeiras()[chair] = std::make_shared<Client>(id, fone);
                 return true;
@@ -75,7 +73,7 @@ public:
     }
 
     // Returns the vector with the cinema's chairs
-    std::vector<std::shared_ptr<Client>>& getCadeiras() {
+    std::unordered_map<std::string, std::shared_ptr<Client>>& getCadeiras() {
         return this->sala;
     }
 

@@ -3,6 +3,7 @@
 #include <list>
 #include <sstream>
 #include <vector>
+#include <algorithm>
 #include <unordered_map>
 #include "../contato-@014/contact.hpp"
 
@@ -98,9 +99,16 @@ public:
     }
 
     friend std::ostream& operator<<(std::ostream& os, Agenda& agenda) {
-        os << "Agenda:\n";
+        std::vector<Contact> contacts_ordered;
         for (auto i : agenda.contacts) {
-            os << i.second << '\n';
+            contacts_ordered.push_back(i.second);
+        }
+        std::sort(contacts_ordered.begin(), contacts_ordered.end(), [](Contact a, Contact b) {
+            return a.getName() < b.getName();
+        });
+        os << "Agenda:\n";
+        for (auto i : contacts_ordered) {
+            os << i << '\n';
         }
         return os;
     }

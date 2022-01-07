@@ -13,9 +13,7 @@ int main() {
     std::cout << (*max) << '\n';
 
     Car car(4, 100);
-    std::cout << "antes\n";
     car.addDriver(max);
-    std::cout << "depois\n";
     std::cout << "car " << car.speed() << '\n';
 
     RaceCar race_car(450, 10, Tyre::medium);

@@ -3,6 +3,7 @@
 #include "tyres.hpp"
 #include "driver.hpp"
 #include "race-car.hpp"
+#include "formula-1-car.hpp"
 
 int main() {
     // Car car;
@@ -17,6 +18,16 @@ int main() {
 
     RaceCar race_car(450, 10, Tyre::medium);
     race_car.addDriver(max);
+
+    FormulaOne formula_1_car(Tyre::soft, Scuderia::mclaren);
+    formula_1_car.addDriver(max);
+
     std::cout << car << '\n';
     std::cout << race_car << '\n';
+    std::cout << formula_1_car << '\n';
+    car.race(formula_1_car);
+    std::cout << car.speed() << " " << race_car.speed() << " " << formula_1_car.speed() << '\n'; 
+    std::cout << formula_1_car.developPower() << '\n';
+    std::cout << formula_1_car.developAeroDynamic() << '\n';
+    std::cout << car.speed() << " " << race_car.speed() << " " << formula_1_car.speed() << '\n'; 
 }

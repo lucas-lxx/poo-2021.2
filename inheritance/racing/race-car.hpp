@@ -19,8 +19,8 @@ public:
     virtual int speed() const {
         auto driver = Car::getDriver();
         if (driver == nullptr)
-            return Car::getPower() / Car::getPassengers();
-        return (Car::getPower() / Car::getPassengers()) * driver->getSkill() + aero_dynamic_pressure + getRubness(tyre_compound);
+            return Car::getPower() / Car::getPassengers() + aero_dynamic_pressure + getRubness(tyre_compound);
+        return ((Car::getPower() / Car::getPassengers()) * driver->getSkill()) + aero_dynamic_pressure + getRubness(tyre_compound);
     }
 
     // Returns the aerodynamic pressure of the car

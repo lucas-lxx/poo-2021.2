@@ -81,4 +81,10 @@ public:
         }
         return false;
     }
+
+    friend std::ostream& operator<<(std::ostream& os, const FormulaOne& f1) {
+        const Car& car = f1;
+        os << car;
+        return os;
+    }
 };

@@ -68,7 +68,7 @@ public:
 
     virtual bool developPower() {
         if (developmentSuccess()) {
-            Car::setPower(Car::getPower() + 1);
+            Car::setPower(Car::getPower() + 5);
             return true;
         }
         return false;
@@ -76,7 +76,7 @@ public:
 
     virtual bool developAeroDynamic() {
         if (developmentSuccess()) {
-            RaceCar::setPower(Car::getPower() + 1);
+            RaceCar::setPower(Car::getPower() + 5);
             return true;
         }
         return false;

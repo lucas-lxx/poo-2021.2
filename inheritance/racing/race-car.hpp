@@ -17,7 +17,7 @@ public:
         auto driver = Car::getDriver();
         if (driver == nullptr)
             return Car::getPower() / Car::getPassengers();
-        return (Car::getPower() / Car::getPassengers()) * driver->getSkill();
+        return ((Car::getPower() / Car::getPassengers()) * driver->getSkill()) + aeroDynamicPressure - (getRubness(tyreCompound) * 25);
     }
 
 };

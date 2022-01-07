@@ -39,23 +39,12 @@ public:
     }
 
     virtual void race(const Car& car) {
-        if (this->speed() > car.speed()) {
+        auto difference = this->speed() - car.speed();
+        if (difference > 0) {
             std::cout << "My duck! Quack quack!\n";
             myDucks++;
         } else {
-            std::cout << "Oh snap I got smoked\n";
-        }
-    }
-
-    virtual void isItMax() {
-        if (driver->getName() == "max" || driver->getName() == "Max") {
-            std::cout << "https://www.youtube.com/watch?v=43HCYSXZ9GI&t=104s <- click it!\n";
-        }
-    }
-
-    virtual void isItGlockGoingSlowly() {
-        if (driver->getName() == "hamilton" || driver->getName() == "Hamilton") {
-            std::cout << "https://www.youtube.com/watch?v=RAICZZVoZI8&t=19s <- click it!\n";
+            std::cout << "Oh snap I got smoked by, " << -difference << "\n";
         }
     }
 

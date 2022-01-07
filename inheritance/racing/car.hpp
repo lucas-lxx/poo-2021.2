@@ -43,9 +43,13 @@ public:
     }
 
     virtual void race(const Car& car) {
+        if (this->driver == nullptr || car.driver == nullptr) {
+            std::cout << "Unable to race without both drivers\n";
+            return;
+        }
         auto difference = this->speed() - car.speed();
         if (difference > 0) {
-            std::cout << "My duck! Quack quack!\n";
+            std::cout << "I won!\n";
             myDucks++;
         } else {
             std::cout << "Oh snap I got smoked by, " << -difference << "\n";

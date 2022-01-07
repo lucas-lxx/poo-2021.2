@@ -55,6 +55,7 @@ public:
 
     FormulaOne(Tyre tyre = Tyre::null, Scuderia scuderia = Scuderia::null) :
         RaceCar{scuderiaPower(scuderia), scuderiaAeroDynamic(scuderia), tyre} {
+        Car::setType("F1 car");
     }
 
     virtual bool developmentSuccess() {

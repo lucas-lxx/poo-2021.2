@@ -12,7 +12,7 @@ public:
         age{age}, name{name} {
     }
 
-    std::string getName() const {
+    virtual std::string getName() const {
         return name;
     }
 

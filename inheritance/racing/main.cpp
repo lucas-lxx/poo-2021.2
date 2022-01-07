@@ -1,4 +1,6 @@
 #include <iostream>
+#include <sstream>
+#include <tuple>
 #include "car.hpp"
 #include "tyres.hpp"
 #include "driver.hpp"
@@ -6,9 +8,6 @@
 #include "formula-1-car.hpp"
 
 int main() {
-    // Car car;
-    // car.isItMax();
-    // car.isItGlockGoingSlowly();
     std::shared_ptr<Driver> max = std::make_shared<Driver>("Max", 24, 99);
     std::cout << (*max) << '\n';
 

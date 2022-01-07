@@ -9,7 +9,6 @@ private:
     std::shared_ptr<Driver> driver{nullptr};
     int passengers{4};
     int power{150};
-    int myDucks{0};
     
 public:
     ///////////////////////////////////////////////////////////////////////////
@@ -36,6 +35,15 @@ public:
         return false;
     }
 
+    virtual bool removeDriver() {
+        if (this->driver != nullptr) {
+            this->driver->setDriving(false);
+            this->driver = nullptr;
+            return true;
+        }
+        return false;
+    }
+
     virtual int speed() const {
         if (driver == nullptr)
             return power / passengers;
@@ -47,12 +55,13 @@ public:
             std::cout << "Unable to race without both drivers\n";
             return;
         }
+        std::cout << *this->driver << " and " << *car.getDriver() << " are racing\n";
+
         auto difference = this->speed() - car.speed();
         if (difference > 0) {
-            std::cout << "I won!\n";
-            myDucks++;
+            std::cout << (*this->driver).getName() << " won!\n";
         } else {
-            std::cout << "Oh snap I got smoked by, " << -difference << "\n";
+            std:: cout << (*car.getDriver()).getName() << " won!\n";
         }
     }
 
@@ -62,10 +71,6 @@ public:
 
     virtual std::shared_ptr<Driver> getDriver() const {
         return driver;
-    }
-
-    virtual int getMyDucks() const {
-        return myDucks;
     }
 
     virtual int getPower() const {
@@ -83,10 +88,6 @@ public:
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
-
-    virtual void setMyDuck(int ducks) {
-        this->myDucks = ducks;
-    }
 
     virtual void setType(std::string new_type) {
         this->type = new_type;

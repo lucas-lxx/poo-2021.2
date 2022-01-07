@@ -23,6 +23,16 @@ public:
         return (Car::getPower() / Car::getPassengers()) * driver->getSkill() + aero_dynamic_pressure + getRubness(tyre_compound);
     }
 
+    // Returns the aerodynamic pressure of the car
+    virtual int getAeroDynamicPressure() const {
+        return aero_dynamic_pressure;
+    }
+
+    // Set the Aero dynamic pressure of the car
+    virtual void setAeroDynamicPressure(int aero_dynamic_pressure) {
+        this->aero_dynamic_pressure = aero_dynamic_pressure;
+    }
+
     friend std::ostream& operator<<(std::ostream& os, RaceCar race_car) {
         const Car& car = race_car;
         os << car;

@@ -57,4 +57,27 @@ public:
         RaceCar{scuderiaPower(scuderia), scuderiaAeroDynamic(scuderia), tyre} {
     }
 
+    virtual bool developmentSuccess() {
+        srand(time(0));
+        if (rand() % 2 == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    virtual bool developPower() {
+        if (developmentSuccess()) {
+            Car::setPower(Car::getPower() + 1);
+            return true;
+        }
+        return false;
+    }
+
+    virtual bool developAeroDynamic() {
+        if (developmentSuccess()) {
+            RaceCar::setPower(Car::getPower() + 1);
+            return true;
+        }
+        return false;
+    }
 };

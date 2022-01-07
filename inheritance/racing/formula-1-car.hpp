@@ -28,6 +28,7 @@ int scuderiaPower(Scuderia scuderia = Scuderia::null) {
         case (Scuderia::williams):
             return 800;
     }
+    return -1;
 }
 
 int scuderiaAeroDynamic(Scuderia scuderia = Scuderia::null) {
@@ -45,25 +46,43 @@ int scuderiaAeroDynamic(Scuderia scuderia = Scuderia::null) {
         case (Scuderia::williams):
             return 80;
     }
+    return -1;
+}
+
+std::string scuderiaName(Scuderia scuderia = Scuderia::mclaren) {
+    if (scuderia == Scuderia::null)
+        return "Null";
+    if (scuderia == Scuderia::ferrari)
+        return "Ferrari";
+    if (scuderia == Scuderia::mercedes)
+        return "Mercedes";
+    if (scuderia == Scuderia::red_bull)
+        return "Red Bull";
+    if (scuderia == Scuderia::mclaren)
+        return "McLaren";
+    if (scuderia == Scuderia::williams) 
+        return "Williams";
+    return "";
 }
 
 class FormulaOne : public RaceCar {
 private:
-    Scuderia scuderia{Scuderia::null};
+    Scuderia scuderia{};
 
-public:
-
-    FormulaOne(Tyre tyre = Tyre::null, Scuderia scuderia = Scuderia::null) :
-        RaceCar{scuderiaPower(scuderia), scuderiaAeroDynamic(scuderia), tyre} {
-        Car::setType("F1 car");
-    }
-
+    // Returns the success probability of the car
     virtual bool developmentSuccess() {
         srand(time(0));
         if (rand() % 2 == 0) {
             return true;
         }
         return false;
+    }
+public:
+
+    FormulaOne(Tyre tyre = Tyre::null, Scuderia scuderia = Scuderia::null) :
+        RaceCar{scuderiaPower(scuderia), scuderiaAeroDynamic(scuderia), tyre}, scuderia{scuderia} {
+        Car::setType("F1 car");
+        std::cout << scuderiaName(scuderia) << '\n';
     }
 
     virtual bool developPower() {
@@ -82,9 +101,13 @@ public:
         return false;
     }
 
-    friend std::ostream& operator<<(std::ostream& os, const FormulaOne& f1) {
+    virtual std::string getScuderia() {
+        return scuderiaName(this->scuderia);
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, FormulaOne& f1) {
         const Car& car = f1;
-        os << car;
+        os << car << ", Scuderia: " << f1.getScuderia();
         return os;
     }
 };

@@ -26,8 +26,12 @@ public:
 
     virtual bool addDriver(std::shared_ptr<Driver> driver) {
         if (this->driver == nullptr) {
-            this->driver = driver;
-            return true;
+            if (!driver->isDriving()) {
+                this->driver = driver;
+                this->driver->setDriving(true);
+                return true;
+            }
+            return false;
         }
         return false;
     }
@@ -93,7 +97,7 @@ public:
     ///////////////////////////////////////////////////////////////////////////
 
     friend std::ostream& operator<<(std::ostream& os, const Car& car) {
-        os << car.type << " power: " << car.power << ", Driver: " << car.driver->getName();
+        os << car.type << " power: " << car.power << ", Driver: " << (car.driver != nullptr ? car.driver->getName() : "None");
         return os;
     }
 };

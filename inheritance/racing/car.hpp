@@ -28,10 +28,13 @@ public:
             if (!driver->isDriving()) {
                 this->driver = driver;
                 this->driver->setDriving(true);
+                std::cout << driver->getName() << " got to " << this->type << " successfully" << std::endl;
                 return true;
             }
+            std::cout << driver->getName() << " is already driving!" << std::endl;
             return false;
         }
+        std::cout << "Car already has a driver!" << std::endl;
         return false;
     }
 
@@ -55,8 +58,8 @@ public:
             std::cout << "Unable to race without both drivers\n";
             return;
         }
-        std::cout << *this->driver << " and " << *car.getDriver() << " are racing\n";
-
+        std::cout << this->driver->getName() << " challenged " << car.getDriver()->getName() << " for a race\n";
+        std::cout << this->driver->getName() << " driving a " << this->type << " and " << car.driver->getName() << " driving a " << car.getType() << '\n';
         auto difference = this->speed() - car.speed();
         if (difference > 0) {
             std::cout << (*this->driver).getName() << " won!\n";

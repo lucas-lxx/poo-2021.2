@@ -12,7 +12,7 @@ public:
     // Driver, Aero dynamic pressure and tyre compound are to be initialized
     RaceCar(int power, int aero_dynamic_pressure = 0, Tyre tyre = Tyre::null):
         Car{1, power}, aero_dynamic_pressure{aero_dynamic_pressure}, tyre_compound{tyre} {
-        Car::setType("Race car");
+        Car::setType("LMP1");
     }
 
     // Returns the speed of the car

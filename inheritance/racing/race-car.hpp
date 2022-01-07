@@ -5,19 +5,27 @@
 
 class RaceCar : public Car {
 private:
-    int aeroDynamicPressure{0};
-    Tyre tyreCompound{Tyre::null};
-    bool turbo{true};
+    int aero_dynamic_pressure{0};
+    Tyre tyre_compound{Tyre::null};
 public:
-    RaceCar(int aeroDynamicPressure = 0, Tyre tyre = Tyre::null, bool turbo=true, std::shared_ptr<Driver> driver = nullptr, int passengers = 1, int power = 600):
-        Car{driver, passengers, power}, aeroDynamicPressure{aeroDynamicPressure}, tyreCompound{tyre}, turbo{turbo} {
+
+    // Driver, Aero dynamic pressure and tyre compound are to be initialized
+    RaceCar(int power, int aero_dynamic_pressure = 0, Tyre tyre = Tyre::null):
+        Car{1, power}, aero_dynamic_pressure{aero_dynamic_pressure}, tyre_compound{tyre} {
+        Car::setType("Race car");
     }
 
+    // Returns the speed of the car
     virtual int speed() const {
         auto driver = Car::getDriver();
         if (driver == nullptr)
             return Car::getPower() / Car::getPassengers();
-        return (Car::getPower() / Car::getPassengers()) * driver->getSkill() + aeroDynamicPressure + getRubness(tyreCompound);
+        return (Car::getPower() / Car::getPassengers()) * driver->getSkill() + aero_dynamic_pressure + getRubness(tyre_compound);
     }
 
+    friend std::ostream& operator<<(std::ostream& os, RaceCar race_car) {
+        const Car& car = race_car;
+        os << car;
+        return os;
+    }
 };

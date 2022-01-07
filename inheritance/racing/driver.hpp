@@ -26,7 +26,7 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const Driver& driver) {
         const Person& person = driver;
-        os << "Driver: " << person.getName() << " skill: " << driver.driverSkill;
+        os << person.getName() << ", skill: " << driver.driverSkill;
         return os;
     }
 };

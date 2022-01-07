@@ -27,12 +27,19 @@ int getRubness(const Tyre& tyre) {
     switch (tyre) {
         case (Tyre::null):
             rubness = -100;
+            break;
         case (Tyre::soft):
             rubness = 100;
+            break;
         case (Tyre::medium):
             rubness = 75;
+            break;
         case (Tyre::hard):
             rubness = 50;
+            break;
+        default:
+            rubness = 0;
+            break;
     }
     return rubness;
 }

@@ -7,17 +7,25 @@ class Car {
 private:
     std::shared_ptr<Driver> driver{nullptr};
     int passengers{4};
-    int power{100};
-    int myDuck{0};
+    int power{150};
+    int myDucks{0};
     
 public:
-    Car(std::shared_ptr<Driver> driver = nullptr, int passengers = 4, int power = 100) :
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    Car(std::shared_ptr<Driver> driver = nullptr, int passengers = 4, int power = 150) :
         driver{driver}, passengers{passengers}, power{power} {
     }
 
     virtual ~Car() {
         std::cout << "The car got to the junkyard\n";
     }
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
 
     virtual int speed() const {
         if (driver == nullptr)
@@ -28,18 +36,10 @@ public:
     virtual void race(const Car& car) {
         if (this->speed() > car.speed()) {
             std::cout << "My duck! Quaqua\n";
-            myDuck++;
+            myDucks++;
         } else {
             std::cout << "Oh snap I got smoked\n";
         }
-    }
-
-    virtual int& getMyDucks() {
-        return myDuck;
-    }
-
-    virtual void setMyDuck(int ducks) {
-        this->myDuck = ducks;
     }
 
     virtual void isItMax() {
@@ -48,6 +48,43 @@ public:
 
     virtual void isItGlockGoingSlowly() {
         std::cout << "https://www.youtube.com/watch?v=RAICZZVoZI8&t=19s <- click it!\n";
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    virtual std::shared_ptr<Driver> getDriver() const {
+        return driver;
+    }
+
+    virtual int getMyDucks() const {
+        return myDucks;
+    }
+
+    virtual int getPower() const {
+        return power;
+    }
+
+    virtual int getPassengers() const {
+        return passengers;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    virtual void setMyDuck(int ducks) {
+        this->myDucks = ducks;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    friend std::ostream& operator<<(std::ostream& os, const Car& car) {
+        os << "Car: " << car.power << " duck counter: " << car.myDucks;
+        return os;
     }
 };
 

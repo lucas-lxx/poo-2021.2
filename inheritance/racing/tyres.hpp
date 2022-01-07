@@ -5,9 +5,7 @@ enum class Tyre {
     null,
     soft,
     medium,
-    hard,
-    softRain,
-    heavyRain
+    hard
 };
 
 std::ostream& operator<<(std::ostream& os, const Tyre& tyre) {
@@ -20,10 +18,21 @@ std::ostream& operator<<(std::ostream& os, const Tyre& tyre) {
             return os << "Medium tyres";
         case (Tyre::hard):
             return os << "Hard tyres";
-        case (Tyre::softRain):
-            return os << "Soft rain tyres";
-        case (Tyre::heavyRain):
-            return os << "Heavy rain tyres";
     }
     return os;
+}
+
+int getRubness(const Tyre& tyre) {
+    int rubness{0};
+    switch (tyre) {
+        case (Tyre::null):
+            rubness = -100;
+        case (Tyre::soft):
+            rubness = 100;
+        case (Tyre::medium):
+            rubness = 75;
+        case (Tyre::hard):
+            rubness = 50;
+    }
+    return rubness;
 }

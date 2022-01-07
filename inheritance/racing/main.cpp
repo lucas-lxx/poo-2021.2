@@ -11,10 +11,12 @@ int main() {
     std::shared_ptr<Driver> max = std::make_shared<Driver>("Max", 24, 99);
     std::cout << (*max) << '\n';
 
-    Car car(max, 4, 100);
+    Car car(4, 100);
+    car.addDriver(max);
     std::cout << "car " << car.speed() << '\n';
 
-    RaceCar racerCar(10, Tyre::medium, true, max);
-
-    std::cout << "racecar " << racerCar.speed() << '\n';
+    RaceCar race_car(450, 10, Tyre::medium);
+    race_car.addDriver(max);
+    std::cout << car << '\n';
+    std::cout << race_car << '\n';
 }

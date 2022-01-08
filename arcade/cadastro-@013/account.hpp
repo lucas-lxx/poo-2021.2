@@ -30,7 +30,11 @@ public:
     ///////////////////////////////////////////////////////////////////////////
 
     virtual void deposit(float amount) {
-        this->balance += amount;
+        if (amount > 0) {
+            this->balance += amount;
+        } else {
+            throw std::runtime_error("fail: invalid amount");
+        }
     }
 
     virtual void transfer(Account* other_account, float amount = 0) {

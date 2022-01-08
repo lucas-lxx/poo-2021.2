@@ -41,16 +41,28 @@ public:
     ///////////////Methods/////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
-    virtual void deposit(float value) {
-        this->balance += value;
+    virtual void deposit(float amount) {
+        this->balance += amount;
     }
 
-    virtual void transfer(Account* other_account, float value = 0) {
+    virtual void transfer(Account* other_account, float amount = 0) {
         if (other_account != nullptr) {
-            other_account->balance += value;
-            this->balance -= value;
+            other_account->balance += amount;
+            this->balance -= amount;
         } else {
-            throw std::runtime_error("Account does not exists");
+            throw std::runtime_error("fail: account not found");
+        }
+    }
+
+    virtual void withdraw(float amount = 0) {
+        if (amount > 0) {
+            if (amount <= this->balance) {
+                this->balance -= amount;
+            } else {
+                throw std::runtime_error("fail: insuficient funds");
+            }
+        } else {
+            throw std::runtime_error("fail: invalid amount");
         }
     }
 

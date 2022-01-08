@@ -67,8 +67,8 @@ public:
     }
 
     void transfer(int accountFromId, int accountToId, float amount) {
-        auto accountFrom = accounts.find(accountFromId);
-        accountFrom->second->transfer(accounts.find(accountToId)->second, amount);
+        auto accountFrom = accounts.find(accountFromId)->second;
+        accountFrom->transfer(accounts.find(accountToId)->second, amount);
     }
 
     void withdraw(int accountId, float amount) {

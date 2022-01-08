@@ -3,6 +3,7 @@
 #include <map>
 #include <unordered_map>
 #include <exception>
+#include <vector>
 #include "account.hpp"
 
 
@@ -13,6 +14,10 @@ private:
     std::string customerId{""};
 
 public:
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////Constructors////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
     Customer(std::string customerId = ""): 
         customerId{customerId} {
     }
@@ -23,9 +28,52 @@ public:
         }
     }
 
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////Methods/////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
     void addAccount(Account* account) {
-        this->accounts[account->getId()] = account;
+        if (account != nullptr) {
+            int idCheck = account->getId();
+            if (this->accounts.find(idCheck) != accounts.end()) {
+                this->accounts[account->getId()] = account;
+            } else {
+                throw std::runtime_error("fail: there is already an account with this id");
+            }
+        } else {
+            throw std::runtime_error("fail: invalid account");
+        }
     }
+
+    void addAccount(std::vector<Account*> accounts) {
+        for (auto& account : accounts) {
+            addAccount(account);
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////Get/Set Methods/////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
+
+    std::string getCustomerId() {
+        return this->customerId;
+    }
+
+    std::map<int, Account*> getAccounts() {
+        return this->accounts;
+    }
+
+    void setCustomerId(std::string customerId) {
+        this->customerId = customerId;
+    }
+
+    void setAccounts(std::map<int, Account*> accounts) {
+        this->accounts = accounts;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    ///////////////PrintMethods////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////
 
     friend std::ostream& operator<<(std::ostream& os, const Customer& customer) {
         os << "- " << customer.customerId << '[';

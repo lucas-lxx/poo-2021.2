@@ -35,7 +35,7 @@ public:
     void addAccount(Account* account) {
         if (account != nullptr) {
             int idCheck = account->getId();
-            if (this->accounts.find(idCheck) != accounts.end()) {
+            if (this->accounts.find(idCheck) == accounts.end()) {
                 this->accounts[account->getId()] = account;
             } else {
                 throw std::runtime_error("fail: there is already an account with this id");

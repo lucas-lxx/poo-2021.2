@@ -80,4 +80,16 @@ public:
     ///////////////PrintMethods////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
 
+    friend std::ostream& operator<<(std::ostream& os, const BankAgency& bank) {
+        os << "Customers:\n";
+        for (auto& it : bank.customers) {
+            os << *it.second << '\n';
+        }
+        os << "Accounts:\n";
+        for (auto& it : bank.accounts) {
+            os << it.second << '\n';
+        }
+        return os;
+    }
+
 };

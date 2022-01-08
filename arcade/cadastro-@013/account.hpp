@@ -4,21 +4,21 @@
 #include <unordered_map>
 #include <exception>
 
-// class Customer {
-// private:
-//     std::map<std::string, Account> accounts;
-//     std::string customerId{""};
+class Customer {
+private:
+    std::map<std::string, Account> accounts;
+    std::string customerId{""};
 
-// public:
-//     Customer(std::string customerId = ""): 
-//         customerId{customerId} {
-//     }
+public:
+    Customer(std::string customerId = ""): 
+        customerId{customerId} {
+    }
 
-//     void addAccount(Account* account) {
-//         // accounts[account->getAccountId()] = account;
-//     }
+    void addAccount(Account* account) {
+        // accounts[account->getAccountId()] = account;
+    }
 
-// };
+};
 
 class Account {
 private:

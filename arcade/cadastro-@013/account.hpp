@@ -1,6 +1,10 @@
 #pragma once
 #include <iostream>
-#include "customer.hpp"
+#include <map>
+
+class Customer {
+
+};
 
 class Account {
 

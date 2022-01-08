@@ -3,22 +3,7 @@
 #include <map>
 #include <unordered_map>
 #include <exception>
-
-class Customer {
-private:
-    std::map<std::string, Account> accounts;
-    std::string customerId{""};
-
-public:
-    Customer(std::string customerId = ""): 
-        customerId{customerId} {
-    }
-
-    void addAccount(Account* account) {
-        // accounts[account->getAccountId()] = account;
-    }
-
-};
+#include <iomanip>
 
 class Account {
 private:
@@ -26,7 +11,7 @@ private:
     std::string customerId{""};
 protected:
     std::string type{""};
-    float balance{0.0f};
+    float balance{00.00f};
 
 public:
     ///////////////////////////////////////////////////////////////////////////
@@ -99,7 +84,7 @@ public:
     ///////////////PrintMethods////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
     friend std::ostream& operator<<(std::ostream& os, const Account& account) {
-        os << account.id << ":" << account.customerId << ":" << account.balance << ":" << account.type;
+        os << account.id << ":" << account.customerId << ":" << std::fixed << std::setprecision(2) << account.balance << ":" << account.type;
         return os;
     }
 };

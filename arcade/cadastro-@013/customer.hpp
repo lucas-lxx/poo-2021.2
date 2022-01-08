@@ -5,6 +5,8 @@
 #include <exception>
 #include "account.hpp"
 
+
+
 class Customer {
 private:
     std::map<int, Account*> accounts;
@@ -16,13 +18,27 @@ public:
     }
 
     ~Customer() {
-        for (auto& account : accounts) {
+        for (auto& account : this->accounts) {
             delete account.second;
         }
     }
 
     void addAccount(Account* account) {
-        this->accounts[account.getId()] = account;
+        this->accounts[account->getId()] = account;
     }
 
+    friend std::ostream& operator<<(std::ostream& os, const Customer& customer) {
+        os << "- " << customer.customerId << '[';
+        int count { 0 };
+        for (auto& account : customer.accounts) {
+            if (((int)customer.accounts.size() -1) == count) {
+                os << account.second->getId();
+                break;
+            }
+            os << account.second->getId() << ", ";
+            count++;
+        }
+        os << ']';
+        return os;
+    }
 };

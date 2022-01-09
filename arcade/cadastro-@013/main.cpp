@@ -1,48 +1,34 @@
 #include <iostream>
+#include <exception>
+#include <sstream>
 #include "account.hpp"
 #include "customer.hpp"
 #include "bank-agency.hpp"
 
-// Prints two accounts to the terminal
-// void showAccounts(Account& savings_account, Account& checking_account) {
-//     std::cout << "savings: " << savings_account << "\nchecking: " << checking_account << '\n';
-// }
+template <typename T>
+T read(stringstream& ss) {
+    T t;
+    ss >> t;
+    return t;
+}
+
+template <typename... Args>
+auto parse(istream& is) {
+    tuple<Args...> t;
+    apply([&is](auto&&... args) {((is >> args), ...);}, t);
+    return t;
+}
 
 int main() {
-    // // SavingsAccount savings_account{0, "Lucas"};
-    // // CheckingAccount checking_account{1, "Lucas"};
-
-    // // showAccounts(savings_account, checking_account);
-    // // savings_account.monthlyUpdate();
-    // // checking_account.monthlyUpdate();
-    // // std::cout << "-----\n";
-    // // showAccounts(savings_account, checking_account);
-    // Customer lucas;
-    // std::cout << lucas << '\n';
-
     BankAgency bank;
-    bank.addCustomer("Lucas");
-    std::cout << bank;
-    std::cout << "=====\n";
-    bank.deposit(0, 100);
-    bank.deposit(1, 100);
-    std::cout << bank;
-    std::cout << "=====\n";
-    bank.monthlyUpdate();
-    std::cout << bank;
-    std::cout << "=====\n";
-    bank.addCustomer("Leh");
-    bank.addCustomer("Joao");
-    std::cout << bank;
-    std::cout << "=====\n";
-    bank.deposit(2, 50.3);
-    bank.deposit(3, 23.44);
-    bank.deposit(4, 409.33);
-    bank.deposit(5, 2333.9);
-    std::cout << bank;
-    std::cout << "=====\n";
-    bank.monthlyUpdate();
-    std::cout << bank;
-    std::cout << "=====\n";
-    
+    while (true) {
+        try {
+            std::string line{}, cmd{};
+            std::getline(std::cin >> std::ws, line);
+            std::stringstream ss{line};
+            ss >> cmd;
+        } catch (std::runtime_error& e) {
+            std::cout << e.what() << '\n';
+        }
+    }
 }

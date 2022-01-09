@@ -20,9 +20,13 @@ private:
 
     void addDefaulAccounts(Customer* customer) {
         if (customer != nullptr) {
-            customer->addAccount(new CheckingAccount(this->nextAccountId, customer->getCustomerId()));
+            auto ca = new CheckingAccount(this->nextAccountId, customer->getCustomerId());
+            customer->addAccount(ca);
+            this->accounts.insert({this->nextAccountId, ca});
             this->nextAccountId++;
-            customer->addAccount(new SavingsAccount(this->nextAccountId, customer->getCustomerId()));
+            auto sa = new SavingsAccount(this->nextAccountId, customer->getCustomerId());
+            customer->addAccount(sa);
+            this->accounts.insert({this->nextAccountId, sa});
             this->nextAccountId++;
         } else {
             throw std::runtime_error("addDefaulAccounts invalid Customer");
@@ -56,8 +60,12 @@ public:
     }
 
     void deposit(int idAccount, float amount) {
-        auto receiver_account = accounts.find(idAccount);
-        receiver_account->second->deposit(amount);
+        if (accounts.find(idAccount) != accounts.end()) {
+            auto receiver_account = accounts.find(idAccount);
+            receiver_account->second->deposit(amount);
+        } else {
+            throw std::runtime_error("fail: account not found");
+        }
     }
 
     void monthlyUpdate() {
@@ -67,13 +75,25 @@ public:
     }
 
     void transfer(int accountFromId, int accountToId, float amount) {
-        auto accountFrom = accounts.find(accountFromId)->second;
-        accountFrom->transfer(accounts.find(accountToId)->second, amount);
+        if (accounts.find(accountFromId) != accounts.end()) {
+            if (accounts.find(accountToId) != accounts.end()) {
+                auto accountFrom = accounts.find(accountFromId)->second;
+                accountFrom->transfer(accounts.find(accountToId)->second, amount);
+            } else {
+                throw std::runtime_error("fail: destination account not found");
+            }
+        } else {
+            throw std::runtime_error("fail: source account not found");
+        }
     }
 
     void withdraw(int accountId, float amount) {
-        auto account = accounts.find(accountId)->second;
-        account->withdraw(amount);
+        if (accounts.find(accountId) != accounts.end()) {
+            auto account = accounts.find(accountId)->second;
+            account->withdraw(amount);
+        } else {
+            throw std::runtime_error("fail: account not found");
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -87,7 +107,7 @@ public:
         }
         os << "Accounts:\n";
         for (auto& it : bank.accounts) {
-            os << it.second << '\n';
+            os << *it.second << '\n';
         }
         return os;
     }

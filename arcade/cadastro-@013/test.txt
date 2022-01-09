@@ -1,0 +1,21 @@
+show
+add Almir
+add Julia
+add Maria
+show
+deposit 0 100
+deposit 1 200
+deposit 2 50
+deposit 3 300
+withdraw 3 50
+withdraw 0 70
+withdraw 1 300
+show
+transfer 3 5 200
+transfer 0 4 25
+transfer 9 1 30
+transfer 2 8 10
+show
+update
+show
+end

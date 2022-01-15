@@ -17,9 +17,28 @@ public:
     }
 
     void like(std::string username) {
-        if (likes.find(username) == likes.end())
+        if (likes.find(username) == likes.end()) {
             likes.insert(username);
-        throw std::runtime_error("fail: already liked");
+            return;
+        }
+        throw std::runtime_error("fail: user " + username + " already liked");
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, Tweet tweet) {
+        os << tweet.id << ":" << tweet.username << " (" << tweet.msg << ")" << " [";
+        int len = tweet.likes.size();
+        // std::cout << len << '\n';
+        int count = 1;
+        for (auto& user_liked : tweet.likes) {
+            if (count >= len) {
+                os << user_liked;
+                break;
+            }
+            os << user_liked << ", ";
+            count++;
+        }
+        os  << "]";
+        return os;
     }
 
 };

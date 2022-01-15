@@ -16,4 +16,10 @@ public:
         id{id}, username{username}, msg{msg} {
     }
 
+    void like(std::string username) {
+        if (likes.find(username) == likes.end())
+            likes.insert(username);
+        throw std::runtime_error("fail: already liked");
+    }
+
 };

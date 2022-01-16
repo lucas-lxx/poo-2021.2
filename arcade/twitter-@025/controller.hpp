@@ -33,8 +33,9 @@ public:
         if (it == users.end()) 
             throw std::runtime_error("fail: user not found");
         auto tweet = std::make_shared<Tweet>(next_tweet_id, username, tweet_text);
-        next_tweet_id++;
+        tweets.insert({next_tweet_id, tweet});
         it->second->store_tweet(tweet);
+        next_tweet_id++;
     }
 
     std::shared_ptr<User> get_user(std::string username) {
@@ -44,4 +45,7 @@ public:
         return found->second;
     }
     
+    // friend std::ostream& operator<<(std::ostream& os, Controller controller) {
+    //     for (auto i : )
+    // }
 };

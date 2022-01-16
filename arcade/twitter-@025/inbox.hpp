@@ -1,26 +1,41 @@
 #pragma once 
 #include <iostream>
 #include <map>
-#include <sstream>
+#include <vector>
 #include "tweet.hpp"
+#include "../../cpp-functional/auxiliar.hpp"
 
 class Inbox {
 private:
-    std::map<int, Tweet> all_tweets;
-    std::map<int, Tweet*> unread;
+    std::vector<Tweet> all_tweets;
+    int first_unread;
+    bool read;
 
 public:
-    Inbox() {}
+    Inbox() {
+        this->first_unread = 0;
+        this->read = false;
+    }
 
-    std::map<int, Tweet> get_all() {
+    std::vector<Tweet> get_all() {
         return this->all_tweets;
     }
 
     Tweet get_tweet(int id) {
-        return all_tweets.find(id)->second;
+        return all_tweets[id].getId();
     }
 
-    std::map<int, Tweet*> get_unread() {
-        return unread;
+    std::vector<Tweet> get_unread() {
+        static std::vector<Tweet> unreaded_tweets;
+        if (!read) {
+            unreaded_tweets.clear();
+            aux::slice(all_tweets, first_unread);
+            first_unread = all_tweets.size();
+        }
+        return unreaded_tweets;
+    }
+
+    void new_tweet(Tweet tweet) {
+
     }
 };

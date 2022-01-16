@@ -24,6 +24,10 @@ public:
         throw std::runtime_error("fail: user " + username + " already liked");
     }
 
+    int getId() {
+        return this->id;
+    }
+
     friend std::ostream& operator<<(std::ostream& os, Tweet tweet) {
         os << tweet.id << ":" << tweet.username << " (" << tweet.msg << ")" << " [";
         int len = tweet.likes.size();

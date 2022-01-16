@@ -17,6 +17,16 @@ public:
         this->nextTweetld = 0;
     }
 
+    void add_user(std::string username) {
+        auto user = std::make_shared<User>(username);
+        auto it = users.find(username);
+        if (it == users.end()) {
+            users.insert({username, user});
+            return;
+        }
+        throw std::runtime_error("fail: username unavailable");
+    }
+
     std::shared_ptr<User> get_user(std::string username) {
         auto found { users.find(username) };
         if (found == users.end())

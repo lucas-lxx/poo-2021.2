@@ -1,5 +1,6 @@
 #include <iostream>
 #include "tweet.hpp"
+#include "inbox.hpp"
 
 int main() {
     Tweet tweet(0, "Lucas", "Hello!");
@@ -14,4 +15,6 @@ int main() {
     std::cout << tweet << '\n';
     tweet.like("Norma");
     std::cout << tweet << '\n';
+    Inbox inbox;
+    std::cout << inbox;
 }

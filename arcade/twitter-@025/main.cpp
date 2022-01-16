@@ -33,5 +33,8 @@ int main() {
     user->follow(user2);
     user->follow(user3);
     user->follow(user4);
-    std::cout << *user;
+    // std::cout << *user;
+    user->unfollow("Leh");
+    // std::cout << *user;
+    std::cout << (*user->get_inbox()) << '\n';
 }

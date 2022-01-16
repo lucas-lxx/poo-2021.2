@@ -12,13 +12,23 @@ private:
     std::map<int, std::shared_ptr<Tweet>> all_tweets;
     std::map<int, std::shared_ptr<Tweet>> unread;
 
+    std::vector<Tweet> to_vector(auto all_tweets) {
+        std::vector<Tweet> vec;
+        for (auto i : all_tweets) {
+            vec.push_back(*i.second);
+        }
+        return vec;
+    }
+
 public:
     Inbox() {}
 
-    std::map<int, std::shared_ptr<Tweet>> get_all() {
-        return this->all_tweets;
+    // retunrs all the tweets on the inbox
+    std::vector<Tweet> get_all() {
+        return to_vector(this->all_tweets);
     }
 
+    // returns a tweet by it's id adressed on the map
     std::shared_ptr<Tweet> get_tweet(int id) {
         auto it = all_tweets.find(id);
         if (it != all_tweets.end()) {
@@ -27,15 +37,14 @@ public:
         throw std::runtime_error("fail: tweet not found!");
     }
 
+    // returns a vector of the unread tweets
     std::vector<Tweet> get_unread() {
-        std::vector<Tweet> unread_copy;
-        for (auto i : this->unread) {
-            unread_copy.push_back(*i.second);
-        }
+        std::vector<Tweet> unread_copy = to_vector(this->unread);
         unread.clear();
         return unread_copy;
     }
 
+    // adds a new tweet to the inbox
     void new_tweet(std::shared_ptr<Tweet> tweet) {
         if (all_tweets.find(tweet->getId()) == all_tweets.end()) {
             all_tweets.insert({tweet->getId(), tweet});

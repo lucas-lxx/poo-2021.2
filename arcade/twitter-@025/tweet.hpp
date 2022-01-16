@@ -31,7 +31,6 @@ public:
     friend std::ostream& operator<<(std::ostream& os, Tweet tweet) {
         os << tweet.id << ":" << tweet.username << " (" << tweet.msg << ")" << " [";
         int len = tweet.likes.size();
-        // std::cout << len << '\n';
         int count = 1;
         for (auto& user_liked : tweet.likes) {
             if (count >= len) {

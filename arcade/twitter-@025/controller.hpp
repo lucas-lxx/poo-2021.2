@@ -45,7 +45,10 @@ public:
         return found->second;
     }
     
-    // friend std::ostream& operator<<(std::ostream& os, Controller controller) {
-    //     for (auto i : )
-    // }
+    friend std::ostream& operator<<(std::ostream& os, Controller controller) {
+        for (auto it : controller.users) {
+            os << it.second;
+        }
+        return os;
+    }
 };

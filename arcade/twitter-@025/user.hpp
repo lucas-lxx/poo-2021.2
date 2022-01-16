@@ -33,6 +33,7 @@ public:
         auto it = following.find(username);
         if (it != following.end()) {
             following.erase(it);
+            return;
         }
         throw std::runtime_error("fail: user not found");
     }

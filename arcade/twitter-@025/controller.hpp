@@ -28,6 +28,14 @@ public:
     }
 
     std::shared_ptr<User> get_user(std::string username) {
+        auto it = users.find(username);
+        if (it != users.end()) {
+            return it->second;
+        }
+        throw std::runtime_error("fail: user not found");
+    }
+
+    std::shared_ptr<User> get_user(std::string username) {
         auto found { users.find(username) };
         if (found == users.end())
             throw std::runtime_error("fail: user not found");

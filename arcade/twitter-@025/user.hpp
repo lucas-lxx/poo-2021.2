@@ -11,6 +11,13 @@ private:
     std::shared_ptr<Inbox> inbox;
     std::string username;
 
+    // adds tweet to the followers inboxes
+    void store_tweet_followers(std::shared_ptr<Tweet> tweet) {
+        for (auto it : followers) {
+            it.second->get_inbox()->new_tweet(tweet);
+        }
+    }
+
 public:
 
     User(std::string username = ""): 
@@ -47,7 +54,7 @@ public:
     }
 
     void store_tweet(std::shared_ptr<Tweet> tweet) {
-        this->inbox->new_tweet(tweet);
+        store_tweet_followers(tweet);
     }
 
     friend std::ostream& operator<<(std::ostream& os, User user) {

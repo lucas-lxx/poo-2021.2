@@ -18,16 +18,6 @@ public:
         this->inbox = nullptr;
     }
 
-    ~User() {
-        delete inbox;
-        for (auto i : followers) {
-            delete i.second;
-        }
-        for (auto i : following) {
-            delete i.second;
-        }
-    }
-
     void follow(User& other) {
         if (other.followers.find(username) == other.followers.end()) {
             other.followers[username] = this;

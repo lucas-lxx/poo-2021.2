@@ -15,7 +15,7 @@ public:
 
     User(std::string username = ""): 
         username{username} {
-        this->inbox = nullptr;
+        this->inbox = std::make_shared<Inbox>();
     }
 
     
@@ -46,7 +46,7 @@ public:
         inbox->get_tweet(tweet_id)->like(this->username);
     }
 
-    void send_tweet(std::shared_ptr<Tweet> tweet) {
+    void store_tweet(std::shared_ptr<Tweet> tweet) {
         this->inbox->new_tweet(tweet);
     }
 

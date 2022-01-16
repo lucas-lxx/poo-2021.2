@@ -27,12 +27,8 @@ public:
         throw std::runtime_error("fail: username unavailable");
     }
 
-    std::shared_ptr<User> get_user(std::string username) {
-        auto it = users.find(username);
-        if (it != users.end()) {
-            return it->second;
-        }
-        throw std::runtime_error("fail: user not found");
+    void send_tweet(std::string username, std::string tweet_text) {
+
     }
 
     std::shared_ptr<User> get_user(std::string username) {

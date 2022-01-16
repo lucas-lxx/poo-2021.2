@@ -36,6 +36,13 @@ public:
     }
 
     void new_tweet(Tweet tweet) {
+        (void) tweet;
+    }
 
+    friend std::ostream& operator<<(std::ostream& os, Inbox inbox) {
+        for (auto i : inbox.get_unread()) {
+            os << i << '\n';
+        }
+        return os;
     }
 };

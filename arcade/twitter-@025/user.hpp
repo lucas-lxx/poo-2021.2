@@ -29,6 +29,14 @@ public:
         throw std::runtime_error("fail: user not found");
     }
 
+    void unfollow(std::string username) {
+        auto it = following.find(username);
+        if (it != following.end()) {
+            following.erase(it);
+        }
+        throw std::runtime_error("fail: user not found");
+    }
+
     std::shared_ptr<Inbox> get_inbox() {
         return this->inbox;
     }

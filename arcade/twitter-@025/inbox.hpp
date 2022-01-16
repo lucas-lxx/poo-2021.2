@@ -25,6 +25,7 @@ public:
 
     // retunrs all the tweets on the inbox
     std::vector<Tweet> get_all() {
+        this->unread.clear();
         return to_vector(this->all_tweets);
     }
 

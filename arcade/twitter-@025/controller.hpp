@@ -7,11 +7,15 @@
 
 class Controller {
 private:
-    int nextTwld;
+    int nextTweetld;
     std::map<int, Tweet> tweets;
     std::map<std::string, User*> users;
 
 public:
+
+    Controller() {
+        this->nextTweetld = 0;
+    }
 
     User* get_user(std::string username) {
         auto found { users.find(username) };

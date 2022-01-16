@@ -33,6 +33,14 @@ public:
         return this->inbox;
     }
 
+    void like(int tweet_id) {
+        inbox->get_tweet(tweet_id)->like(this->username);
+    }
+
+    void send_tweet(std::shared_ptr<Tweet> tweet) {
+        this->inbox->new_tweet(tweet);
+    }
+
     friend std::ostream& operator<<(std::ostream& os, User user) {
         os << user.username << '\n';
         os << " following [";

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <map>
 #include <set>
+#include <vector>
 
 class Tweet {
 private:
@@ -44,6 +45,14 @@ public:
             }
             os  << "]";
         }
+        return os;
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const std::vector<Tweet>& tweets) {
+        for (auto& i : tweets) {
+            os << i << '\n';
+        }
+        os << '\n';
         return os;
     }
 

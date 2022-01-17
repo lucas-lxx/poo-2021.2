@@ -55,7 +55,7 @@ public:
     }
 
     friend std::ostream& operator<<(std::ostream& os, Inbox inbox) {
-        for (auto i : inbox.get_unread()) {
+        for (auto i : inbox.get_all()) {
             os << i << '\n';
         }
         return os;

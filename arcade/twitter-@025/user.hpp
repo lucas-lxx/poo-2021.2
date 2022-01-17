@@ -29,8 +29,8 @@ public:
     void follow(std::shared_ptr<User> other) {
         auto it = other->followers.find(username);
         if (it == other->followers.end()) {
-            other->followers[username] = shared_from_this();
-            this->following[other->username] = other;
+            other->followers.insert({username, shared_from_this()});
+            this->following.insert({other->username, other});
             return;
         }
         throw std::runtime_error("fail: user not found");
@@ -39,6 +39,7 @@ public:
     void unfollow(std::string username) {
         auto it = following.find(username);
         if (it != following.end()) {
+            it->second->followers.erase(it->second->followers.find(this->username));
             following.erase(it);
             return;
         }
@@ -74,7 +75,7 @@ public:
 
         os << " followers [";
         for (auto i : user.followers) {
-            if (count >= (int) user.following.size()) {
+            if (count >= (int) user.followers.size()) {
                 os << i.second->username;
                 break;
             }

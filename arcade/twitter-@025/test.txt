@@ -21,4 +21,7 @@ timeline sara
 timeline goku
 unfollow goku tina
 show
+timeline bruno
+follow goku kuririm
+like sara 4
 end

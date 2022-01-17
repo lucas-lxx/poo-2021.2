@@ -47,7 +47,7 @@ public:
     
     friend std::ostream& operator<<(std::ostream& os, Controller controller) {
         for (auto it : controller.users) {
-            os << it.second;
+            os << *it.second;
         }
         return os;
     }

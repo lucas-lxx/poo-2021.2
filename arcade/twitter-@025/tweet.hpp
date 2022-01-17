@@ -29,18 +29,21 @@ public:
     }
 
     friend std::ostream& operator<<(std::ostream& os, Tweet tweet) {
-        os << tweet.id << ":" << tweet.username << " (" << tweet.msg << ")" << " [";
+        os << tweet.id << ":" << tweet.username << " (" << tweet.msg << ")";
         int len = tweet.likes.size();
-        int count = 1;
-        for (auto& user_liked : tweet.likes) {
-            if (count >= len) {
-                os << user_liked;
-                break;
+        if (tweet.likes.size() > 0) {
+            int count = 1;
+            os << "[";
+            for (auto& user_liked : tweet.likes) {
+                if (count >= len) {
+                    os << user_liked;
+                    break;
+                }
+                os << user_liked << ", ";
+                count++;
             }
-            os << user_liked << ", ";
-            count++;
+            os  << "]";
         }
-        os  << "]";
         return os;
     }
 

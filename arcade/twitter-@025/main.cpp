@@ -1,40 +1,48 @@
 #include <iostream>
+#include <sstream>
+#include <exception>
 #include "tweet.hpp"
 #include "inbox.hpp"
 #include "user.hpp"
+#include "controller.hpp"
+#include "../../cpp-functional/auxiliar.hpp"
 
 int main() {
-    // auto tweet = std::make_shared<Tweet>(0, "Lucas", "Hello!");
-    // // std::cout << tweet << '\n';
-    // tweet->like("Leh");
-    // // std::cout << tweet << '\n';
-    // tweet->like("Dan");
-    // // std::cout << tweet << '\n';
-    // tweet->like("Gil");
-    // // std::cout << tweet << '\n';
-    // tweet->like("Ró");
-    // // std::cout << tweet << '\n';
-    // tweet->like("Norma");
-    // // std::cout << tweet << '\n';
-    // Inbox inbox;
-    // std::cout << inbox;
-    // inbox.new_tweet(tweet);
-    // std::cout << "inbox tweet:\n" << inbox;
-    // std::cout << "====\n";
-    // auto tweet2 = std::make_shared<Tweet>(1, "Lucas", "Functional programming!");
-    // inbox.new_tweet(tweet2);
-    // tweet2->like("David");
-    // std::cout << "inbox tweet2:\n" << inbox;
+    Controller controller;
 
-    auto user = std::make_shared<User>("Lucas");
-    auto user2 = std::make_shared<User>("Leh");
-    auto user3 = std::make_shared<User>("La");
-    auto user4 = std::make_shared<User>("Ró");
-    user->follow(user2);
-    user->follow(user3);
-    user->follow(user4);
-    // std::cout << *user;
-    user->unfollow("Leh");
-    // std::cout << *user;
-    std::cout << (*user->get_inbox()) << '\n';
+    while (true) {
+        std::string line;
+        std::string command;
+        // std::cout << "$ ";
+        std::getline(std::cin >> std::ws, line);
+        std::cout << "$" << line << '\n';
+        std::stringstream ss{line};
+        command = aux::read<std::string>(ss);
+        try {
+            if (command == "end") {
+                break;
+            } else if (command == "show") {
+                std::cout << controller;
+            } else if (command == "addUser") {
+                std::string username = aux::read<std::string>(ss);
+                controller.add_user(username);
+            } else if (command == "follow") {
+                auto [follower, followed] = aux::parse<std::string, std::string>(ss);
+                controller.get_user(follower)->follow(controller.get_user(followed));
+            } else if (command == "unfollow") {
+                auto [follower, unfollowed] = aux::parse<std::string, std::string>(ss);
+                controller.get_user(follower)->unfollow(unfollowed);
+            } else if (command == "timeline") {
+                std::string name = aux::read<std::string>(ss);
+                std::cout << *controller.get_user(name)->get_inbox() << '\n';
+            } else if (command == "tweet") {
+                std::string username = aux::read<std::string>(ss);
+                controller.send_tweet(username, ss.str());
+            } else {
+                throw std::runtime_error("fail: command not found");
+            }
+        } catch (const std::runtime_error& e) {
+            std::cout << e.what() << '\n';
+        }
+    }
 }

@@ -14,4 +14,11 @@ tweet goku internet maldita
 timeline goku
 timeline tina
 timeline sara
+like sara 1
+like goku 1
+like sara 3
+timeline sara
+timeline goku
+unfollow goku tina
+show
 end

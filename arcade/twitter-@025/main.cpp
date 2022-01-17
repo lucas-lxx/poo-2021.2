@@ -34,10 +34,18 @@ int main() {
                 controller.get_user(follower)->unfollow(unfollowed);
             } else if (command == "timeline") {
                 std::string name = aux::read<std::string>(ss);
-                std::cout << *controller.get_user(name)->get_inbox() << '\n';
-            } else if (command == "tweet") {
+                std::cout << *controller.get_user(name)->get_inbox();
+            } else if (command == "timeline-new") {
+                std::string name = aux::read<std::string>(ss);
+                std::cout << controller.get_user(name)->get_inbox()->get_unread();
+            }  else if (command == "tweet") {
                 std::string username = aux::read<std::string>(ss);
-                controller.send_tweet(username, ss.str());
+                std::string tweet;
+                std::getline(ss >> std::ws, tweet);
+                controller.send_tweet(username, tweet);
+            } else if (command == "like") {
+                auto [username, tweet_id] = aux::parse<std::string, int>(ss);
+                controller.get_user(username)->like(tweet_id);
             } else {
                 throw std::runtime_error("fail: command not found");
             }

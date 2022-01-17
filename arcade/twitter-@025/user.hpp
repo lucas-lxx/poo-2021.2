@@ -18,6 +18,10 @@ private:
         }
     }
 
+    void store_tweet_this_account(std::shared_ptr<Tweet> tweet) {
+        this->inbox->new_tweet(tweet);
+    }
+
 public:
 
     User(std::string username = ""): 
@@ -56,6 +60,7 @@ public:
 
     void store_tweet(std::shared_ptr<Tweet> tweet) {
         store_tweet_followers(tweet);
+        store_tweet_this_account(tweet);
     }
 
     friend std::ostream& operator<<(std::ostream& os, User user) {

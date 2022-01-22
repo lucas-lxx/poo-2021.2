@@ -24,9 +24,9 @@ public:
     Inbox() {}
 
     // retunrs all the tweets on the inbox
-    std::vector<Tweet> get_all() {
+    std::map<int, Tweet*> get_all() {
         this->unread.clear();
-        return to_vector(this->all_tweets);
+        return this->all_tweets;
     }
 
     // returns a tweet by it's id adressed on the map
@@ -55,8 +55,8 @@ public:
     }
 
     friend std::ostream& operator<<(std::ostream& os, Inbox inbox) {
-        for (auto i : inbox.get_all()) {
-            os << i << '\n';
+        for (const auto& it : inbox.get_all()) {
+            os << *it.second << '\n';
         }
         return os;
     }

@@ -12,40 +12,35 @@ int main() {
 
     while (true) {
         std::string line;
-        std::string command;
         // std::cout << "$ ";
         std::getline(std::cin >> std::ws, line);
         std::cout << "$" << line << '\n';
-        std::stringstream ss{line};
-        command = aux::read<std::string>(ss);
+        std::vector<std::string> command {aux::split(line, ' ')};
         try {
-            if (command == "end") {
+            if (command[0] == "end") {
                 break;
-            } else if (command == "show") {
+            } else if (command[0] == "show") {
                 std::cout << controller;
-            } else if (command == "addUser") {
-                std::string username = aux::read<std::string>(ss);
-                controller.add_user(username);
-            } else if (command == "follow") {
-                auto [follower, followed] = aux::parse<std::string, std::string>(ss);
-                controller.get_user(follower)->follow(controller.get_user(followed));
-            } else if (command == "unfollow") {
-                auto [follower, unfollowed] = aux::parse<std::string, std::string>(ss);
-                controller.get_user(follower)->unfollow(unfollowed);
-            } else if (command == "timeline") {
-                std::string name = aux::read<std::string>(ss);
-                std::cout << *controller.get_user(name)->get_inbox();
-            } else if (command == "timeline-new") {
-                std::string name = aux::read<std::string>(ss);
-                std::cout << controller.get_user(name)->get_inbox()->get_unread();
-            }  else if (command == "tweet") {
-                std::string username = aux::read<std::string>(ss);
-                std::string tweet;
-                std::getline(ss >> std::ws, tweet);
-                controller.send_tweet(username, tweet);
-            } else if (command == "like") {
-                auto [username, tweet_id] = aux::parse<std::string, int>(ss);
-                controller.get_user(username)->like(tweet_id);
+            } else if (command[0] == "addUser") {
+                ////////////////////username////
+                controller.add_user(command[1]);
+            } else if (command[0] == "follow") {
+                ////////////////////follower//////////////////////////////followed///
+                controller.get_user(command[1])->follow(controller.get_user(command[2]));
+            } else if (command[0] == "unfollow") {
+                ////////////////////follower//////////////followed////
+                controller.get_user(command[1])->unfollow(command[2]);
+            } else if (command[0] == "timeline") {
+                //////////////////////////////////user name////////////////
+                std::cout << *controller.get_user(command[1])->get_inbox();
+            } else if (command[0] == "timeline-new") {
+                /////////////////////////////////user name////////////////////////
+                std::cout << controller.get_user(command[1])->get_inbox()->get_unread();
+            }  else if (command[0] == "tweet") {
+                //////////////////////username///////////////////////tweet////////////////
+                controller.send_tweet(command[1], aux::join(aux::slice(command, 2), " "));
+            } else if (command[0] == "like") {
+                controller.get_user(command[1])->like(std::stoi(command[2]));
             } else {
                 throw std::runtime_error("fail: command not found");
             }

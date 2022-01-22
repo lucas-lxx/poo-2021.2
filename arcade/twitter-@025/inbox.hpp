@@ -9,8 +9,8 @@
 
 class Inbox {
 private:
-    std::map<int, std::shared_ptr<Tweet>> all_tweets;
-    std::map<int, std::shared_ptr<Tweet>> unread;
+    std::map<int, Tweet*> all_tweets;
+    std::map<int, Tweet*> unread;
 
     std::vector<Tweet> to_vector(auto all_tweets) {
         std::vector<Tweet> vec;
@@ -30,7 +30,7 @@ public:
     }
 
     // returns a tweet by it's id adressed on the map
-    std::shared_ptr<Tweet> get_tweet(int id) {
+    Tweet* get_tweet(int id) {
         auto it = all_tweets.find(id);
         if (it != all_tweets.end()) {
             return it->second;
@@ -46,7 +46,7 @@ public:
     }
 
     // adds a new tweet to the inbox
-    void new_tweet(std::shared_ptr<Tweet> tweet) {
+    void new_tweet(Tweet* tweet) {
         if (all_tweets.find(tweet->getId()) == all_tweets.end()) {
             all_tweets.insert({tweet->getId(), tweet});
             unread.insert({tweet->getId(), tweet});

@@ -4,21 +4,21 @@
 #include "inbox.hpp"
 
 
-class User : public std::enable_shared_from_this<User> {
+class User {
 private:
-    std::map<std::string, std::shared_ptr<User>> followers;
-    std::map<std::string, std::shared_ptr<User>> following;
+    std::map<std::string, User*> followers;
+    std::map<std::string, User*> following;
     std::shared_ptr<Inbox> inbox;
     std::string username;
 
     // adds tweet to the followers inboxes
-    void store_tweet_followers(std::shared_ptr<Tweet> tweet) {
+    void store_tweet_followers(Tweet* tweet) {
         for (auto it : followers) {
             it.second->get_inbox()->new_tweet(tweet);
         }
     }
 
-    void store_tweet_this_account(std::shared_ptr<Tweet> tweet) {
+    void store_tweet_this_account(Tweet* tweet) {
         this->inbox->new_tweet(tweet);
     }
 
@@ -30,10 +30,10 @@ public:
     }
 
     
-    void follow(std::shared_ptr<User> other) {
+    void follow(User* other) {
         auto it = other->followers.find(username);
         if (it == other->followers.end()) {
-            other->followers.insert({username, shared_from_this()});
+            other->followers.insert({username, this});
             this->following.insert({other->username, other});
             return;
         }
@@ -50,15 +50,15 @@ public:
         throw std::runtime_error("fail: user not found");
     }
 
-    std::shared_ptr<Inbox> get_inbox() {
-        return this->inbox;
+    Inbox* get_inbox() {
+        return this->inbox.get();
     }
 
     void like(int tweet_id) {
         inbox->get_tweet(tweet_id)->like(this->username);
     }
 
-    void store_tweet(std::shared_ptr<Tweet> tweet) {
+    void store_tweet(Tweet* tweet) {
         store_tweet_followers(tweet);
         store_tweet_this_account(tweet);
     }

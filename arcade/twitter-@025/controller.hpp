@@ -34,15 +34,15 @@ public:
             throw std::runtime_error("fail: user not found");
         auto tweet = std::make_shared<Tweet>(next_tweet_id, username, tweet_text);
         tweets.insert({next_tweet_id, tweet});
-        it->second->store_tweet(tweet);
+        it->second->store_tweet(tweet.get());
         next_tweet_id++;
     }
 
-    std::shared_ptr<User> get_user(std::string username) {
+    User* get_user(std::string username) {
         auto found = users.find(username);
         if (found == users.end())
             throw std::runtime_error("fail: user not found");
-        return found->second;
+        return found->second.get();
     }
     
     friend std::ostream& operator<<(std::ostream& os, Controller controller) {

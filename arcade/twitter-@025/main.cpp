@@ -38,8 +38,8 @@ int main() {
                 controller.send_tweet(command[1], aux::join(aux::slice(command, 2), " "));
             } else if (command[0] == "like") {
                 controller.get_user(command[1])->like(std::stoi(command[2]));
-            } else if (command[0] == "remove") {
-
+            } else if (command[0] == "retweet") {
+                controller.send_retweet(command[1], std::stoi(command[2]), aux::join(aux::slice(command, 3), " "));
             } else {
                 throw std::runtime_error("fail: command not found");
             }

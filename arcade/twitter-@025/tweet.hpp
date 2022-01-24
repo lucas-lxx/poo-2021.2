@@ -3,6 +3,7 @@
 #include <map>
 #include <set>
 #include <vector>
+#include "../../cpp-functional/auxiliar.hpp"
 
 class Tweet {
 private:
@@ -37,20 +38,18 @@ public:
         return this->msg;
     }
 
+    std::string get_likes() {
+        if (this->likes.empty())
+            return "";
+        auto likes_str = aux::join(this->likes, " ");
+        return likes_str;
+    }
+
     friend std::ostream& operator<<(std::ostream& os, Tweet tweet) {
         os << tweet.id << ":" << tweet.username << " (" << tweet.msg << ")";
-        int len = tweet.likes.size();
         if (tweet.likes.size() > 0) {
-            int count = 1;
             os << "[";
-            for (auto& user_liked : tweet.likes) {
-                if (count >= len) {
-                    os << user_liked;
-                    break;
-                }
-                os << user_liked << ", ";
-                count++;
-            }
+            os << tweet.get_likes();
             os  << "]";
         }
         return os;

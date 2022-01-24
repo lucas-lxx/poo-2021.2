@@ -50,6 +50,10 @@ public:
         this->deleted = true;
     }
 
+    void set_retweet(Tweet* tweet) {
+        this->retweet = tweet;
+    }
+
     std::string get_likes() {
         if (this->likes.empty())
             return "";
@@ -61,11 +65,10 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, Tweet tweet) {
         os << tweet.id << ":" << tweet.username << " (" << tweet.msg << ")";
-        if (tweet.likes.size() > 0) {
-            os << "[";
-            os << tweet.get_likes();
-            os  << "]";
-        }
+        if (tweet.likes.size() > 0)
+            os << "[" << tweet.get_likes() << "]";
+        if (tweet.retweet != nullptr)
+            os << "\n  " << *tweet.retweet;
         return os;
     }
 

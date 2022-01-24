@@ -11,11 +11,15 @@ private:
     std::set<std::string> likes;
     std::string username;
     std::string msg;
+    Tweet* retweet;
+    bool deleted;
 
 public:
 
     Tweet(int id = -1, std::string username = "", std::string msg = ""): 
         id{id}, username{username}, msg{msg} {
+        this->retweet = nullptr;
+        this->deleted = false;
     }
 
     void like(std::string username) {
@@ -38,12 +42,22 @@ public:
         return this->msg;
     }
 
+    bool is_deleted() {
+        return this->deleted;
+    }
+
+    void set_deleted() {
+        this->deleted = true;
+    }
+
     std::string get_likes() {
         if (this->likes.empty())
             return "";
         auto likes_str = aux::join(this->likes, " ");
         return likes_str;
     }
+
+
 
     friend std::ostream& operator<<(std::ostream& os, Tweet tweet) {
         os << tweet.id << ":" << tweet.username << " (" << tweet.msg << ")";

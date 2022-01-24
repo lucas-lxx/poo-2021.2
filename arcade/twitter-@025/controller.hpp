@@ -22,7 +22,7 @@ private:
     void delete_tweets(User* user) {
         auto user_tweets = user->get_inbox()->get_my_tweets();
         for (auto& i:user_tweets) 
-            i->is_deleted();
+            i->set_deleted();
     }
 
     std::map<std::string, std::shared_ptr<User>>::iterator get_user_iterator(std::string username) {
@@ -67,11 +67,11 @@ public:
     }
 
     void remove_user(std::string username) {
-        auto user = get_user_iterator(username);
-        user->second->unfollow_all();
-        user->second->reject_all();
-        delete_tweets(user->second.get());
-        this->users.erase(user);
+        auto it_user = get_user_iterator(username);
+        delete_tweets(it_user->second.get());
+        it_user->second->reject_all();
+        it_user->second->unfollow_all();
+        this->users.erase(it_user);
     }
 
     friend std::ostream& operator<<(std::ostream& os, Controller controller) {

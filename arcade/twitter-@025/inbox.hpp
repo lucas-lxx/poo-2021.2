@@ -10,7 +10,7 @@
 class Inbox {
 private:
     std::map<int, Tweet*> all_tweets;
-    std::map<int, Tweet*> unread;
+    std::map<int, Tweet*> my_tweets;
 
     // returns a vector with the all the keys to the user
     std::vector<int> get_user_tweets(std::string user_name, std::map<int, Tweet*>& map) {
@@ -27,12 +27,18 @@ private:
             map.erase(i);
     }
 
+    std::vector<Tweet*> to_vector(std::map <int, Tweet*> map) {
+        std::vector<Tweet*> vec;
+        for (const auto& i : map) 
+            vec.push_back(i.second);
+        return vec;
+    }
+
 public:
     Inbox() {}
 
     // retunrs all the tweets on the inbox
     std::map<int, Tweet*> get_all() {
-        this->unread.clear();
         return this->all_tweets;
     }
 
@@ -40,7 +46,6 @@ public:
     void rm_tweets_from(std::string username) {
         auto to_remove = get_user_tweets(username, this->all_tweets);
         rm_tweets_by_ids(to_remove, this->all_tweets);
-        rm_tweets_by_ids(to_remove, this->unread);
     }
 
     // returns a tweet by it's id adressed on the map
@@ -54,18 +59,22 @@ public:
 
     // adds a new tweet to the inbox
     void new_tweet(Tweet* tweet) {
-        if (all_tweets.find(tweet->get_id()) == all_tweets.end()) {
+        if (all_tweets.find(tweet->get_id()) == all_tweets.end())
             all_tweets.insert({tweet->get_id(), tweet});
-            unread.insert({tweet->get_id(), tweet});
-            return;
-        }
+    }
+
+    void store_in_my_tweets(Tweet* tweet) {
+        my_tweets.insert({tweet->get_id(), tweet});
+    }
+
+    std::vector<Tweet*> get_my_tweets() {
+        return to_vector(my_tweets);
     }
 
     friend std::ostream& operator<<(std::ostream& os, Inbox inbox) {
         for (auto it = inbox.all_tweets.rbegin(); it != inbox.all_tweets.rend(); it++) {
             os << *it->second << '\n';
         }
-        inbox.unread.clear();
         return os;
     }
 };

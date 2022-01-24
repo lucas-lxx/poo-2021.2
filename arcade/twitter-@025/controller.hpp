@@ -12,6 +12,12 @@ private:
     std::map<int, std::shared_ptr<Tweet>> tweets;
     std::map<std::string, std::shared_ptr<User>> users;
 
+    Tweet* create_tweet(std::string username, std::string tweet_text) {
+        auto tweet = std::make_shared<Tweet>(next_tweet_id, username, tweet_text);
+        tweets.insert({next_tweet_id, tweet});
+        return tweet.get();
+    }
+
 public:
 
     Controller() {
@@ -32,9 +38,8 @@ public:
         auto it = users.find(username);
         if (it == users.end()) 
             throw std::runtime_error("fail: user not found");
-        auto tweet = std::make_shared<Tweet>(next_tweet_id, username, tweet_text);
-        tweets.insert({next_tweet_id, tweet});
-        it->second->store_tweet(tweet.get());
+        auto tweet = create_tweet(username, tweet_text);
+        it->second->store_tweet(tweet);
         next_tweet_id++;
     }
 

@@ -26,7 +26,10 @@ private:
     }
 
     std::map<std::string, std::shared_ptr<User>>::iterator get_user_iterator(std::string username) {
-        return users.find(username);
+        auto found = users.find(username);
+        if (found == users.end())
+            throw std::runtime_error("fail: user not found");
+        return found;
     }
 public:
 
@@ -52,8 +55,6 @@ public:
 
     User* get_user(std::string username) {
         auto found = get_user_iterator(username);
-        if (found == users.end())
-            throw std::runtime_error("fail: user not found");
         return found->second.get();
     }
 

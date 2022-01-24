@@ -31,13 +31,16 @@ public:
 
     
     void follow(User* other) {
-        auto it = other->followers.find(username);
-        if (it == other->followers.end()) {
-            other->followers.insert({username, this});
+        auto other_sign = other->followers.insert({username, this});
+        if (other_sign.second) {
             this->following.insert({other->username, other});
             return;
         }
-        throw std::runtime_error("fail: user not found");
+        if(other_sign.first == followers.end()) {
+            throw std::runtime_error("fail: user not found");
+            return;
+        }
+        throw std::runtime_error("fail: " + this->username + " already follows " + other->username);
     }
 
     void unfollow(std::string username) {

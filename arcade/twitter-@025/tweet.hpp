@@ -46,7 +46,7 @@ public:
     }
 
     friend std::ostream& operator<<(std::ostream& os, Tweet tweet) {
-        os << ((-1) * tweet.id) << ":" << tweet.username << " (" << tweet.msg << ")";
+        os << tweet.id << ":" << tweet.username << " (" << tweet.msg << ")";
         if (tweet.likes.size() > 0) {
             os << "[";
             os << tweet.get_likes();

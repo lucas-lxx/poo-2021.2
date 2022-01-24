@@ -20,6 +20,8 @@ private:
 
     void store_tweet_this_account(Tweet* tweet) {
         this->inbox->new_tweet(tweet);
+        if (tweet->get_sender() == username)
+            this->inbox->store_in_my_tweets(tweet);
     }
 
 public:

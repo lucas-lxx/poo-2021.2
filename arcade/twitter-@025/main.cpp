@@ -12,9 +12,9 @@ int main() {
 
     while (true) {
         std::string line;
-        // std::cout << "$ ";
+        std::cout << "$ ";
         std::getline(std::cin >> std::ws, line);
-        std::cout << "$" << line << '\n';
+        // std::cout << "$" << line << '\n';
         std::vector<std::string> command {aux::split(line, ' ')};
         try {
             if (command[0] == "end") {

@@ -12,14 +12,6 @@ private:
     std::map<int, Tweet*> all_tweets;
     std::map<int, Tweet*> unread;
 
-    std::vector<Tweet> to_vector(std::map<int, Tweet*> all_tweets) {
-        std::vector<Tweet> vec;
-        for (auto i : all_tweets) {
-            vec.push_back(*i.second);
-        }
-        return vec;
-    }
-
     // returns a vector with the all the keys to the user
     std::vector<int> get_user_tweets(std::string user_name, std::map<int, Tweet*>& map) {
         std::vector<int> to_remove;
@@ -58,13 +50,6 @@ public:
             return it->second;
         }
         throw std::runtime_error("fail: tweet not found!");
-    }
-
-    // returns a vector of the unread tweets
-    std::vector<Tweet> get_unread() {
-        std::vector<Tweet> unread_copy = to_vector(this->unread);
-        unread.clear();
-        return unread_copy;
     }
 
     // adds a new tweet to the inbox

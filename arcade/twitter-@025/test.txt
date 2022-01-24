@@ -21,6 +21,11 @@ timeline sara
 timeline goku
 unfollow goku tina
 show
+timeline goku
+timeline sara
+retweet sara 3 olha goku, ela nao gostou do seu chocolate
+timeline sara
+timeline goku
 timeline bruno
 follow goku kuririm
 like sara 4

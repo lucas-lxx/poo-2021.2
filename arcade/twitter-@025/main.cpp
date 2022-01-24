@@ -12,9 +12,9 @@ int main() {
 
     while (true) {
         std::string line;
-        // std::cout << "$ ";
+        std::cout << "$ ";
         std::getline(std::cin >> std::ws, line);
-        std::cout << "$" << line << '\n';
+        // std::cout << "$" << line << '\n';
         std::vector<std::string> command {aux::split(line, ' ')};
         try {
             if (command[0] == "end") {
@@ -33,10 +33,7 @@ int main() {
             } else if (command[0] == "timeline") {
                 //////////////////////////////////user name////////////////
                 std::cout << *controller.get_user(command[1])->get_inbox();
-            } else if (command[0] == "timeline-new") {
-                /////////////////////////////////user name////////////////////////
-                std::cout << controller.get_user(command[1])->get_inbox()->get_unread();
-            }  else if (command[0] == "tweet") {
+            } else if (command[0] == "tweet") {
                 //////////////////////username///////////////////////tweet////////////////
                 controller.send_tweet(command[1], aux::join(aux::slice(command, 2), " "));
             } else if (command[0] == "like") {

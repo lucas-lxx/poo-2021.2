@@ -68,6 +68,8 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, Inbox inbox) {
         for (auto it = inbox.all_tweets.rbegin(); it != inbox.all_tweets.rend(); it++) {
+            if (it->second->is_deleted())
+                continue;
             os << *it->second << '\n';
         }
         return os;

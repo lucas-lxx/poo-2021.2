@@ -15,6 +15,7 @@ private:
     Tweet* create_tweet(std::string username, std::string tweet_text) {
         auto tweet = std::make_shared<Tweet>(next_tweet_id, username, tweet_text);
         tweets.insert({next_tweet_id, tweet});
+        next_tweet_id++;
         return tweet.get();
     }
 
@@ -35,12 +36,9 @@ public:
     }
 
     void send_tweet(std::string username, std::string tweet_text) {
-        auto it = users.find(username);
-        if (it == users.end()) 
-            throw std::runtime_error("fail: user not found");
+        auto user = get_user(username);
         auto tweet = create_tweet(username, tweet_text);
-        it->second->store_tweet(tweet);
-        next_tweet_id++;
+        user->store_tweet(tweet);
     }
 
     User* get_user(std::string username) {
@@ -48,6 +46,14 @@ public:
         if (found == users.end())
             throw std::runtime_error("fail: user not found");
         return found->second.get();
+    }
+
+    void send_retweet(std::string username, int retweet_id, std::string tweet_text) {
+        auto user = get_user(username);
+        auto retweet = user->get_inbox()->get_tweet(retweet_id);
+        auto tweet = create_tweet(username, tweet_text);
+        tweet->set_retweet(retweet);
+        user->store_tweet(tweet);
     }
     
     friend std::ostream& operator<<(std::ostream& os, Controller controller) {

@@ -24,6 +24,10 @@ private:
         for (auto& i:user_tweets) 
             i->is_deleted();
     }
+
+    std::map<std::string, std::shared_ptr<User>>::iterator get_user_iterator(std::string username) {
+        return users.find(username);
+    }
 public:
 
     Controller() {
@@ -41,20 +45,20 @@ public:
     }
 
     void send_tweet(std::string username, std::string tweet_text) {
-        auto user = get_user(username)->second.get();
+        auto user = get_user(username);
         auto tweet = create_tweet(username, tweet_text);
         user->store_tweet(tweet);
     }
 
-    std::map<std::string, std::shared_ptr<User>>::iterator get_user(std::string username) {
-        auto found = users.find(username);
+    User* get_user(std::string username) {
+        auto found = get_user_iterator(username);
         if (found == users.end())
             throw std::runtime_error("fail: user not found");
-        return found;
+        return found->second.get();
     }
 
     void send_retweet(std::string username, int retweet_id, std::string tweet_text) {
-        auto user = get_user(username)->second.get();
+        auto user = get_user(username);
         auto retweet = user->get_inbox()->get_tweet(retweet_id);
         auto tweet = create_tweet(username, tweet_text);
         tweet->set_retweet(retweet);
@@ -62,7 +66,7 @@ public:
     }
 
     void remove_user(std::string username) {
-        auto user = get_user(username);
+        auto user = get_user_iterator(username);
         user->second->unfollow_all();
         user->second->reject_all();
         delete_tweets(user->second.get());

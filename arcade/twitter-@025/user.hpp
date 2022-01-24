@@ -31,6 +31,8 @@ public:
 
     
     void follow(User* other) {
+        // other_sign is a pair [iterator, bool]
+        // bool is true when insert is succesfull
         auto other_sign = other->followers.insert({username, this});
         if (other_sign.second) {
             this->following.insert({other->username, other});
@@ -45,6 +47,7 @@ public:
 
     void unfollow(std::string username) {
         auto it = following.find(username);
+        // auto sign = 
         if (it != following.end()) {
             it->second->followers.erase(it->second->followers.find(this->username));
             following.erase(it);

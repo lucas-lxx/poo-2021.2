@@ -53,7 +53,7 @@ public:
     }
 
     // adds a new tweet to the inbox
-    void new_tweet(Tweet* tweet) {
+    void store_tweet(Tweet* tweet) {
         if (all_tweets.find(tweet->get_id()) == all_tweets.end())
             all_tweets.insert({tweet->get_id(), tweet});
     }

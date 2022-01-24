@@ -14,12 +14,12 @@ private:
     // adds tweet to the followers inboxes
     void store_tweet_followers(Tweet* tweet) {
         for (auto it : followers) {
-            it.second->get_inbox()->new_tweet(tweet);
+            it.second->get_inbox()->store_tweet(tweet);
         }
     }
 
     void store_tweet_this_account(Tweet* tweet) {
-        this->inbox->new_tweet(tweet);
+        this->inbox->store_tweet(tweet);
         if (tweet->get_sender() == username)
             this->inbox->store_in_my_tweets(tweet);
     }

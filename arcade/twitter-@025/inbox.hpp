@@ -69,9 +69,9 @@ public:
 
     // adds a new tweet to the inbox
     void new_tweet(Tweet* tweet) {
-        if (all_tweets.find(tweet->getId()) == all_tweets.end()) {
-            all_tweets.insert({tweet->getId(), tweet});
-            unread.insert({tweet->getId(), tweet});
+        if (all_tweets.find(tweet->get_id()) == all_tweets.end()) {
+            all_tweets.insert({tweet->get_id(), tweet});
+            unread.insert({tweet->get_id(), tweet});
             return;
         }
     }

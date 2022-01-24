@@ -21,7 +21,7 @@ private:
     }
 
     // returns a vector with the all the keys to the user
-    std::vector<int> get_user_tweets(std::string user_name, std::map<int, Tweet*> map) {
+    std::vector<int> get_user_tweets(std::string user_name, std::map<int, Tweet*>& map) {
         std::vector<int> to_remove;
         for (const auto& i : map) {
             if (i.second->get_sender() == user_name) 
@@ -30,7 +30,7 @@ private:
         return to_remove;
     }
 
-    void rm_tweets_by_ids(std::vector<int> ids, std::map<int, Tweet*> map) {
+    void rm_tweets_by_ids(std::vector<int> ids, std::map<int, Tweet*>& map) {
         for (const auto& i : ids)
             map.erase(i);
     }
@@ -42,6 +42,13 @@ public:
     std::map<int, Tweet*> get_all() {
         this->unread.clear();
         return this->all_tweets;
+    }
+
+    // removes all the tweets from the user, by it's username
+    void rm_tweets_from(std::string username) {
+        auto to_remove = get_user_tweets(username, this->all_tweets);
+        rm_tweets_by_ids(to_remove, this->all_tweets);
+        rm_tweets_by_ids(to_remove, this->unread);
     }
 
     // returns a tweet by it's id adressed on the map

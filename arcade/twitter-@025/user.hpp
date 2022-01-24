@@ -29,7 +29,7 @@ public:
         this->inbox = std::make_shared<Inbox>();
     }
 
-    
+    // this object add other to this->following, and other object adds this to other.followers
     void follow(User* other) {
         // other_sign is a pair [iterator, bool]
         // bool is true when insert is succesfull

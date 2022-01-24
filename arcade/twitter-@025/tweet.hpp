@@ -25,6 +25,10 @@ public:
         throw std::runtime_error("fail: user " + username + " already liked");
     }
 
+    std::string get_sender() {
+        return this->username;
+    }
+
     int getId() {
         return this->id;
     }

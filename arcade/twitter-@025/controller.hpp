@@ -35,7 +35,11 @@ public:
         auto tweet = std::make_shared<Tweet>(next_tweet_id, username, tweet_text);
         tweets.insert({next_tweet_id, tweet});
         it->second->store_tweet(tweet.get());
-        next_tweet_id++;
+        next_tweet_id--;
+    }
+
+    void like(std::string username_liked_tweet, int id_tweet_liked) {
+        get_user(username_liked_tweet)->like(id_tweet_liked * (-1));
     }
 
     User* get_user(std::string username) {

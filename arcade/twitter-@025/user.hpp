@@ -45,11 +45,13 @@ public:
         throw std::runtime_error("fail: " + this->username + " already follows " + other->username);
     }
 
+    // this object unfollows the object with the parameter username
     void unfollow(std::string username) {
-        auto it = following.find(username);
-        if (it != following.end()) {
-            it->second->followers.erase(it->second->followers.find(this->username));
-            following.erase(it);
+        auto it_user = following.find(username);
+        if (it_user != following.end()) {
+            this->inbox->rm_tweets_from(it_user->second->username);
+            it_user->second->followers.erase(it_user->second->followers.find(this->username));
+            following.erase(it_user);
             return;
         }
         throw std::runtime_error("fail: user not found");

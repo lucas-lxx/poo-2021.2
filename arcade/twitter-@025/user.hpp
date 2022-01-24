@@ -73,6 +73,8 @@ public:
     }
 
     void unfollow_all() {
+        for (auto& i : following)
+            i.second->followers.erase(this->username);
         following.clear();
     }
 

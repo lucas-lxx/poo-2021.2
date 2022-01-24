@@ -29,4 +29,10 @@ timeline goku
 timeline bruno
 follow goku kuririm
 like sara 4
+follow tina sara
+show
+remove tina
+show
+timeline goku
+timeline sara
 end

@@ -29,8 +29,12 @@ public:
         return this->username;
     }
 
-    int getId() {
+    int get_id() {
         return this->id;
+    }
+
+    std::string get_tweet() {
+        return this->msg;
     }
 
     friend std::ostream& operator<<(std::ostream& os, Tweet tweet) {

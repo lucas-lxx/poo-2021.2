@@ -77,9 +77,10 @@ public:
     }
 
     friend std::ostream& operator<<(std::ostream& os, Inbox inbox) {
-        for (const auto& it : inbox.get_all()) {
-            os << *it.second << '\n';
+        for (auto it = inbox.all_tweets.rbegin(); it != inbox.all_tweets.rend(); it++) {
+            os << *it->second << '\n';
         }
+        inbox.unread.clear();
         return os;
     }
 };

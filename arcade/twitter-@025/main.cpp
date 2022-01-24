@@ -40,7 +40,7 @@ int main() {
                 //////////////////////username///////////////////////tweet////////////////
                 controller.send_tweet(command[1], aux::join(aux::slice(command, 2), " "));
             } else if (command[0] == "like") {
-                controller.get_user(command[1])->like(std::stoi(command[2]));
+                controller.like(command[1], std::stoi(command[2]));
             } else if (command[0] == "remove") {
 
             } else {

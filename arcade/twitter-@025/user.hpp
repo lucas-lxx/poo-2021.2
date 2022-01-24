@@ -47,7 +47,6 @@ public:
 
     void unfollow(std::string username) {
         auto it = following.find(username);
-        // auto sign = 
         if (it != following.end()) {
             it->second->followers.erase(it->second->followers.find(this->username));
             following.erase(it);

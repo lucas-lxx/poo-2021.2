@@ -61,8 +61,6 @@ public:
         return likes_str;
     }
 
-
-
     friend std::ostream& operator<<(std::ostream& os, Tweet tweet) {
         os << tweet.id << ":" << tweet.username << " (" << tweet.msg << ")";
         if (tweet.likes.size() > 0)

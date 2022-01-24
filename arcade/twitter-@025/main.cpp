@@ -12,9 +12,9 @@ int main() {
 
     while (true) {
         std::string line;
-        std::cout << "$ ";
+        // std::cout << "$ ";
         std::getline(std::cin >> std::ws, line);
-        // std::cout << "$" << line << '\n';
+        std::cout << "$" << line << '\n';
         std::vector<std::string> command {aux::split(line, ' ')};
         try {
             if (command[0] == "end") {
@@ -41,6 +41,8 @@ int main() {
                 controller.send_tweet(command[1], aux::join(aux::slice(command, 2), " "));
             } else if (command[0] == "like") {
                 controller.get_user(command[1])->like(std::stoi(command[2]));
+            } else if (command[0] == "remove") {
+
             } else {
                 throw std::runtime_error("fail: command not found");
             }

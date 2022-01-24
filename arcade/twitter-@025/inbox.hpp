@@ -37,11 +37,6 @@ private:
 public:
     Inbox() {}
 
-    // retunrs all the tweets on the inbox
-    std::map<int, Tweet*> get_all() {
-        return this->all_tweets;
-    }
-
     // removes all the tweets from the user, by it's username
     void rm_tweets_from(std::string username) {
         auto to_remove = get_user_tweets(username, this->all_tweets);

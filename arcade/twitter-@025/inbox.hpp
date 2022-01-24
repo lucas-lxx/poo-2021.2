@@ -20,10 +20,11 @@ private:
         return vec;
     }
 
-    std::vector<int> get_user_tweets(std::string username) {
+    // returns a vector with the all the keys to the user
+    std::vector<int> get_user_tweets(std::string user_name, std::map<int, Tweet*> map) {
         std::vector<int> to_remove;
-        for (const auto& i : all_tweets) {
-            if (i.second->get_sender() == username) 
+        for (const auto& i : map) {
+            if (i.second->get_sender() == user_name) 
                 to_remove.push_back(i.first);
         }
         return to_remove;

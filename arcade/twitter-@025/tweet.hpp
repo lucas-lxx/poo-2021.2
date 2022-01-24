@@ -62,6 +62,10 @@ public:
     }
 
     friend std::ostream& operator<<(std::ostream& os, Tweet tweet) {
+        if (tweet.is_deleted()) {
+            os << "this tweet was deleted";
+            return os;
+        }
         os << tweet.id << ":" << tweet.username << " (" << tweet.msg << ")";
         if (tweet.likes.size() > 0)
             os << "[" << tweet.get_likes() << "]";

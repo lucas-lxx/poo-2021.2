@@ -12,12 +12,26 @@ private:
     std::map<int, Tweet*> all_tweets;
     std::map<int, Tweet*> unread;
 
-    std::vector<Tweet> to_vector(auto all_tweets) {
+    std::vector<Tweet> to_vector(std::map<int, Tweet*> all_tweets) {
         std::vector<Tweet> vec;
         for (auto i : all_tweets) {
             vec.push_back(*i.second);
         }
         return vec;
+    }
+
+    std::vector<int> get_user_tweets(std::string username) {
+        std::vector<int> to_remove;
+        for (const auto& i : all_tweets) {
+            if (i.second->get_sender() == username) 
+                to_remove.push_back(i.first);
+        }
+        return to_remove;
+    }
+
+    void rm_tweets_by_ids(std::vector<int> ids, std::map<int, Tweet*> map) {
+        for (const auto& i : ids)
+            map.erase(i);
     }
 
 public:

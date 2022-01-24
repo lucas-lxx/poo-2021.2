@@ -72,6 +72,16 @@ public:
         store_tweet_this_account(tweet);
     }
 
+    void unfollow_all() {
+        following.clear();
+    }
+
+    void reject_all() {
+        for (auto& i:followers) 
+            i.second->following.erase(this->username);
+        followers.clear();
+    }
+
     friend std::ostream& operator<<(std::ostream& os, User user) {
         os << user.username << '\n';
         os << " following [";

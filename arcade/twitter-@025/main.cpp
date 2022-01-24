@@ -6,6 +6,7 @@
 #include "user.hpp"
 #include "controller.hpp"
 #include "../../cpp-functional/auxiliar.hpp"
+#include "tweet-exception.hpp"
 
 int main() {
     Controller controller;
@@ -43,9 +44,9 @@ int main() {
             } else if (command[0] == "remove") {
                 controller.remove_user(command[1]);
             } else {
-                throw std::runtime_error("fail: command not found");
+                throw TweetException("fail: command not found");
             }
-        } catch (const std::runtime_error& e) {
+        } catch (const TweetException& e) {
             std::cout << e.what() << '\n';
         }
     }

@@ -4,6 +4,7 @@
 #include <set>
 #include <vector>
 #include "../../cpp-functional/auxiliar.hpp"
+#include "tweet-exception.hpp"
 
 class Tweet {
 private:
@@ -27,7 +28,7 @@ public:
             likes.insert(username);
             return;
         }
-        throw std::runtime_error("fail: user " + username + " already liked");
+        throw TweetException("fail: user " + username + " already liked");
     }
 
     std::string get_sender() {

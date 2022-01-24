@@ -6,6 +6,7 @@
 #include <utility>
 #include "tweet.hpp"
 #include "../../cpp-functional/auxiliar.hpp"
+#include "exception"
 
 class Inbox {
 private:
@@ -49,7 +50,7 @@ public:
         if (it != all_tweets.end()) {
             return it->second;
         }
-        throw std::runtime_error("fail: tweet not found!");
+        throw TweetException("fail: tweet not found!");
     }
 
     // adds a new tweet to the inbox

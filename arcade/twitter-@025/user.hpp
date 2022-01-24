@@ -2,7 +2,7 @@
 #include <iostream>
 #include <map>
 #include "inbox.hpp"
-
+#include "tweet-exception.hpp"
 
 class User {
 private:
@@ -41,10 +41,10 @@ public:
             return;
         }
         if(other_sign.first == followers.end()) {
-            throw std::runtime_error("fail: user not found");
+            throw TweetException("fail: user not found");
             return;
         }
-        throw std::runtime_error("fail: " + this->username + " already follows " + other->username);
+        throw TweetException("fail: " + this->username + " already follows " + other->username);
     }
 
     // this object unfollows the object with the parameter username
@@ -56,7 +56,7 @@ public:
             following.erase(it_user);
             return;
         }
-        throw std::runtime_error("fail: user not found");
+        throw TweetException("fail: user not found");
     }
 
     Inbox* get_inbox() {

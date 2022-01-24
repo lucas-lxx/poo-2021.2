@@ -19,6 +19,11 @@ private:
         return tweet.get();
     }
 
+    void delete_tweets(User* user) {
+        auto user_tweets = user->get_inbox()->get_my_tweets();
+        for (auto& i:user_tweets) 
+            i->is_deleted();
+    }
 public:
 
     Controller() {
@@ -36,26 +41,34 @@ public:
     }
 
     void send_tweet(std::string username, std::string tweet_text) {
-        auto user = get_user(username);
+        auto user = get_user(username)->second.get();
         auto tweet = create_tweet(username, tweet_text);
         user->store_tweet(tweet);
     }
 
-    User* get_user(std::string username) {
+    std::map<std::string, std::shared_ptr<User>>::iterator get_user(std::string username) {
         auto found = users.find(username);
         if (found == users.end())
             throw std::runtime_error("fail: user not found");
-        return found->second.get();
+        return found;
     }
 
     void send_retweet(std::string username, int retweet_id, std::string tweet_text) {
-        auto user = get_user(username);
+        auto user = get_user(username)->second.get();
         auto retweet = user->get_inbox()->get_tweet(retweet_id);
         auto tweet = create_tweet(username, tweet_text);
         tweet->set_retweet(retweet);
         user->store_tweet(tweet);
     }
-    
+
+    void remove_user(std::string username) {
+        auto user = get_user(username);
+        user->second->unfollow_all();
+        user->second->reject_all();
+        delete_tweets(user->second.get());
+        this->users.erase(user);
+    }
+
     friend std::ostream& operator<<(std::ostream& os, Controller controller) {
         for (auto it : controller.users) {
             os << *it.second;

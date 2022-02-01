@@ -5,7 +5,7 @@
 #include <memory>
 #include <utility>
 #include "tweet.hpp"
-#include "../../cpp-functional/auxiliar.hpp"
+#include "cpp-functional/auxiliar.hpp"
 #include "exception"
 
 class Inbox {

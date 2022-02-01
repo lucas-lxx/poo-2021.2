@@ -3,7 +3,7 @@
 #include <map>
 #include <set>
 #include <vector>
-#include "../../cpp-functional/auxiliar.hpp"
+#include "cpp-functional/auxiliar.hpp"
 #include "tweet-exception.hpp"
 
 class Tweet {

@@ -4,15 +4,14 @@
 #include <vector>
 #include <sstream>
 #include <memory>
-#include <unordered_set>
-#include <unordered_map>
+#include <map>
 #include "client.hpp"
 
 
 class Sala {
 private:
-    std::unordered_map<std::string, std::shared_ptr<Client>> customers;
-    std::unordered_map<int, std::string> chairs;
+    std::map<std::string, std::shared_ptr<Client>> customers;
+    std::map<int, std::string> chairs;
     int cinema_size = {0};
     
     // Returns the iterator of the map if the person is present
@@ -59,7 +58,6 @@ public:
 
     Sala(int capacity = 0) :
         cinema_size(capacity) {
-        this->customers.reserve(capacity);
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -91,7 +89,7 @@ public:
     }
 
     // Returns the vector with the cinema's chairs
-    std::unordered_map<std::string, std::shared_ptr<Client>>& getCadeiras() {
+    std::map<std::string, std::shared_ptr<Client>>& getCadeiras() {
         return this->customers;
     }
 

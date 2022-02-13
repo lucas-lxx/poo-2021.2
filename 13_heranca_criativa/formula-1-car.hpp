@@ -79,7 +79,7 @@ private:
     }
 public:
 
-    FormulaOne(Tyre tyre = Tyre::null, Scuderia scuderia = Scuderia::null) :
+    FormulaOne(Tyre tyre = Tyre::FLAT_TYRE, Scuderia scuderia = Scuderia::null) :
         RaceCar{scuderiaPower(scuderia), scuderiaAeroDynamic(scuderia), tyre}, scuderia{scuderia} {
         Car::setType("F1 car");
     }

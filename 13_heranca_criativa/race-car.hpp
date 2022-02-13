@@ -6,11 +6,11 @@
 class RaceCar : public Car {
 private:
     int aero_dynamic_pressure{0};
-    Tyre tyre_compound{Tyre::null};
+    Tyre tyre_compound{Tyre::FLAT_TYRE};
 public:
 
     // Driver, Aero dynamic pressure and tyre compound are to be initialized
-    RaceCar(int power, int aero_dynamic_pressure = 0, Tyre tyre = Tyre::null):
+    RaceCar(int power, int aero_dynamic_pressure = 0, Tyre tyre = Tyre::FLAT_TYRE):
         Car{1, power}, aero_dynamic_pressure{aero_dynamic_pressure}, tyre_compound{tyre} {
         Car::setType("LMP1");
     }

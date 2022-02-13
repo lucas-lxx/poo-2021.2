@@ -60,12 +60,7 @@ public:
     }
 
     void deposit(int idAccount, float amount) {
-        if (accounts.find(idAccount) != accounts.end()) {
-            auto receiver_account = accounts.find(idAccount);
-            receiver_account->second->deposit(amount);
-        } else {
-            throw std::runtime_error("fail: account not found");
-        }
+        getAccount(idAccount)->deposit(amount);
     }
 
     void monthlyUpdate() {
@@ -75,25 +70,11 @@ public:
     }
 
     void transfer(int accountFromId, int accountToId, float amount) {
-        if (accounts.find(accountFromId) != accounts.end()) {
-            if (accounts.find(accountToId) != accounts.end()) {
-                auto accountFrom = accounts.find(accountFromId)->second;
-                accountFrom->transfer(accounts.find(accountToId)->second, amount);
-            } else {
-                throw std::runtime_error("fail: destination account not found");
-            }
-        } else {
-            throw std::runtime_error("fail: source account not found");
-        }
+        getAccount(accountFromId)->transfer(getAccount(accountToId), amount);
     }
 
     void withdraw(int accountId, float amount) {
-        if (accounts.find(accountId) != accounts.end()) {
-            auto account = accounts.find(accountId)->second;
-            account->withdraw(amount);
-        } else {
-            throw std::runtime_error("fail: account not found");
-        }
+        getAccount(accountId)->withdraw(amount);
     }
 
     ///////////////////////////////////////////////////////////////////////////

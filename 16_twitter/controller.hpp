@@ -69,9 +69,10 @@ public:
 
     void remove_user(std::string username) {
         auto it_user = get_user_iterator(username);
-        delete_tweets(it_user->second.get());
-        it_user->second->reject_all();
-        it_user->second->unfollow_all();
+        auto user = it_user->second.get();
+        delete_tweets(user);
+        user->reject_all();
+        user->unfollow_all();
         this->users.erase(it_user);
     }
 

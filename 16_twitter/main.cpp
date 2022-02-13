@@ -5,7 +5,7 @@
 #include "inbox.hpp"
 #include "user.hpp"
 #include "controller.hpp"
-#include "cpp-functional/auxiliar.hpp"
+#include "../cpp-functional/auxiliar.hpp"
 #include "tweet-exception.hpp"
 
 int main() {
@@ -13,9 +13,9 @@ int main() {
 
     while (true) {
         std::string line;
-        // std::cout << "$ ";
+        std::cout << "$ ";
         std::getline(std::cin >> std::ws, line);
-        std::cout << "$" << line << '\n';
+        // std::cout << "$" << line << '\n';
         std::vector<std::string> command {aux::split(line, ' ')};
         try {
             if (command[0] == "end") {

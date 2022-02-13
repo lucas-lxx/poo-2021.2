@@ -34,14 +34,10 @@ public:
     // this object add other to this->following, and other object adds this to other.followers
     void follow(User* other) {
         // other_sign is a pair [iterator, bool]
-        // bool is true when insert is succesfull
-        auto other_sign = other->followers.insert({username, this});
-        if (other_sign.second) {
+        // sign is true when insert is succesfull
+        auto [it_other, boolean] = other->followers.insert({username, this});
+        if (boolean) {
             this->following.insert({other->username, other});
-            return;
-        }
-        if(other_sign.first == followers.end()) {
-            throw TweetException("fail: user not found");
             return;
         }
         throw TweetException("fail: " + this->username + " already follows " + other->username);

@@ -4,25 +4,16 @@
 #include <sstream>
 #include <vector>
 #include <algorithm>
-#include <unordered_map>
-#include "../contato-@014/contact.hpp"
+#include <map>
+#include "../../10_contato/contact.hpp"
 
 class Agenda {
 private:
-    std::unordered_map<std::string, Contact> contacts{};
-
-    // Returns the position of the contact, else returns -1
-    std::unordered_map<std::string, Contact>::iterator findPosByName(std::string name) {
-        auto it = this->contacts.find(name);
-        if (it != this->contacts.end()) {
-            return it;
-        }
-        return this->contacts.end();
-    }
+    std::map<std::string, Contact> contacts{};
 
     // Returns a pointer to the contact or else returns nullptr
     Contact* findContact(std::string name) {
-        auto it {findPosByName(name)};
+        auto it {contacts.find(name)};
         if (it == this->contacts.end())
             return nullptr;
         return &it->second;
@@ -62,7 +53,7 @@ public:
 
     // Returns true if the contact was removed successfully
     bool rmContact(std::string name) {
-        auto it {findPosByName(name)};
+        auto it = contacts.find(name);
         if (it != this->contacts.end()) {
             this->contacts.erase(it);
             return true;
@@ -83,7 +74,7 @@ public:
         return found;
     }
 
-    std::unordered_map<std::string, Contact> getContacts() {
+    std::map<std::string, Contact> getContacts() {
         return this->contacts;
     }
 
@@ -99,19 +90,9 @@ public:
     }
 
     friend std::ostream& operator<<(std::ostream& os, Agenda& agenda) {
-        std::vector<Contact> contacts_ordered;
-        // Pushes back all the elements of the map to the vector
-        for (auto i : agenda.contacts) {
-            contacts_ordered.push_back(i.second);
-        }
-        // Sort the vector alphabetically
-        std::sort(contacts_ordered.begin(), contacts_ordered.end(), [](Contact a, Contact b) {
-            return a.getName() < b.getName();
-        });
-        // Pushes the contacs to the output stream
         os << "Agenda:\n";
-        for (auto i : contacts_ordered) {
-            os << i << '\n';
+        for (auto i : agenda.contacts) {
+            os << i.second << '\n';
         }
         return os;
     }

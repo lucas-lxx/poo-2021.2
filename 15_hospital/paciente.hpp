@@ -19,6 +19,7 @@ public:
 
     virtual void remover_medico(std::string) = 0;
 
+    virtual std::string to_string() = 0;
 };
 
 class Paciente : public IPaciente {
@@ -35,7 +36,9 @@ public:
 
     virtual void remover_medico(std::string);
 
-    friend std::ostream& operator<<(std::ostream&, Paciente);
+    virtual std::string to_string();
+
+    // friend std::ostream& operator<<(std::ostream&, Paciente);
 
 private:
 

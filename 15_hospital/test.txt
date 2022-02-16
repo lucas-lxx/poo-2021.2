@@ -1,0 +1,8 @@
+addPacs fred-fratura alvis-avc goku-hemorragia silva-sinusite
+addMeds bisturi-cirurgia snif-alergologia facada-cirurgia
+show
+tie bisturi fred alvis goku
+tie snif silva alvis
+tie facada goku
+show
+end

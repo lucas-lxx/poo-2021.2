@@ -35,15 +35,29 @@ void Medico::remover_paciente(std::string id_paciente) {
     paciente->remover_medico(this->id);
 }
 
-std::ostream& operator<<(std::ostream& os, Medico medico) {
+std::string Medico::to_string() {
     int size = 20;
-    os << "Med: " << medico.id << ":" << medico.classe;
-    size = size - (medico.id.size() + medico.classe.size());
+    std::string line;
+    line = "Med: " + id + ":" + classe;
+    size = size - (id.size() + classe.size());
     for (int i = 0; i < size; i++)
-        os << " ";
-    os << "Pacs: [ ";
-    for (auto [key, doc] : medico.pacientes)
-        os << doc->get_id() << " ";
-    os << "]";
-    return os;
+        line += " ";
+    line += "Pacs: [ ";
+    for (auto [key, pac] : pacientes)
+        line += pac->get_id() + " ";
+    line += "]";
+    return line;
 }
+
+// std::ostream& operator<<(std::ostream& os, Medico medico) {
+//     int size = 20;
+//     os << "Med: " << medico.id << ":" << medico.classe;
+//     size = size - (medico.id.size() + medico.classe.size());
+//     for (int i = 0; i < size; i++)
+//         os << " ";
+//     os << "Pacs: [ ";
+//     for (auto [key, doc] : medico.pacientes)
+//         os << doc->get_id() << " ";
+//     os << "]";
+//     return os;
+// }

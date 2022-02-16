@@ -1,31 +1,40 @@
 #include <iostream>
+#include <vector>
+#include "../cpp-functional/auxiliar.hpp"
 #include "paciente.hpp"
 #include "medico.hpp"
 #include "hospital.hpp"
 
 int main() {
     Hospital hospital;
-    auto p1 = new Paciente("L", "avc");
-    auto m1 = new Medico("J", "asdf");
-    auto m2 = new Medico("K", "asdf");
-    std::cout << *p1 << '\n';
-    try {
-        hospital.add_medico(m1);
-        hospital.add_medico(m2);
-        hospital.add_paciente(p1);
-        hospital.vincular(m1->get_id(), p1->get_id());
-        std::cout << *m1 << '\n';
-        std::cout << *p1 << '\n';
-        hospital.vincular(m2->get_id(), p1->get_id());
-
-    } catch(const std::exception& e) {
-        std::cerr << e.what() << '\n';
-    }
-
     
-    std::cout << *m1 << '\n';
-    std::cout << *p1 << '\n';
-    delete m1;
-    delete m2;
-    delete p1;
+    while (true) {
+        std::string line;
+        // std::cout << "$ ";
+        std::getline(std::cin >> std::ws, line);
+        std::cout << "$" << line << '\n';
+        std::vector<std::string> command {aux::split(line, ' ')};
+        try {
+            if (command[0] == "end") {
+                break;
+            } else if (command[0] == "addPacs") {
+                auto pacs = aux::slice(command, 1);
+                for (auto i:pacs)
+                    hospital.add_paciente(std::make_shared<Paciente>(aux::split(i, '-')[0], aux::split(i, '-')[1]));
+            } else if (command[0] == "show") {
+                std::cout << hospital;
+            } else if (command[0] == "addMeds") {
+                auto pacs = aux::slice(command, 1);
+                for (auto i:pacs)
+                    hospital.add_medico(std::make_shared<Medico>(aux::split(i, '-')[0], aux::split(i, '-')[1]));
+            } else if (command[0] == "tie") {
+                auto pacs = aux::slice(command, 2);
+                for (auto i:pacs)
+                    hospital.vincular(command[1], i);
+            }
+        } catch(const std::exception& e) {
+            std::cerr << e.what() << '\n';
+        }
+    }
+    
 }

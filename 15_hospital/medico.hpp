@@ -18,13 +18,13 @@ public:
     virtual std::map<std::string, IPaciente*> get_pacientes() = 0;
 
     virtual void remover_paciente(std::string) = 0;
+
+    virtual std::string to_string() = 0;
 };
 
 class Medico : public IMedico {
 public:
     Medico(std::string sender, std::string classe);
-
-    // virtual void double_patient(IPaciente*);
 
     virtual void add_paciente(IPaciente* paciente);
 
@@ -36,7 +36,9 @@ public:
 
     virtual void remover_paciente(std::string id_paciente);
 
-    friend std::ostream& operator<<(std::ostream& os, Medico medico);
+    virtual std::string to_string();
+
+    // friend std::ostream& operator<<(std::ostream& os, Medico medico);
 
 private:
     std::string classe;

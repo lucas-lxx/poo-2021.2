@@ -2,6 +2,7 @@
 #define HOSPITAL_HPP
 #include <iostream>
 #include <map>
+#include <memory>
 #include "medico.hpp"
 #include "paciente.hpp"
 
@@ -9,14 +10,14 @@ class Hospital {
 public:
     Hospital() {};
 
-    void add_medico(IMedico* medico) {
+    void add_medico(std::shared_ptr<IMedico> medico) {
         auto [medico_it, boolean] = this->medicos.insert({medico->get_id(), medico});
         if (!boolean)
             throw std::runtime_error("fail: there is already a doctor with this id");
     }
 
 
-    void add_paciente(IPaciente* paciente) {
+    void add_paciente(std::shared_ptr<IPaciente> paciente) {
         auto [paciente_it, boolean] = this->pacientes.insert({paciente->get_id(), paciente});
         if (!boolean)
             throw std::runtime_error("fail: there is already a pacient with this id");
@@ -26,7 +27,7 @@ public:
         auto it_medico = this->medicos.find(id_medico);
         if (it_medico == this->medicos.end())
             throw std::runtime_error("fail: this doctor does not exist");
-        auto medico = it_medico->second;
+        auto medico = it_medico->second.get();
         remover_todos_os_pacientes(medico);
         this->medicos.erase(it_medico);
     }
@@ -35,17 +36,25 @@ public:
         auto it_paciente = this->pacientes.find(id_paciente);
         if (it_paciente == this->pacientes.end())
             throw std::runtime_error("fail: this pacient does not exist");
-        auto paciente = it_paciente->second;
+        auto paciente = it_paciente->second.get();
         remover_todos_os_medicos(paciente);
         this->pacientes.erase(it_paciente);
     }
 
     void vincular(std::string id_medico, std::string id_paciente) {
-        auto medico = get_medico_iterator(id_medico)->second;
-        auto paciente = get_paciente_iterator(id_paciente)->second;
+        auto medico = get_medico_iterator(id_medico)->second.get();
+        auto paciente = get_paciente_iterator(id_paciente)->second.get();
         check_pacients_list(medico, id_paciente);
         check_doctors_list(paciente, medico);
         medico->add_paciente(paciente);
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, Hospital hospital) {
+        for (auto [key, paciente]:hospital.pacientes)
+            os << paciente->to_string() << '\n';
+        for (auto [key, medico]:hospital.medicos)
+            os << medico->to_string() << '\n';
+        return os;
     }
 
 private:
@@ -62,14 +71,14 @@ private:
         }
     }
 
-    std::map<std::string, IMedico*>::iterator get_medico_iterator(std::string id_medico) {
+    std::map<std::string, std::shared_ptr<IMedico>>::iterator get_medico_iterator(std::string id_medico) {
         auto it_medico = medicos.find(id_medico);
         if (it_medico == medicos.end())
             throw std::runtime_error("fail: doctor not found");
         return it_medico;
     }
 
-    std::map<std::string, IPaciente*>::iterator get_paciente_iterator(std::string id_paciente) {
+    std::map<std::string, std::shared_ptr<IPaciente>>::iterator get_paciente_iterator(std::string id_paciente) {
         auto it_paciente = pacientes.find(id_paciente);
         if (it_paciente == pacientes.end())
             throw std::runtime_error("fail: pacient not found");
@@ -86,8 +95,8 @@ private:
             paciente->remover_medico(key);
     }
 
-    std::map<std::string, IMedico*> medicos;
-    std::map<std::string, IPaciente*> pacientes;
+    std::map<std::string, std::shared_ptr<IMedico>> medicos;
+    std::map<std::string, std::shared_ptr<IPaciente>> pacientes;
 
 };
 

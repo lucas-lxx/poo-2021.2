@@ -8,15 +8,7 @@ Paciente::Paciente(std::string id = "", std::string diagnostico = ""):
     id(id), diagnostico(diagnostico) {
 }
 
-void Paciente::double_expertise(IMedico* medico) {
-    for(auto [key, doc] : this->medicos){
-        if(medico->get_classe() == doc->get_classe())
-            throw std::runtime_error("fail: there is already a doctor with this expertise");
-    }
-}
-
 void Paciente::add_medico(IMedico* medico) {
-    double_expertise(medico);
     // boolean is true when insert operation is successful
     auto [medico_it, boolean] = medicos.insert({medico->get_id(), medico});
     if (boolean)
@@ -36,11 +28,11 @@ std::map<std::string, IMedico*> Paciente::get_medicos() {
 }
 
 void Paciente::remover_medico(std::string id_medico) {
-    auto it_medico = get_medicos().find(id_medico);
-    if (it_medico == get_medicos().end())
+    auto it_medico = this->medicos.find(id_medico);
+    if (it_medico == this->medicos.end())
         return;
     auto medico = it_medico->second;
-    get_medicos().erase(it_medico);
+    this->medicos.erase(it_medico);
     medico->remover_paciente(this->id);
 }
 

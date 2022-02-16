@@ -25,8 +25,6 @@ class Paciente : public IPaciente {
 public:
     Paciente(std::string, std::string);
 
-    virtual void double_expertise(IMedico*);
-
     virtual void add_medico(IMedico*);
 
     virtual std::string get_diagnostico();

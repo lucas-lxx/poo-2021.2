@@ -27,21 +27,21 @@ std::map<std::string, IPaciente*> Medico::get_pacientes() {
 }
 
 void Medico::remover_paciente(std::string id_paciente) {
-    auto it_paciente = get_pacientes().find(id_paciente);
-    if (it_paciente == get_pacientes().end())
+    auto it_paciente = this->pacientes.find(id_paciente);
+    if (it_paciente == this->pacientes.end())
         return;
     auto paciente = it_paciente->second;
-    get_pacientes().erase(it_paciente);
+    this->pacientes.erase(it_paciente);
     paciente->remover_medico(this->id);
 }
 
 std::ostream& operator<<(std::ostream& os, Medico medico) {
     int size = 20;
-    os << "Pac: " << medico.id << ":" << medico.classe;
+    os << "Med: " << medico.id << ":" << medico.classe;
     size = size - (medico.id.size() + medico.classe.size());
     for (int i = 0; i < size; i++)
         os << " ";
-    os << "Meds: [ ";
+    os << "Pacs: [ ";
     for (auto [key, doc] : medico.pacientes)
         os << doc->get_id() << " ";
     os << "]";
